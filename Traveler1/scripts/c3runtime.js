@@ -8786,6 +8786,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Physics.Acts.ApplyImpulse,
 		C3.Plugins.Sprite.Acts.SetPosToObject,
 		C3.Plugins.Touch.Cnds.OnHoldGestureObject,
+		C3.Plugins.yagames_sdk.Acts.InitializeYSDK,
 		C3.Plugins.yagames_sdk.Acts.ShowRewardedAD,
 		C3.Plugins.System.Acts.WaitForPreviousActions,
 		C3.Plugins.Sprite.Exps.LayerName,
