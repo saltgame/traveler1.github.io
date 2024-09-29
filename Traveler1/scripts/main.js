@@ -1,196 +1,1136 @@
-function l(b,a,c,d){b.l.vb(b.zb,a,c,d)}function p(b,a,c){return b.l.Kd(b.zb,a,c)}function q(b,a,c,d){b.l.fa?l(b,a,c,d):b.l.Df()._OnMessageFromDOM({type:"event",component:b.zb,handler:a,dispatchOpts:d||null,data:c,responseId:null})}function r(b,a,c){b.l.D(b.zb,a,c)}function x(b,a){for(const [c,d]of a)r(b,c,d)}function y(b){b.ec||(b.l.Nc(b.te),b.ec=!0)}window.Ca=class{constructor(b,a){this.l=b;this.zb=a;this.ec=!1;this.te=()=>this.La()}yc(){}La(){}};
-window.vg=class{constructor(){this.xd=-1}m(){-1!==this.xd&&(self.clearTimeout(this.xd),this.xd=-1)}};"use strict";class aa{constructor(b){this.Cb=b;this.dd=!1;this.ld=!0;this.Eb=this.va=this.yd=-1}}
-function ca(b,a){const c=a.elementId,d=b.Ac(c,a),e=new aa(d);b.Sa.set(c,e);d.style.boxSizing="border-box";d.style.display="none";e.ld=!!a.isVisible;d.addEventListener("focus",()=>{z(b,"elem-focused",c)});d.addEventListener("blur",()=>{z(b,"elem-blurred",c)});const f=a.htmlIndex;e.yd=f;e.Eb=a.htmlZIndex;b.$a&&(a=b.l.Cc(f),e.va=a,b.l.pb(a).appendChild(d))}function da(b,a){r(b,"get-element",c=>{const d=A(b,c.elementId);return a(d,c)})}
-function A(b,a){b=b.Sa.get(a);if(!b)throw Error(`no element with id ${a}`);return b.Cb}function z(b,a,c,d){d||(d={});d.elementId=c;l(b,a,d)}function ea(b,a){var c;c||(c={});c.elementId=a;q(b,"click",c)}
-window.Tb=class extends self.Ca{constructor(b,a){super(b,a);this.Sa=new Map;this.$a=!0;x(this,[["create",c=>ca(this,c)],["destroy",c=>{c=c.elementId;const d=A(this,c);this.$a&&d.parentElement.removeChild(d);this.Sa.delete(c)}],["set-visible",c=>{if(this.$a){var d=this.Sa.get(c.elementId),e=d.Cb;d.dd?e.style.display=c.isVisible?"":"none":d.ld=!!c.isVisible}}],["update-position",c=>{if(this.$a){var d=this.Sa.get(c.elementId),e=d.Cb,f=this.l;e.style.left=c.left+"px";e.style.top=c.top+"px";e.style.width=
-c.width+"px";e.style.height=c.height+"px";var h=c.fontSize;null!==h&&(e.style.fontSize=h+"em");h=c.htmlIndex;d.yd=h;h=f.Cc(h);h!==d.va&&(e.remove(),f.pb(h).appendChild(e),d.va=h,f.Yc());c=c.htmlZIndex;c!==d.Eb&&(d.Eb=c,f.Yc());d.dd||(d.dd=!0,d.ld&&(e.style.display=""))}}],["update-state",c=>{const d=A(this,c.elementId);this.wb(d,c)}],["focus",c=>this.Vc(c)],["set-css-style",c=>{const d=A(this,c.elementId),e=c.prop;c=c.val;e.startsWith("--")?d.style.setProperty(e,c):d.style[e]=c}],["set-attribute",
-c=>{A(this,c.elementId).setAttribute(c.name,c.val)}],["remove-attribute",c=>{A(this,c.elementId).removeAttribute(c.name)}]]);da(this,c=>c)}Ac(){throw Error("required override");}wb(){throw Error("required override");}Vc(b){var a=A(this,b.elementId);b.focus?a.focus():a.blur()}};"use strict";const fa=/(iphone|ipod|ipad|macos|macintosh|mac os x)/i.test(navigator.userAgent),ia=/android/i.test(navigator.userAgent),ja=/safari/i.test(navigator.userAgent)&&!/(chrome|chromium|edg\/|OPR\/|nwjs)/i.test(navigator.userAgent);
-let ka=0;function la(b){const a=document.createElement("script");a.async=!1;a.type="module";return b.eg?new Promise(c=>{const d="c3_resolve_"+ka;++ka;self[d]=c;a.textContent=b.ig+`\n\nself["${d}"]();`;document.head.appendChild(a)}):new Promise((c,d)=>{a.onload=c;a.onerror=d;a.src=b;document.head.appendChild(a)})}
-async function ma(){if(!navigator.userActivation||"undefined"===typeof OffscreenCanvas)return!1;try{let b=!1;const a=new Worker(URL.createObjectURL(new Blob(['\n\tself.addEventListener("message", () =>\n\t{\n\t\ttry {\n\t\t\tconst offscreenCanvas = new OffscreenCanvas(32, 32);\n\t\t\tconst gl = offscreenCanvas.getContext("webgl");\n\t\t\tself.postMessage(!!gl);\n\t\t}\n\t\tcatch (err)\n\t\t{\n\t\t\tconsole.warn("Feature detection worker error:", err);\n\t\t\tself.postMessage(false);\n\t\t}\n\t});'],{type:"text/javascript"})),
-{get type(){b=!0}}),c=await new Promise(d=>{a.addEventListener("message",e=>{a.terminate();d(e.data)});a.postMessage("")});return b&&c}catch(b){return console.warn("Error feature detecting worker mode: ",b),!1}}let B=new Audio;
-const na={"audio/webm; codecs=opus":!!B.canPlayType("audio/webm; codecs=opus"),"audio/ogg; codecs=opus":!!B.canPlayType("audio/ogg; codecs=opus"),"audio/webm; codecs=vorbis":!!B.canPlayType("audio/webm; codecs=vorbis"),"audio/ogg; codecs=vorbis":!!B.canPlayType("audio/ogg; codecs=vorbis"),"audio/mp4":!!B.canPlayType("audio/mp4"),"audio/mpeg":!!B.canPlayType("audio/mpeg")};B=null;async function oa(b){b=await pa(b);return(new TextDecoder("utf-8")).decode(b)}
-function pa(b){return new Promise((a,c)=>{const d=new FileReader;d.onload=e=>a(e.target.result);d.onerror=e=>c(e);d.readAsArrayBuffer(b)})}const qa=[];let C=0;window.RealFile=window.File;const D=[],ra=new Map,va=new Map;let wa=0;const xa=[];self.runOnStartup=function(b){if("function"!==typeof b)throw Error("runOnStartup called without a function");xa.push(b)};const ya=new Set(["cordova","playable-ad","instant-games"]);let za=!1;
-window.ba=class b{constructor(a){this.fa=a.mg;this.Fa=null;this.ea="";this.kb=a.hg;this.Rb={};this.eb=this.Aa=null;this.bb=[];this.qa=null;this.ge=!0;this.P=[];this.rd=[];this.sd=!1;this.ue=()=>this.Bf();this.hd=!1;this.ae=0;this.Gb=null;this.jb=-1;this.ag=()=>this.Mf();this.Ob=new Set;this.zd=null;this.ve=[];this.A=a.we;this.fc="file"===location.protocol.substr(0,4);if("playable-ad"===this.A||"instant-games"===this.A)this.fa=!1;ja&&(this.fa=!1);if("cordova"===this.A&&this.fa&&ia){const c=/Chrome\/(\d+)/i.exec(navigator.userAgent);
-c&&90<=parseInt(c[1],10)||(this.fa=!1)}this.ta()?self.chrome.webview.addEventListener("message",c=>this.Qd(c.data)):"macos-wkwebview"===this.A&&(self.C3WrapperOnMessage=c=>this.Qd(c));this.jc=this.xa=null;"html5"!==this.A||window.isSecureContext||console.warn("[Construct] Warning: the browser indicates this is not a secure context. Some features may be unavailable. Use secure (HTTPS) hosting to ensure all features are available.");this.D("canvas","update-size",c=>this.Qf(c));this.D("canvas","set-html-layer-count",
-c=>this._OnSetHTMLLayerCount(c));this.D("canvas","cleanup-html-layers",()=>this.Hf());this.D("runtime","cordova-fetch-local-file",c=>this.If(c));this.D("runtime","create-job-worker",()=>this.Jf());this.D("runtime","send-wrapper-extension-message",c=>this.Pf(c));"cordova"===this.A?document.addEventListener("deviceready",()=>this.Xb(a)):this.Xb(a)}m(){this.Oc();this.Fa&&(this.Fa=this.Fa.onmessage=null);this.Aa&&(this.Aa.terminate(),this.Aa=null);this.eb&&(this.eb.m(),this.eb=null);for(const {canvas:a,
-nb:c}of this.P)a.remove(),c.remove();this.P.length=0}Gd(){return this.P[0].canvas}Cc(a){return Math.min(a,this.P.length-1)}pb(a){if(0>a||a>=this.P.length)throw new RangeError("invalid canvas layer");return this.P[a].nb}_GetHTMLWrapElement(a){return this.pb(a)}Te(){return fa&&"cordova"===this.A}tb(){const a=navigator.userAgent;return fa&&ya.has(this.A)||navigator.standalone||/crios\/|fxios\/|edgios\//i.test(a)}Re(){return ia}Hd(){return ia&&ya.has(this.A)}Jd(){return"windows-webview2"===this.A||!!("preview"===
-this.A&&window.chrome&&window.chrome.webview&&window.chrome.webview.postMessage)}ta(){return this.Jd()||"xbox-uwp-webview2"===this.A}async Xb(a){this.fa&&!await ma()&&(this.fa=!1);"macos-wkwebview"===this.A?this.Oa({type:"ready"}):this.ta()&&(this.Sf(),this.ve=(await this.Gf()).registeredComponentIds);if("playable-ad"===this.A){this.xa=self.c3_base64files;this.jc={};await this.yf();for(let d=0,e=a.mb.length;d<e;++d){var c=a.mb[d];this.jc.hasOwnProperty(c)?a.mb[d]={eg:!0,ig:this.jc[c]}:this.xa.hasOwnProperty(c)&&
-(a.mb[d]=URL.createObjectURL(this.xa[c]))}a.xc=[]}if("nwjs"===this.A&&self.nw&&self.nw.App.manifest["c3-steam-mode"]){let d=0;this.Nc(()=>{d++;document.documentElement.style.opacity=0===d%2?"1":"0.999"})}a.gg?this.ea=a.gg:(c=location.origin,this.ea=("null"===c?"file:///":c)+location.pathname,c=this.ea.lastIndexOf("/"),-1!==c&&(this.ea=this.ea.substr(0,c+1)));a.og&&(this.Rb=a.og);c=new MessageChannel;this.Fa=c.port1;this.Fa.onmessage=d=>this._OnMessageFromRuntime(d.data);window.c3_addPortMessageHandler&&
-window.c3_addPortMessageHandler(d=>this.Lf(d));this.Gb=new self.Ue(this);await Aa(this.Gb);"object"===typeof window.StatusBar&&window.StatusBar.hide();if("object"===typeof window.AndroidFullScreen)try{await new Promise((d,e)=>{window.AndroidFullScreen.immersiveMode(d,e)})}catch(d){console.error("Failed to enter Android immersive mode: ",d)}this.fa?await this.Ff(a,c.port2):await this.Ef(a,c.port2)}Qc(a){a=this.Rb.hasOwnProperty(a)?this.Rb[a]:a.endsWith("/workermain.js")&&this.Rb.hasOwnProperty("workermain.js")?
-this.Rb["workermain.js"]:"playable-ad"===this.A&&this.xa.hasOwnProperty(a)?this.xa[a]:a;a instanceof Blob&&(a=URL.createObjectURL(a));return a}async Bc(a,c,d){if(a.startsWith("blob:"))return new Worker(a,d);if("cordova"===this.A&&this.fc)return a=await this.Sb(d.dg?a:this.kb+a),new Worker(URL.createObjectURL(new Blob([a],{type:"application/javascript"})),d);a=new URL(a,c);if(location.origin!==a.origin){a=await fetch(a);if(!a.ok)throw Error("failed to fetch worker script");a=await a.blob();return new Worker(URL.createObjectURL(a),
-d)}return new Worker(a,d)}ua(){return Math.max(window.innerWidth,1)}ka(){return Math.max(window.innerHeight,1)}Ec(){return this.ta()||(new Set(["cordova","nwjs","macos-wkwebview"])).has(this.A)?"standalone":window.matchMedia("(display-mode: fullscreen)").matches?"fullscreen":window.matchMedia("(display-mode: standalone)").matches?"standalone":window.matchMedia("(display-mode: minimal-ui)").matches?"minimal-ui":navigator.standalone?"standalone":"browser"}Od(a){var c=this.ea,d=location.href,e=this.ua(),
-f=this.ka(),h=this.Ec(),k=window.devicePixelRatio,m=b.sb(),n=a.Cg,t=window.cr_previewImageBlobs||this.xa,v=window.cr_previewProjectFileBlobs,u=window.cr_previewProjectFiles,w=window.cr_swClientId||"";a=a.we;var ha=(new URLSearchParams(self.location.search)).has("debug"),J=this.Gb;return{runtimeBaseUrl:c,previewUrl:d,windowInnerWidth:e,windowInnerHeight:f,cssDisplayMode:h,devicePixelRatio:k,isFullscreen:m,projectData:n,previewImageBlobs:t,previewProjectFileBlobs:v,previewProjectFileSWUrls:u,swClientId:w,
-exportType:a,isDebug:ha,ife:!!self.Ag,jobScheduler:{inputPort:J.gd,outputPort:J.qd,maxNumWorkers:J.Xf},supportedAudioFormats:na,opusWasmScriptUrl:window.cr_opusWasmScriptUrl||this.kb+"opus.wasm.js",opusWasmBinaryUrl:window.cr_opusWasmBinaryUrl||this.kb+"opus.wasm.wasm",isFileProtocol:this.fc,isiOSCordova:this.Te(),isiOSWebView:this.tb(),isWindowsWebView2:this.Jd(),isAnyWebView2Wrapper:this.ta(),wrapperComponentIds:this.ve,isFBInstantAvailable:"undefined"!==typeof self.FBInstant}}async Ff(a,c){const d=
-this.Qc(a.ng);"preview"===this.A?(this.Aa=new Worker("previewworker.js",{type:"module",name:"Runtime"}),await new Promise((n,t)=>{const v=u=>{this.Aa.removeEventListener("message",v);u.data&&"ok"===u.data.type?n():t()};this.Aa.addEventListener("message",v);this.Aa.postMessage({type:"construct-worker-init","import":(new URL(d,this.ea)).toString()})})):this.Aa=await this.Bc(d,this.ea,{type:"module",name:"Runtime",dg:!0});const e=document.createElement("canvas");e.style.display="none";const f=e.transferControlToOffscreen();
-document.body.appendChild(e);const h=document.createElement("div");h.className="c3htmlwrap";document.body.appendChild(h);this.P.push({canvas:e,nb:h});window.c3canvas=e;self.C3_InsertHTMLPlaceholders&&self.C3_InsertHTMLPlaceholders();let k=a.xc||[],m=a.mb;k=await Promise.all(k.map(n=>this.Ya(n)));m=await Promise.all(m.map(n=>this.Ya(n)));if("cordova"===this.A)for(let n=0,t=a.wc.length;n<t;++n){const v=a.wc[n],u=v[0];if(u===a.Ad||"scriptsInEvents.js"===u||u.endsWith("/scriptsInEvents.js"))v[1]=await this.Ya(u)}this.Aa.postMessage(Object.assign(this.Od(a),
-{type:"init-runtime",isInWorker:!0,messagePort:c,canvas:f,workerDependencyScripts:k,engineScripts:m,projectScripts:a.wc,mainProjectScript:a.Ad,projectScriptsStatus:self.C3_ProjectScriptsStatus}),[c,f,...Ba(this.Gb)]);this.bb=D.map(n=>new n(this));this.Nd();Da(e);Ea(h);Fa(this.qa);self.c3_callFunction=(n,t)=>p(this.qa,"js-invoke-function",{name:n,params:t});"preview"===this.A&&(self.goToLastErrorScript=()=>this.vb("runtime","go-to-last-error-script"))}async Ef(a,c){const d=document.createElement("canvas");
-d.style.display="none";document.body.appendChild(d);var e=document.createElement("div");e.className="c3htmlwrap";document.body.appendChild(e);this.P.push({canvas:d,nb:e});window.c3canvas=d;self.C3_InsertHTMLPlaceholders&&self.C3_InsertHTMLPlaceholders();this.bb=D.map(k=>new k(this));this.Nd();Da(d);Ea(e);e=a.mb.map(k=>"string"===typeof k?(new URL(k,this.ea)).toString():k);if(Array.isArray(a.xc)){var f=[...a.xc].map(k=>k instanceof Blob?URL.createObjectURL(k):k);e.unshift(...f)}e=await Promise.all(e.map(k=>
-this.Ya(k)));await Promise.all(e.map(k=>la(k)));e=self.C3_ProjectScriptsStatus;f=a.Ad;const h=a.wc;for(let [k,m]of h)if(m||(m=k),k===f)try{m=await this.Ya(m),await la(m),"preview"!==this.A||e[k]||this.Sd(k,"main script did not run to completion")}catch(n){this.Sd(k,n)}else if("scriptsInEvents.js"===k||k.endsWith("/scriptsInEvents.js"))m=await this.Ya(m),await la(m);"preview"===this.A&&"object"!==typeof self.ug.wg?(this.Zb(),console.error("[C3 runtime] Failed to load JavaScript code used in events. Check all your JavaScript code has valid syntax."),
-alert("Failed to load JavaScript code used in events. Check all your JavaScript code has valid syntax.")):(a=Object.assign(this.Od(a),{isInWorker:!1,messagePort:c,canvas:d,runOnStartupFunctions:xa}),Fa(this.qa),this.Pd(),this.eb=self.C3_CreateRuntime(a),await self.C3_InitRuntime(this.eb,a))}Sd(a,c){this.Zb();console.error(`[Preview] Failed to load project main script (${a}): `,c);alert(`Failed to load project main script (${a}). Check all your JavaScript code has valid syntax. Press F12 and check the console for error details.`)}Pd(){this.Zb()}Zb(){const a=
-window.cr_previewLoadingElem;a&&(a.parentElement.removeChild(a),window.cr_previewLoadingElem=null)}async Jf(){const a=await Ga(this.Gb);return{outputPort:a,transferables:[a]}}Qf(a){if(!this.hd){var c=a.styleWidth+"px",d=a.styleHeight+"px",e=a.marginLeft+"px",f=a.marginTop+"px";for(const {canvas:h,nb:k}of this.P)h.style.width=c,h.style.height=d,h.style.marginLeft=e,h.style.marginTop=f,k.style.width=c,k.style.height=d,k.style.marginLeft=e,k.style.marginTop=f,this.ge&&(h.style.display="",k.style.display=
-"");document.documentElement.style.setProperty("--construct-scale",a.displayScale);this.ge=!1}}_OnSetHTMLLayerCount(a){var c=a.count,d=a.immediate,e=a.styleWidth+"px",f=a.styleHeight+"px";const h=a.marginLeft+"px",k=a.marginTop+"px";a=[];const m=[];if(c<this.P.length)for(;this.P.length>c;){const {canvas:n,nb:t}=this.P.pop();t.remove();this.fa&&!d?this.rd.push(n):n.remove()}else if(c>this.P.length)for(let n=0,t=c-this.P.length;n<t;++n)c=document.createElement("canvas"),c.classList.add("c3overlay"),
-this.fa?(d=c.transferControlToOffscreen(),a.push(d),m.push(d)):a.push(c),document.body.appendChild(c),d=document.createElement("div"),d.classList.add("c3htmlwrap","c3overlay"),document.body.appendChild(d),c.style.width=e,c.style.height=f,c.style.marginLeft=h,c.style.marginTop=k,d.style.width=e,d.style.height=f,d.style.marginLeft=h,d.style.marginTop=k,Da(c),Ea(d),this.P.push({canvas:c,nb:d});for(const n of this.bb)if(n instanceof window.Tb&&n.$a)for(const t of n.Sa.values())e=n.l.Cc(t.yd),f=t.va,-1!==
-e&&-1!==f&&e!==f&&(f=t.Cb,f.remove(),n.l.pb(e).appendChild(f),t.va=e);this.Yc();return{addedCanvases:a,transferables:m}}Hf(){for(const a of this.rd)a.remove();this.rd.length=0}Yc(){this.sd||(this.sd=!0,this.Nc(this.ue))}Bf(){this.Rd(this.ue);this.sd=!1;let a=[];for(var c of this.bb)if(c instanceof window.Tb){var d=c.$a?[...c.Sa.values()]:null;d&&a.push(...d)}a.sort((h,k)=>{const m=h.va,n=k.va;return m!==n?m-n:h.Eb-k.Eb});let e=d=c=0,f=a.length;for(;e<f;++e){const h=a[e];h.va!==c&&(this.Md(c,a.slice(d,
-e)),c=h.va,d=e)}d<e&&this.Md(c,a.slice(d,e))}Md(a,c){if(!(1>=c.length||a>=this.P.length)){c=c.map(m=>m.Cb);var d=new Set(c);a=this.pb(a);for(var e=Array.from(a.children).filter(m=>d.has(m)),f=0,h=Math.min(c.length,e.length);f<h&&c[f]===e[f];++f);for(var k=f;k<h;++k)e[k].remove();for(k=f;k<h;++k)a.appendChild(c[k])}}Df(){if(this.fa)throw Error("not available in worker mode");return this.eb}vb(a,c,d,e,f){this.Fa.postMessage({type:"event",component:a,handler:c,dispatchOpts:e||null,data:d,responseId:null},
-f)}Kd(a,c,d,e,f){const h=wa++,k=new Promise((m,n)=>{va.set(h,{resolve:m,reject:n})});this.Fa.postMessage({type:"event",component:a,handler:c,dispatchOpts:e||null,data:d,responseId:h},f);return k}_OnMessageFromRuntime(a){const c=a.type;if("event"===c)return this.Kf(a);if("result"===c)this.Nf(a);else if("runtime-ready"===c)this.Of();else if("alert-error"===c)this.Zb(),alert(a.message);else if("creating-runtime"===c)this.Pd();else throw Error(`unknown message '${c}'`);}Kf(a){const c=a.component,d=a.handler,
-e=a.data,f=a.responseId;if(a=ra.get(c))if(a=a.get(d)){var h=null;try{h=a(e)}catch(k){console.error(`Exception in '${c}' handler '${d}':`,k);null!==f&&this.Yb(f,!1,""+k);return}if(null===f)return h;h&&h.then?h.then(k=>this.Yb(f,!0,k)).catch(k=>{console.error(`Rejection from '${c}' handler '${d}':`,k);this.Yb(f,!1,""+k)}):this.Yb(f,!0,h)}else console.warn(`[DOM] No handler '${d}' for component '${c}'`);else console.warn(`[DOM] No event handlers for component '${c}'`)}Yb(a,c,d){let e;d&&d.transferables&&
-(e=d.transferables);this.Fa.postMessage({type:"result",responseId:a,isOk:c,result:d},e)}Nf(a){const c=a.responseId,d=a.isOk;a=a.result;const e=va.get(c);d?e.resolve(a):e.reject(a);va.delete(c)}D(a,c,d){let e=ra.get(a);e||(e=new Map,ra.set(a,e));if(e.has(c))throw Error(`[DOM] Component '${a}' already has handler '${c}'`);e.set(c,d)}static sa(a){if(D.includes(a))throw Error("DOM handler already added");D.push(a)}Nd(){for(const a of this.bb)if("runtime"===a.zb){this.qa=a;return}throw Error("cannot find runtime DOM handler");
-}Lf(a){this.vb("debugger","message",a)}Of(){for(const a of this.bb)a.yc()}static sb(){return!!(document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement||za)}static $b(a){za=!!a}Nc(a){this.Ob.add(a);this.Xc()}Rd(a){this.Ob.delete(a);0===this.Ob.size&&this.Oc()}Xc(){-1===this.jb&&0<this.Ob.size&&(this.jb=requestAnimationFrame(this.ag))}Oc(){-1!==this.jb&&(cancelAnimationFrame(this.jb),this.jb=-1)}Mf(){this.jb=-1;for(const a of this.Ob)a();this.Xc()}Ma(a){this.qa.Ma(a)}Xa(a){this.qa.Xa(a)}Wc(){this.qa.Wc()}Wb(a){this.qa.Wb(a)}Se(){return!!na["audio/webm; codecs=opus"]}async Tf(a){a=
-await this.Kd("runtime","opus-decode",{arrayBuffer:a},null,[a]);return new Float32Array(a)}Ye(a){this.hd=!0;this.ae=a}Qe(a){return/^(?:[a-z\-]+:)?\/\//.test(a)||"data:"===a.substr(0,5)||"blob:"===a.substr(0,5)}Id(a){return!this.Qe(a)}async Ya(a){return"cordova"===this.A&&(a.startsWith("file:")||this.fc&&this.Id(a))?(a.startsWith(this.ea)&&(a=a.substr(this.ea.length)),a=await this.Sb(a),URL.createObjectURL(new Blob([a],{type:"application/javascript"}))):a}async If(a){const c=a.filename;switch(a.as){case "text":return await this.Oe(c);
-case "buffer":return await this.Sb(c);default:throw Error("unsupported type");}}Ed(a){const c=window.cordova.file.applicationDirectory+"www/"+a;return new Promise((d,e)=>{window.resolveLocalFileSystemURL(c,f=>{f.file(d,e)},e)})}async Oe(a){a=await this.Ed(a);return await oa(a)}Pc(){if(qa.length&&!(8<=C)){C++;var a=qa.shift();this.zf(a.filename,a.jg,a.cg)}}Sb(a){return new Promise((c,d)=>{qa.push({filename:a,jg:e=>{C--;this.Pc();c(e)},cg:e=>{C--;this.Pc();d(e)}});this.Pc()})}async zf(a,c,d){try{const e=
-await this.Ed(a),f=await pa(e);c(f)}catch(e){d(e)}}Qd(a){if("entered-fullscreen"===a)b.$b(!0),F(this.qa);else if("exited-fullscreen"===a)b.$b(!1),F(this.qa);else if("object"===typeof a){const c=a.type;"directory-handles"!==c&&("wrapper-init-response"===c?(this.zd(a),this.zd=null):"extension-message"===c?this.vb("runtime","wrapper-extension-message",a):console.warn("Unknown wrapper message: ",a))}else console.warn("Unknown wrapper message: ",a)}Pf(a){this.Oa({type:"extension-message",componentId:a.componentId,
-messageId:a.messageId,params:a.params||[],asyncId:a.asyncId})}Oa(a){this.ta()?window.chrome.webview.postMessage(JSON.stringify(a)):"macos-wkwebview"===this.A&&window.webkit.messageHandlers.C3Wrapper.postMessage(JSON.stringify(a))}Sf(){window.moveTo=(a,c)=>{this.Oa({type:"set-window-position",windowX:Math.ceil(a),windowY:Math.ceil(c)})};window.resizeTo=(a,c)=>{this.Oa({type:"set-window-size",windowWidth:Math.ceil(a),windowHeight:Math.ceil(c)})}}Gf(){return this.ta()?new Promise(a=>{this.zd=a;this.Oa({type:"wrapper-init"})}):
-Promise.resolve()}async yf(){const a=[];for(const [c,d]of Object.entries(this.xa))a.push(this.xf(c,d));await Promise.all(a)}async xf(a,c){if("object"===typeof c)this.xa[a]=new Blob([c.str],{type:c.type}),this.jc[a]=c.str;else{let d=await this.Cf(c);d||(d=this.Af(c));this.xa[a]=d}}async Cf(a){try{return await (await fetch(a)).blob()}catch(c){return console.warn("Failed to fetch a data: URI. Falling back to a slower workaround. This is probably because the Content Security Policy unnecessarily blocked it. Allow data: URIs in your CSP to avoid this.",
-c),null}}Af(a){a=this.Rf(a);return this.wf(a.data,a.fg)}Rf(a){var c=a.indexOf(",");if(0>c)throw new URIError("expected comma in data: uri");var d=a.substring(c+1);c=a.substring(5,c).split(";");a=c[0]||"";const e=c[2];d="base64"===c[1]||"base64"===e?atob(d):decodeURIComponent(d);return{fg:a,data:d}}wf(a,c){var d=a.length;let e=d>>2,f=new Uint8Array(d),h=new Uint32Array(f.buffer,0,e),k,m;for(m=k=0;k<e;++k)h[k]=a.charCodeAt(m++)|a.charCodeAt(m++)<<8|a.charCodeAt(m++)<<16|a.charCodeAt(m++)<<24;for(d&=
-3;d--;)f[m]=a.charCodeAt(m),++m;return new Blob([f],{type:c})}};"use strict";const G=self.ba,Ha=new Map([["OSLeft","MetaLeft"],["OSRight","MetaRight"]]),H={dispatchRuntimeEvent:!0,dispatchUserScriptEvent:!0},Ia={dispatchUserScriptEvent:!0},Ja={dispatchRuntimeEvent:!0};function Ka(b){return new Promise((a,c)=>{const d=document.createElement("link");d.onload=()=>a(d);d.onerror=e=>c(e);d.rel="stylesheet";d.href=b;document.head.appendChild(d)})}
-function La(b){return new Promise((a,c)=>{const d=new Image;d.onload=()=>a(d);d.onerror=e=>c(e);d.src=b})}async function Ma(b){b=URL.createObjectURL(b);try{return await La(b)}finally{URL.revokeObjectURL(b)}}function Na(b){do{if(b.parentNode&&b.hasAttribute("contenteditable"))return!0;b=b.parentNode}while(b);return!1}const Oa=new Set(["input","textarea","datalist","select"]),Pa=new Set(["canvas","body","html"]);
-function I(b){b.target.tagName&&Pa.has(b.target.tagName.toLowerCase())&&b.preventDefault()}function Qa(b){b.target.tagName&&b.target.classList.contains("c3htmlwrap")&&b.preventDefault()}function Ra(b){(b.metaKey||b.ctrlKey)&&b.preventDefault()}
-self.C3_GetSvgImageSize=async function(b){b=await Ma(b);if(0<b.width&&0<b.height)return[b.width,b.height];b.style.position="absolute";b.style.left="0px";b.style.top="0px";b.style.visibility="hidden";document.body.appendChild(b);const a=b.getBoundingClientRect();document.body.removeChild(b);return[a.width,a.height]};self.C3_RasterSvgImageBlob=async function(b,a,c,d,e){b=await Ma(b);const f=document.createElement("canvas");f.width=d;f.height=e;f.getContext("2d").drawImage(b,0,0,a,c);return f};
-let Sa=!1;document.addEventListener("pause",()=>Sa=!0);document.addEventListener("resume",()=>Sa=!1);function Da(b){b.addEventListener("selectstart",I);b.addEventListener("gesturehold",I);b.addEventListener("pointerdown",I)}function Ea(b){b.addEventListener("selectstart",Qa);b.addEventListener("gesturehold",Qa);b.addEventListener("touchstart",Qa)}function Fa(b){b.$d=!0;b.md=b.l.ua();b.Hb=b.l.ka()}
-function F(b){if(!b.oa){var a=G.sb();a&&"any"!==b.vd&&Ta(b);l(b,"fullscreenchange",{isFullscreen:a,innerWidth:b.ua(),innerHeight:b.ka()})}}async function Ua(b){await Promise.all(b.webfonts.map(async a=>{a=new FontFace(a.name,`url('${a.url}')`);document.fonts.add(a);await a.load()}))}
-async function Va(b){var a=b.imageBitmapOpts;b=await self.C3_RasterSvgImageBlob(b.blob,b.imageWidth,b.imageHeight,b.surfaceWidth,b.surfaceHeight);a=a?await createImageBitmap(b,a):await createImageBitmap(b);return{imageBitmap:a,transferables:[a]}}async function Wa(b){return await self.C3_GetSvgImageSize(b.blob)}function Xa(b){window.c3_postToMessagePort&&(b.from="runtime",window.c3_postToMessagePort(b))}
-function Ya(b){self.setTimeout(()=>{b.Zd=!0},1E3);"cordova"===b.l.A?(document.addEventListener("pause",()=>Za(b,!0)),document.addEventListener("resume",()=>Za(b,!1))):document.addEventListener("visibilitychange",()=>Za(b,"hidden"===document.visibilityState));b.nc=!("hidden"!==document.visibilityState&&!Sa);return{isSuspended:b.nc}}
-function $a(b){b.Ud||(b.Ud=!0,window.addEventListener("deviceorientation",a=>{b.oa||l(b,"deviceorientation",{absolute:!!a.absolute,alpha:a.alpha||0,beta:a.beta||0,gamma:a.gamma||0,timeStamp:a.timeStamp,webkitCompassHeading:a.webkitCompassHeading,webkitCompassAccuracy:a.webkitCompassAccuracy},H)}),window.addEventListener("deviceorientationabsolute",a=>{b.oa||l(b,"deviceorientationabsolute",{absolute:!!a.absolute,alpha:a.alpha||0,beta:a.beta||0,gamma:a.gamma||0,timeStamp:a.timeStamp},H)}))}
-function ab(b){b.Td||(b.Td=!0,window.addEventListener("devicemotion",a=>{if(!b.oa){var c=null,d=a.acceleration;d&&(c={x:d.x||0,y:d.y||0,z:d.z||0});d=null;var e=a.accelerationIncludingGravity;e&&(d={x:e.x||0,y:e.y||0,z:e.z||0});e=null;var f=a.rotationRate;f&&(e={alpha:f.alpha||0,beta:f.beta||0,gamma:f.gamma||0});l(b,"devicemotion",{acceleration:c,accelerationIncludingGravity:d,rotationRate:e,interval:a.interval,timeStamp:a.timeStamp},H)}}))}async function bb(b){await Ka(b.url)}
-function cb(b,a){b.be=a.message;-1===b.bd&&(b.bd=setTimeout(()=>{b.bd=-1;const c=document.getElementById("exportToVideoMessage");c&&(c.textContent=b.be)},250))}function db(b,a){console.warn("[Construct] Fullscreen request failed: ",a);l(b,"fullscreenerror",{isFullscreen:G.sb(),innerWidth:b.ua(),innerHeight:b.ka()})}
-function Za(b,a){b.nc!==a&&((b.nc=a)?b.l.Oc():b.l.Xc(),l(b,"visibilitychange",{hidden:a}),!a&&b.l.tb()&&(b=()=>{document.scrollingElement.scrollTop=0;document.scrollingElement.scrollLeft=0},setTimeout(b,50),setTimeout(b,100),setTimeout(b,250),setTimeout(b,500)))}
-function eb(b,a,c){"Backspace"===c.key&&I(c);"nwjs"===b.l.A&&"u"===c.key&&(c.ctrlKey||c.metaKey)&&c.preventDefault();if(!b.oa){var d=Ha.get(c.code)||c.code;q(b,a,{code:d,key:c.key,which:c.which,repeat:c.repeat,altKey:c.altKey,ctrlKey:c.ctrlKey,metaKey:c.metaKey,shiftKey:c.shiftKey,timeStamp:c.timeStamp},H)}}
-function K(b,a,c,d){b.oa||c.sourceCapabilities&&c.sourceCapabilities.firesTouchEvents||c.originalEvent&&c.originalEvent.sourceCapabilities&&c.originalEvent.sourceCapabilities.firesTouchEvents||q(b,a,{button:c.button,buttons:c.buttons,clientX:c.clientX,clientY:c.clientY+b.Ia,pageX:c.pageX,pageY:c.pageY+b.Ia,movementX:c.movementX||0,movementY:c.movementY||0,timeStamp:c.timeStamp},d)}
-function L(b,a,c){if(!b.oa){var d=0;"mouse"===c.pointerType&&(d=b.od);q(b,a,{pointerId:c.pointerId,pointerType:c.pointerType,button:c.button,buttons:c.buttons,lastButtons:d,clientX:c.clientX,clientY:c.clientY+b.Ia,pageX:c.pageX,pageY:c.pageY+b.Ia,movementX:c.movementX||0,movementY:c.movementY||0,width:c.width||0,height:c.height||0,pressure:c.pressure||0,tangentialPressure:c.tangentialPressure||0,tiltX:c.tiltX||0,tiltY:c.tiltY||0,twist:c.twist||0,timeStamp:c.timeStamp},H);"mouse"===c.pointerType&&
-(b.od=c.buttons)}}function fb(b,a,c){document.body.style.position="";document.body.style.overflow="";document.body.style.transform="";b.Ia=0;if(0<c){var d=document.activeElement;d&&(d=d.getBoundingClientRect(),a=(d.top+d.bottom)/2-(a-c)/2,a>c&&(a=c),0>a&&(a=0),0<a&&(document.body.style.position="absolute",document.body.style.overflow="visible",document.body.style.transform=`translateY(${-a}px)`,b.Ia=a))}}
-function gb(b,a,c,d){const e=b.ua(),f=b.ka();b.lb=-1;e!=a||f!=c?l(b,"window-resize",{innerWidth:e,innerHeight:f,devicePixelRatio:window.devicePixelRatio,isFullscreen:G.sb(),cssDisplayMode:b.l.Ec()}):10>d&&hb(b,e,f,d+1)}function hb(b,a,c,d){-1!==b.lb&&clearTimeout(b.lb);b.lb=setTimeout(()=>gb(b,a,c,d),48)}
-function Ta(b){b=b.vd;if(screen.orientation&&screen.orientation.lock)screen.orientation.lock(b).catch(a=>console.warn("[Construct] Failed to lock orientation: ",a));else try{let a=!1;screen.lockOrientation?a=screen.lockOrientation(b):screen.webkitLockOrientation?a=screen.webkitLockOrientation(b):screen.mozLockOrientation?a=screen.mozLockOrientation(b):screen.msLockOrientation&&(a=screen.msLockOrientation(b));a||console.warn("[Construct] Failed to lock orientation")}catch(a){console.warn("[Construct] Failed to lock orientation: ",
-a)}}function ib(b){return!b||b===document||b===window||b===document.body||"canvas"===b.tagName.toLowerCase()}
-G.sa(class extends self.Ca{constructor(b){super(b,"runtime");this.$d=!1;this.lb=-1;this.vd="any";this.nc=this.Td=this.Ud=!1;this.tc=document.createElement("div");this.tc.className="c3-screen-reader-text";this.tc.setAttribute("aria-live","polite");document.body.appendChild(this.tc);this.Ra=null;this.oa=!1;this.be="";this.bd=-1;this.Zd=!1;this.md=b.ua();this.Hb=b.ka();this.Ia=this.Qb=0;b.D("runtime","invoke-download",c=>{const d=c.url;c=c.filename;const e=document.createElement("a"),f=document.body;
-e.textContent=c;e.href=d;e.download=c;f.appendChild(e);e.click();f.removeChild(e)});b.D("runtime","load-webfonts",c=>Ua(c));b.D("runtime","raster-svg-image",c=>Va(c));b.D("runtime","get-svg-image-size",c=>Wa(c));b.D("runtime","set-target-orientation",c=>{this.vd=c.targetOrientation});b.D("runtime","register-sw",()=>{window.C3_RegisterSW&&window.C3_RegisterSW()});b.D("runtime","post-to-debugger",c=>Xa(c));b.D("runtime","go-to-script",c=>Xa(c));b.D("runtime","before-start-ticking",()=>Ya(this));b.D("runtime",
-"debug-highlight",c=>{if(c.show){this.Ra||(this.Ra=document.createElement("div"),this.Ra.id="inspectOutline",document.body.appendChild(this.Ra));var d=this.Ra;d.style.display="";d.style.left=c.left-1+"px";d.style.top=c.top-1+"px";d.style.width=c.width+2+"px";d.style.height=c.height+2+"px";d.textContent=c.name}else this.Ra&&(this.Ra.style.display="none")});b.D("runtime","enable-device-orientation",()=>$a(this));b.D("runtime","enable-device-motion",()=>ab(this));b.D("runtime","add-stylesheet",c=>bb(c));
-b.D("runtime","script-create-worker",c=>{const d=c.port2;(new Worker(c.url,c.opts)).postMessage({type:"construct-worker-init",port2:d},[d])});b.D("runtime","alert",c=>this.Tc(c));b.D("runtime","screen-reader-text",c=>{var d=c.type;"create"===d?(d=document.createElement("p"),d.id="c3-sr-"+c.id,d.textContent=c.text,this.tc.appendChild(d)):"update"===d?(d=document.getElementById("c3-sr-"+c.id))?d.textContent=c.text:console.warn(`[Construct] Missing screen reader text with id ${c.id}`):"release"===d?
-(d=document.getElementById("c3-sr-"+c.id))?d.remove():console.warn(`[Construct] Missing screen reader text with id ${c.id}`):console.warn(`[Construct] Unknown screen reader text update '${d}'`)});b.D("runtime","hide-cordova-splash",()=>{navigator.splashscreen&&navigator.splashscreen.hide&&navigator.splashscreen.hide()});b.D("runtime","set-exporting-to-video",c=>{this.oa=!0;const d=document.createElement("h1");d.id="exportToVideoMessage";d.textContent=c.message;document.body.prepend(d);document.body.classList.add("exportingToVideo");
-this.l.Gd().style.display="";this.l.Ye(c.duration)});b.D("runtime","export-to-video-progress",c=>cb(this,c));b.D("runtime","exported-to-video",c=>{window.bg({type:"exported-video",arrayBuffer:c.arrayBuffer,contentType:c.contentType,time:c.time})});b.D("runtime","exported-to-image-sequence",c=>{window.bg({type:"exported-image-sequence",blobArr:c.blobArr,time:c.time,gif:c.gif})});const a=new Set(["input","textarea","datalist"]);window.addEventListener("contextmenu",c=>{const d=c.target;a.has(d.tagName.toLowerCase())||
-Na(d)||c.preventDefault()});window.addEventListener("selectstart",I);window.addEventListener("gesturehold",I);window.addEventListener("touchstart",I,{passive:!1});window.addEventListener("pointerdown",I,{passive:!1});this.od=0;window.addEventListener("mousedown",c=>{1===c.button&&c.preventDefault()});window.addEventListener("mousewheel",Ra,{passive:!1});window.addEventListener("wheel",Ra,{passive:!1});window.addEventListener("resize",()=>{a:{if(!this.oa&&this.$d){var c=this.ua();var d=this.ka();if(this.l.Hd()){if(this.Zd){if(this.md===
-c&&d<this.Hb){this.Qb=this.Hb-d;fb(this,this.Hb,this.Qb);c=void 0;break a}0<this.Qb&&(this.Qb=0,fb(this,d,this.Qb))}this.md=c;this.Hb=d}l(this,"window-resize",{innerWidth:c,innerHeight:d,devicePixelRatio:window.devicePixelRatio,isFullscreen:G.sb(),cssDisplayMode:this.l.Ec()});this.l.tb()&&(-1!==this.lb&&clearTimeout(this.lb),gb(this,c,d,0))}c=void 0}return c});window.addEventListener("fullscreenchange",()=>F(this));window.addEventListener("webkitfullscreenchange",()=>F(this));window.addEventListener("mozfullscreenchange",
-()=>F(this));window.addEventListener("fullscreenerror",c=>db(this,c));window.addEventListener("webkitfullscreenerror",c=>db(this,c));window.addEventListener("mozfullscreenerror",c=>db(this,c));if(b.tb()){let c=Infinity;window.visualViewport.addEventListener("resize",()=>{const d=window.visualViewport.height;d>c&&(document.scrollingElement.scrollTop=0,document.scrollingElement.scrollLeft=0);c=d});document.documentElement.setAttribute("ioswebview","")}this.fb=new Set;this.lc=new WeakSet;this.Ea=!1}yc(){window.addEventListener("focus",
-()=>{l(this,"window-focus",null,Ja)});window.addEventListener("blur",()=>{try{var a=window.parent&&window.parent.document.hasFocus()}catch(c){a=!1}l(this,"window-blur",{parentHasFocus:a},Ja);this.od=0});window.addEventListener("focusin",a=>{a=a.target;(Oa.has(a.tagName.toLowerCase())||Na(a))&&l(this,"keyboard-blur",null,Ja)});window.addEventListener("keydown",a=>eb(this,"keydown",a));window.addEventListener("keyup",a=>eb(this,"keyup",a));window.addEventListener("mousedown",a=>K(this,"mousedown",a,
-Ia));window.addEventListener("mousemove",a=>K(this,"mousemove",a,Ia));window.addEventListener("mouseup",a=>K(this,"mouseup",a,Ia));window.addEventListener("dblclick",a=>K(this,"dblclick",a,H));window.addEventListener("wheel",a=>{this.oa||l(this,"wheel",{clientX:a.clientX,clientY:a.clientY+this.Ia,pageX:a.pageX,pageY:a.pageY+this.Ia,deltaX:a.deltaX,deltaY:a.deltaY,deltaZ:a.deltaZ,deltaMode:a.deltaMode,timeStamp:a.timeStamp},H)});window.addEventListener("pointerdown",a=>{window!==window.top&&window.focus();
-ib(a.target)&&document.activeElement&&!ib(document.activeElement)&&document.activeElement.blur();L(this,"pointerdown",a)});this.l.fa&&"undefined"!==typeof window.onpointerrawupdate&&self===self.top?window.addEventListener("pointerrawupdate",a=>{L(this,"pointermove",a)}):window.addEventListener("pointermove",a=>L(this,"pointermove",a));window.addEventListener("pointerup",a=>L(this,"pointerup",a));window.addEventListener("pointercancel",a=>L(this,"pointercancel",a));const b=()=>this.Wc();window.addEventListener("pointerup",
-b,!0);window.addEventListener("touchend",b,!0);window.addEventListener("click",b,!0);window.addEventListener("keydown",b,!0);window.addEventListener("gamepadconnected",b,!0);this.l.Re()&&!this.l.Hd()&&navigator.virtualKeyboard&&(navigator.virtualKeyboard.overlaysContent=!0,navigator.virtualKeyboard.addEventListener("geometrychange",()=>{fb(this,this.ka(),navigator.virtualKeyboard.boundingRect.height)}));this.l.tb()&&(document.scrollingElement.scrollTop=0,document.scrollingElement.scrollLeft=0)}ua(){return this.l.ua()}ka(){return this.l.ka()}Wc(){var b=
-[...this.fb];this.fb.clear();if(!this.Ea)for(const a of b)(b=a.play())&&b.catch(()=>{this.lc.has(a)||this.fb.add(a)})}Ma(b){if("function"!==typeof b.play)throw Error("missing play function");this.lc.delete(b);let a;try{a=b.play()}catch(c){this.fb.add(b);return}a&&a.catch(()=>{this.lc.has(b)||this.fb.add(b)})}Xa(b){this.fb.delete(b);this.lc.add(b)}Wb(b){this.Ea=!!b}Tc(b){alert(b.message)}});"use strict";
-async function Aa(b){if(b.Vf)throw Error("already initialised");b.Vf=!0;var a=b.Ga.Qc(("playable-ad"===b.Ga.A?b.Ga.kb:"")+"dispatchworker.js");b.ad=await b.Ga.Bc(a,b.yb,{name:"DispatchWorker"});a=new MessageChannel;b.gd=a.port1;b.ad.postMessage({type:"_init","in-port":a.port2},[a.port2]);b.qd=await Ga(b)}function Ba(b){return[b.gd,b.qd]}
-async function Ga(b){const a=b.he.length;var c=b.Ga.Qc(("playable-ad"===b.Ga.A?b.Ga.kb:"")+"jobworker.js");c=await b.Ga.Bc(c,b.yb,{name:"JobWorker"+a});const d=new MessageChannel,e=new MessageChannel;b.ad.postMessage({type:"_addJobWorker",port:d.port1},[d.port1]);c.postMessage({type:"init",number:a,"dispatch-port":d.port2,"output-port":e.port2},[d.port2,e.port2]);b.he.push(c);return e.port1}
-self.Ue=class{constructor(b){this.Ga=b;this.yb=b.ea;this.yb="preview"===b.A?this.yb+"workers/":this.yb+b.kb;this.Xf=Math.min(navigator.hardwareConcurrency||2,16);this.ad=null;this.he=[];this.qd=this.gd=null}};"use strict";window.C3_Is_Supported&&(window.c3_runtimeInterface=new self.ba({mg:!1,ng:"workermain.js",mb:["scripts/c3runtime.js"],wc:[],Ad:"",hg:"scripts/",xc:[],we:"html5"}));"use strict";
-self.ba.sa(class extends self.Ca{constructor(b){super(b,"mouse");x(this,[["cursor",a=>{document.documentElement.style.cursor=a}],["request-pointer-lock",()=>{this.l.Gd().requestPointerLock()}],["release-pointer-lock",()=>{document.exitPointerLock()}]]);document.addEventListener("pointerlockchange",()=>{l(this,"pointer-lock-change",{"has-pointer-lock":!!document.pointerLockElement})});document.addEventListener("pointerlockerror",()=>{l(this,"pointer-lock-error",{"has-pointer-lock":!!document.pointerLockElement})})}});
-"use strict";const jb=180/Math.PI;
-async function kb(b,a){a.usePlayMusicAsSoundWorkaround&&(b.pc=!0);b.wd=a.timeScaleMode;b.me=["equalpower","HRTF","soundfield"][a.panningModel];b.Yd=["linear","inverse","exponential"][a.distanceModel];b.ne=a.refDistance;b.le=a.maxDistance;b.pe=a.rolloffFactor;if(b.l.hd)b.pc=!0,b.h=new OfflineAudioContext({numberOfChannels:2,sampleRate:48E3,length:Math.ceil(48E3*b.l.ae)});else{var c={latencyHint:a.latencyHint};b.se||(c.sampleRate=48E3);if("undefined"!==typeof AudioContext)b.h=new AudioContext(c);else if("undefined"!==
-typeof webkitAudioContext)b.h=new webkitAudioContext(c);else throw Error("Web Audio API not supported");lb(b);b.h.onstatechange=()=>{"running"!==b.h.state&&lb(b);l(b,"audiocontext-state",{audioContextState:b.h.state})}}b.ab=b.h.createGain();b.ab.connect(b.h.destination);c=a.listenerPos;b.da[0]=c[0];b.da[1]=c[1];b.da[2]=c[2];b.h.listener.setPosition(c[0],c[1],c[2]);b.h.listener.setOrientation(...b.ga);self.C3_GetAudioContextCurrentTime=()=>b.h.currentTime;try{await Promise.all(a.preloadList.map(d=>
-M(b,d.originalUrl,d.url,d.type,!1)))}catch(d){console.error("[Construct] Preloading sounds failed: ",d)}return{sampleRate:b.h.sampleRate,audioContextState:b.h.state,outputLatency:b.h.outputLatency||0}}
-async function mb(b,a){var c=a.originalUrl,d=a.url;const e=a.type,f=a.isMusic,h=a.tags,k=a.isLooping,m=a.vol,n=a.pos,t=a.panning,v=a.stereoPan;let u=a.off;0<u&&!a.trueClock&&(b.h.getOutputTimestamp?(a=b.h.getOutputTimestamp(),u=u-a.performanceTime/1E3+a.contextTime):u=u-performance.now()/1E3+b.h.currentTime);b.ie=h.slice(0);nb(b,h);try{b.U=await pb(b,c,d,e,h,f);if(t){N(b.U,!0);var w=b.U,ha=t.x,J=t.y,Gb=t.z,Hb=t.angle,sa=t.innerAngle,ta=t.outerAngle,ua=t.outerGain;if(w.Fb){qb(w,ha,J,Gb,Hb);var E=self.ob.Ze;
-w.ya[0]!==E(sa)&&(w.ya[0]=E(sa),w.H.coneInnerAngle=E(sa));w.ya[1]!==E(ta)&&(w.ya[1]=E(ta),w.H.coneOuterAngle=E(ta));w.ya[2]!==ua&&(w.ya[2]=ua,w.H.coneOuterGain=ua)}t.hasOwnProperty("uid")&&(b.U.wa=t.uid)}else"number"===typeof v&&0!==v?(O(b.U,!0),rb(b.U,v)):(N(b.U,!1),O(b.U,!1));b.U.Play(k,m,n,u)}catch(Ib){console.error("[Construct] Audio: error starting playback: ",Ib);return}finally{c=h.join(" ");d=b.Nb.get(c);if(!d)throw Error("expected pending tag");d.Bd--;0===d.Bd&&(d.resolve(),b.Nb.delete(c))}y(b)}
-async function sb(b,a){var c=a.tags;const d=a.vol,e=a.duration;a=a.stopOnEnd;await tb(b,c);for(const k of P(b,c))if(!k.Da){c=k.I.gain;c.cancelScheduledValues(0);var f=k.B.h.currentTime,h=f+e;c.setValueAtTime(c.value,f);c.linearRampToValueAtTime(d,h);k.Va=d;k.cb=h;k.re=a}Q(b)}async function ub(b,a){const c=a.tags;a=a.rate;await tb(b,c);for(const d of P(b,c))d.pa!==a&&(d.pa=a,d.Pa())}async function vb(b,a){const c=a.tags;a=a.pos;await tb(b,c);for(const d of P(b,c))d.Ic(a)}
-async function wb(b,a){const c=a.originalUrl,d=a.url,e=a.type;a=a.isMusic;try{await pb(b,c,d,e,"",a)}catch(f){console.error("[Construct] Audio: error preloading: ",f)}}async function xb(b,a){if(a=await M(b,"",a.url,a.type,a.isMusic,!0))a.m(),a=b.ma.indexOf(a),-1!==a&&b.ma.splice(a,1)}
-async function yb(b,a){const c=a.type;var d=a.hasOwnProperty("tags")?a.tags:[a.tag];const e=a.params;let f;if("convolution"===c)try{f=await M(b,a.bufferOriginalUrl,a.bufferUrl,a.bufferType,!1)}catch(m){console.log("[Construct] Audio: error loading convolution: ",m);return}for(const m of d){if("filter"===c)d=new self.De(b,...e);else if("delay"===c)d=new self.Be(b,...e);else if("convolution"===c){var h=d=new self.Ae(b,f.la,...e),k=a.bufferType;h.Wd=a.bufferOriginalUrl;h.Xd=k}else if("flanger"===c)d=
-new self.Ee(b,...e);else if("phaser"===c)d=new self.Ge(b,...e);else if("gain"===c)d=new self.Fe(b,...e);else if("stereopan"===c)d=new self.Ie(b,...e);else if("tremolo"===c)d=new self.Je(b,...e);else if("ringmod"===c)d=new self.He(b,...e);else if("distortion"===c)d=new self.Ce(b,...e);else if("compressor"===c)d=new self.ze(b,...e);else if("analyser"===c)d=new self.ye(b,...e);else throw Error("invalid effect type");h=b;k=m;k=k.toLowerCase();let n=h.na.get(k);n||(n=[],h.na.set(k,n));d.fe=n.length;d.ud=
-k;n.push(d);zb(h,k)}Ab(b)}
-async function Bb(b,a){const c=a.saveLoadMode;if(3!==c){var d=[];for(var e of b.J)e.Ja()&&1===c||!e.Ja()&&2===c?d.push(e):e.m();b.J=d}for(const f of b.na.values())for(const h of f)h.m();b.na.clear();b.uc=a.timeScale;b.cd=a.gameTime;d=a.listenerPos;b.da[0]=d[0];b.da[1]=d[1];b.da[2]=d[2];b.h.listener.setPosition(d[0],d[1],d[2]);d=a.listenerOrientation;if(Array.isArray(d)){for(e=0;6>e;++e)b.ga[e]=d[e];b.h.listener.setOrientation(...b.ga)}b.Ea=a.isSilent;b.l.Wb(b.Ea);b.kc=a.masterVolume;b.ab.gain.value=
-b.kc;d=[];for(const f of Object.values(a.effects))d.push(Promise.all(f.map(h=>yb(b,h))));await Promise.all(d);await Promise.all(a.playing.map(f=>Cb(b,f,c)));Q(b)}
-async function Db(b,a){try{const c=b.h.suspend(a.time);b.ee?b.h.resume():(b.h.startRendering().then(d=>{const e=[];for(let f=0,h=d.numberOfChannels;f<h;++f){const k=d.getChannelData(f);e.push(k.buffer)}b.l.vb("runtime","offline-audio-render-completed",{duration:d.duration,length:d.length,numberOfChannels:d.numberOfChannels,sampleRate:d.sampleRate,channelData:e},null,e)}).catch(d=>Eb(d)),b.ee=!0);await c}catch(c){Eb(c)}}
-function lb(b){b.dc||(b.fd=!1,window.addEventListener("pointerup",b.Ha,!0),window.addEventListener("touchend",b.Ha,!0),window.addEventListener("click",b.Ha,!0),window.addEventListener("keydown",b.Ha,!0),b.dc=!0)}
-async function M(b,a,c,d,e,f){for(var h of b.ma)if(h.rb()===c)return await Fb(h),h;if(f)return null;if(e&&(b.pc||b.de)){f=0;for(let k=0,m=b.ma.length;k<m;++k)h=b.ma[k],b.ma[f]=h,h.Ja()?h.m():++f;b.ma.length=f}f="audio/webm; codecs=opus"===d&&!b.se;e&&f&&(b.de=!0);c=!e||b.pc||f?new self.Me(b,a,c,d,e,f):new self.Ke(b,a,c,d,e);b.ma.push(c);await Fb(c);b.ke.has(a)||(l(b,"buffer-metadata",{originalUrl:a,duration:c.ja()}),b.ke.add(a));return c}
-function Jb(b,a){return b===a||b.normalize().toLowerCase()===a.normalize().toLowerCase()}function Kb(b,a){return(a=b.na.get(a.toLowerCase()))?a[0].R():b.ia()}function zb(b,a){a=a.toLowerCase();let c=b.ia();var d=b.na.get(a);if(d&&d.length){c=d[0].R();for(let f=0,h=d.length;f<h;++f){var e=d[f];f+1===h?e.X(b.ia()):e.X(d[f+1].R())}}for(const f of Lb(b,a))e=f,d=c,e=e.ha||e.H||e.I,e.disconnect(),e.connect(d);b.Ta&&b.nd===a&&(b.Ta.disconnect(),b.Ta.connect(c))}
-function*Lb(b,a){if(a)for(const c of b.J)Jb(0<c.ra.length?c.ra[0]:"",a)&&(yield c);else b.U&&!b.U.S()&&(yield b.U)}function Mb(b,a,c){return c?b.l.Tf(a).then(d=>{const e=b.h.createBuffer(1,d.length,48E3);e.getChannelData(0).set(d);return e}):new Promise((d,e)=>{b.h.decodeAudioData(a,d,e)})}function Nb(b,a){let c=0;for(let d=0,e=b.J.length;d<e;++d){const f=b.J[d];b.J[c]=f;f.T===a?f.m():++c}b.J.length=c}
-function*P(b,a){if(0<a.length)for(const d of b.J){a:{b=d.ra;var c=a;for(const e of c){c=!1;for(const f of b)if(Jb(f,e)){c=!0;break}if(!c){b=!1;break a}}b=!0}b&&(yield d)}else b.U&&!b.U.S()&&(yield b.U)}async function pb(b,a,c,d,e,f){for(const h of b.J)if(h.rb()===c&&(h.zc()||f))return h.ra=e,h;a=await M(b,a,c,d,f);e="html5"===a.Zc?new self.Le(a.B,a,e):new self.Ne(a.B,a,e);b.J.push(e);return e}
-function nb(b,a){a=a.join(" ");let c=b.Nb.get(a);if(!c){let d=null;c={Bd:0,promise:new Promise(e=>d=e),resolve:d};b.Nb.set(a,c)}c.Bd++}function tb(b,a){return(b=b.Nb.get((0===a.length?b.ie:a).join(" ")))?b.promise:Promise.resolve()}function Q(b){if(0<b.Za.size)y(b);else for(const a of b.J)if(!a.K&&!a.S()){y(b);break}}function Ob(b,a,c,d){l(b,"trigger",{type:a,tags:c,aiid:d})}function Ab(b){b.jd||(b.jd=!0,Promise.resolve().then(()=>Pb(b)))}
-function Pb(b){const a={};for(const [c,d]of b.na)a[c]=d.map(e=>e.qb());l(b,"fxstate",{fxstate:a});b.jd=!1}
-async function Cb(b,a,c){if(3!==c){var d=a.bufferOriginalUrl,e=a.bufferUrl,f=a.bufferType,h=a.isMusic,k=a.tags,m=a.isLooping,n=a.volume,t=a.playbackTime;if(!h||1!==c)if(h||2!==c){c=null;try{c=await pb(b,d,e,f,k,h)}catch(v){console.error("[Construct] Audio: error loading audio state: ",v);return}b=c;(d=a.pan)?(N(b,!0),e=b.H,f=d.pos,b.hb[0]=f[0],b.hb[1]=f[1],b.hb[2]=f[2],f=d.orient,b.gb[0]=f[0],b.gb[1]=f[1],b.gb[2]=f[2],e.setPosition(...b.hb),e.setOrientation(...b.gb),b.ya[0]=d.cia,b.ya[1]=d.coa,b.ya[2]=
-d.cog,e.coneInnerAngle=d.cia,e.coneOuterAngle=d.coa,e.coneOuterGain=d.cog,b.wa=d.uid):N(b,!1);b=c;d=a.stereoPan;"number"!==typeof d?O(b,!1):(O(b,!0),rb(b,d));c.Play(m,n,t,0);a.isPlaying||c.ub();c.Sc(a)}}}function Eb(b){console.error("[Audio] Offline rendering error: ",b)}
-self.ob=class extends self.Ca{constructor(b){super(b,"audio");this.ab=this.h=null;this.dc=this.fd=!1;this.Ha=()=>{if(!this.fd){var a=this.h;"suspended"===a.state&&a.resume&&a.resume();var c=a.createBuffer(1,220,22050),d=a.createBufferSource();d.buffer=c;d.connect(a.destination);d.start(0);"running"===a.state&&this.dc&&(this.fd=!0,window.removeEventListener("pointerup",this.Ha,!0),window.removeEventListener("touchend",this.Ha,!0),window.removeEventListener("click",this.Ha,!0),window.removeEventListener("keydown",
-this.Ha,!0),this.dc=!1)}};this.ma=[];this.J=[];this.U=null;this.ie=[];this.ke=new Set;this.je=-1;this.Nb=new Map;this.kc=1;this.Ea=!1;this.wd=0;this.uc=1;this.cd=0;this.me="HRTF";this.Yd="inverse";this.ne=600;this.le=1E4;this.pe=1;this.da=[0,0,0];this.ga=[0,0,-1,0,1,0];this.de=this.pc=!1;this.se=this.l.Se();this.na=new Map;this.Za=new Set;this.ee=this.jd=!1;this.nd="";this.Ta=null;self.C3Audio_OnMicrophoneStream=(a,c)=>{this.Ta&&this.Ta.disconnect();this.nd=c.toLowerCase();this.Ta=this.h.createMediaStreamSource(a);
-this.Ta.connect(Kb(this,this.nd))};this.cc=null;self.C3Audio_GetOutputStream=()=>{this.cc||(this.cc=this.h.createMediaStreamDestination(),this.ab.connect(this.cc));return this.cc.stream};self.C3Audio_DOMInterface=this;x(this,[["create-audio-context",a=>kb(this,a)],["play",a=>mb(this,a)],["stop",a=>{a=a.tags;for(const c of P(this,a))c.Ka()}],["stop-all",()=>{for(const a of this.J)a.Ka()}],["set-paused",a=>{const c=a.tags;a=a.paused;for(const d of P(this,c))a?d.ub():d.Vb();Q(this)}],["set-volume",a=>
-{const c=a.tags;a=a.vol;for(const d of P(this,c))R(d,a)}],["fade-volume",a=>sb(this,a)],["set-master-volume",a=>{this.kc=a.vol;this.ab.gain.value=this.kc}],["set-muted",a=>{const c=a.tags;a=a.isMuted;for(const d of P(this,c))Qb(d,a)}],["set-silent",a=>{this.Ea=a.isSilent;this.l.Wb(this.Ea);for(const c of this.J)c.ac()}],["set-looping",a=>{const c=a.tags;a=a.isLooping;for(const d of P(this,c))d.Jc(a)}],["set-playback-rate",a=>ub(this,a)],["set-stereo-pan",a=>{const c=a.tags;a=a.p;for(const d of P(this,
-c))O(d,!0),rb(d,a)}],["seek",a=>vb(this,a)],["preload",a=>wb(this,a)],["unload",a=>xb(this,a)],["unload-all",()=>{for(const a of this.ma)a.m();this.ma.length=0}],["set-suspended",a=>{a=a.isSuspended;!a&&this.h.resume&&this.h.resume();for(const c of this.J)c.Kc(a);a&&this.h.suspend&&this.h.suspend()}],["add-effect",a=>yb(this,a)],["set-effect-param",a=>{var c=a.tags;const d=a.index,e=a.param,f=a.value,h=a.ramp;a=a.time;for(const k of c)c=this.na.get(k.toLowerCase()),!c||0>d||d>=c.length||c[d].ca(e,
-f,h,a);Ab(this)}],["remove-effects",a=>{a=a.tags;for(const c of a){a=c.toLowerCase();const d=this.na.get(a);if(!d||!d.length)break;for(const e of d)e.m();this.na.delete(a);zb(this,a)}}],["tick",a=>{this.uc=a.timeScale;this.cd=a.gameTime;this.je=a.tickCount;if(0!==this.wd)for(var c of this.J)c.Pa();!(c=a.listenerPos)||this.da[0]===c[0]&&this.da[1]===c[1]&&this.da[2]===c[2]||(this.da[0]=c[0],this.da[1]=c[1],this.da[2]=c[2],this.h.listener.setPosition(c[0],c[1],c[2]));if((c=a.listenerOrientation)&&(this.ga[0]!==
-c[0]||this.ga[1]!==c[1]||this.ga[2]!==c[2]||this.ga[3]!==c[3]||this.ga[4]!==c[4]||this.ga[5]!==c[5])){for(let d=0;6>d;++d)this.ga[d]=c[d];this.h.listener.setOrientation(...this.ga)}for(const d of a.instPans){a=d.uid;for(const e of this.J)e.wa===a&&qb(e,d.x,d.y,d.z,d.angle)}}],["load-state",a=>Bb(this,a)],["offline-render-audio",a=>Db(this,a)],["offline-render-finish",()=>{this.h.resume()}]])}Y(){return this.h}ia(){return this.ab}GetAudioContextExtern(){return this.Y()}GetDestinationNodeExtern(){return this.ia()}Ub(){return this.Ea}Ma(b){this.l.Ma(b)}Xa(b){this.l.Xa(b)}La(){for(var b of this.Za)b.La();
-b=this.h.currentTime;for(var a of this.J)a.La(b);a=this.J.filter(c=>!c.K&&!c.S()).map(c=>c.qb());l(this,"state",{tickCount:this.je,outputLatency:this.h.outputLatency||0,audioInstances:a,analysers:[...this.Za].map(c=>({tag:c.ud,index:c.fe,peak:c.ib,rms:c.oe,binCount:c.o.frequencyBinCount,freqBins:c.ce}))});0===a.length&&0===this.Za.size&&this.ec&&(this.l.Rd(this.te),this.ec=!1)}static Ze(b){return b*jb}static Fd(b){return Math.max(Math.min(Math.pow(10,b/20),1),0)}static Ve(b){return Math.log(Math.max(Math.min(b,
-1),0))/Math.log(10)*20}};self.ba.sa(self.ob);"use strict";function Fb(b){b.ic||(b.ic=b.Rc());return b.ic}self.Cd=class{constructor(b,a,c,d,e){this.B=b;this.$f=a;this.Ua=c;this.W=d;this.Wf=e;this.Zc="";this.ic=null}m(){this.ic=this.B=null}Rc(){}Y(){return this.B.Y()}Fc(){return this.$f}rb(){return this.Ua}Dc(){return this.W}Ja(){return this.Wf}ja(){}};"use strict";
-self.Ke=class extends self.Cd{constructor(b,a,c,d,e){super(b,a,c,d,e);this.Zc="html5";this.O=new Audio;this.O.crossOrigin="anonymous";this.O.autoplay=!1;this.O.preload="auto";this.Ib=this.Jb=null;this.O.addEventListener("canplaythrough",()=>!0);this.Mb=this.Y().createGain();this.Lb=null;this.O.addEventListener("canplay",()=>{this.Jb&&(this.Jb(),this.Ib=this.Jb=null);!this.Lb&&this.O&&(this.Lb=this.Y().createMediaElementSource(this.O),this.Lb.connect(this.Mb))});this.onended=null;this.O.addEventListener("ended",
-()=>{if(this.onended)this.onended()});this.O.addEventListener("error",f=>{console.error(`[Construct] Audio '${this.Ua}' error: `,f);this.Ib&&(this.Ib(f),this.Ib=this.Jb=null)})}m(){Nb(this.B,this);this.Mb.disconnect();this.Mb=null;this.Lb.disconnect();this.Lb=null;this.O&&!this.O.paused&&this.O.pause();this.O=this.onended=null;super.m()}Rc(){return new Promise((b,a)=>{this.Jb=b;this.Ib=a;this.O.src=this.Ua})}Z(){return this.O}ja(){return this.O.duration}};"use strict";
-async function Rb(b){if(b.Qa)return b.Qa;var a=b.B.l;if("cordova"===a.A&&a.Id(b.Ua)&&a.fc)b.Qa=await a.Sb(b.Ua);else{a=await fetch(b.Ua);if(!a.ok)throw Error(`error fetching audio data: ${a.status} ${a.statusText}`);b.Qa=await a.arrayBuffer()}}async function Sb(b){if(b.la)return b.la;b.la=await Mb(b.B,b.Qa,b.Yf);b.Qa=null}
-self.Me=class extends self.Cd{constructor(b,a,c,d,e,f){super(b,a,c,d,e);this.Zc="webaudio";this.la=this.Qa=null;this.Yf=!!f}m(){Nb(this.B,this);this.la=this.Qa=null;super.m()}async Rc(){try{await Rb(this),await Sb(this)}catch(b){console.error(`[Construct] Failed to load audio '${this.Ua}': `,b)}}ja(){return this.la?this.la.duration:0}};"use strict";let Ub=0;
-function N(b,a){a=!!a;b.Fb!==a&&(b.Fb=a,b.Fb?(O(b,!1),b.H||(b.H=b.Y().createPanner(),b.H.panningModel=b.B.me,b.H.distanceModel=b.B.Yd,b.H.refDistance=b.B.ne,b.H.maxDistance=b.B.le,b.H.rolloffFactor=b.B.pe),b.I.disconnect(),b.I.connect(b.H),b.H.connect(b.ia())):(b.H.disconnect(),b.I.disconnect(),b.I.connect(b.ia())))}
-function O(b,a){a=!!a;b.hc!==a&&(b.hc=a,b.hc?(N(b,!1),b.ha=b.Y().createStereoPanner(),b.I.disconnect(),b.I.connect(b.ha),b.ha.connect(b.ia())):(b.ha.disconnect(),b.ha=null,b.I.disconnect(),b.I.connect(b.ia())))}function rb(b,a){b.hc&&b.td!==a&&(b.ha.pan.value=a,b.td=a)}function R(b,a){b.Va=a;b.I.gain.cancelScheduledValues(0);b.cb=-1;b.I.gain.value=b.Gc()}function Qb(b,a){a=!!a;b.Da!==a&&(b.Da=a,b.ac())}
-function qb(b,a,c,d,e){if(b.Fb){var f=b.hb,h=b.gb,k=Math.cos(e);e=Math.sin(e);if(f[0]!==a||f[1]!==c||f[2]!==d)f[0]=a,f[1]=c,f[2]=d,b.H.setPosition(...f);if(h[0]!==k||h[1]!==e||0!==h[2])h[0]=k,h[1]=e,h[2]=0,b.H.setOrientation(...h)}}function S(b){return b.kd?b.B.cd:performance.now()/1E3}
-self.Dd=class{constructor(b,a,c){this.B=b;this.T=a;this.ra=c;this.bc=Ub++;this.I=this.Y().createGain();this.I.connect(this.ia());this.H=null;this.Fb=!1;this.hb=[0,0,0];this.gb=[0,0,0];this.ya=[0,0,0];this.ha=null;this.hc=!1;this.td=0;this.K=!0;this.aa=this.za=this.M=!1;this.Va=1;this.Da=!1;this.pa=1;b=this.B.wd;this.kd=1===b&&!this.Ja()||2===b;this.cb=this.wa=-1;this.re=!1}m(){this.T=this.B=null;this.H&&(this.H.disconnect(),this.H=null);this.ha&&(this.ha.disconnect(),this.ha=null);this.I.disconnect();
-this.I=null}Y(){return this.B.Y()}ia(){return Kb(this.B,0<this.ra.length?this.ra[0]:"")}Fc(){return this.T.Fc()}rb(){return this.T.rb()}Dc(){return this.T.Dc()}Ja(){return this.T.Ja()}S(){}zc(){}IsPlaying(){return!this.K&&!this.M&&!this.S()}Wa(){}ja(){return this.T.ja()}Play(){}Ka(){}ub(){}Vb(){}La(b){-1!==this.cb&&b>=this.cb&&(this.cb=-1,this.re&&this.Ka(),Ob(this.B,"fade-ended",this.ra,this.bc))}Gc(){const b=this.Va;return isFinite(b)?b:0}Ub(){return this.B.Ub()}ac(){}Jc(){}Pa(){}Ic(){}Kc(){}Hc(){}qb(){var b=
-this.bc,a=this.ra,c=this.ja(),d=-1===this.cb?this.Va:this.I.gain.value,e=this.IsPlaying();if(this.H){var f=this.H;f={pos:this.hb,orient:this.gb,cia:f.coneInnerAngle,coa:f.coneOuterAngle,cog:f.coneOuterGain,uid:this.wa}}else f=null;return{aiid:b,tags:a,duration:c,volume:d,isPlaying:e,playbackTime:this.Wa(),playbackRate:this.pa,uid:this.wa,bufferOriginalUrl:this.Fc(),bufferUrl:"",bufferType:this.Dc(),isMusic:this.Ja(),isLooping:this.aa,isMuted:this.Da,resumePosition:this.Hc(),pan:f,stereoPan:this.ha?
-this.td:null}}Sc(b){var a=b.playbackRate;this.pa!==a&&(this.pa=a,this.Pa());Qb(this,b.isMuted)}};"use strict";
-self.Le=class extends self.Dd{constructor(b,a,c){super(b,a,c);this.T.Mb.connect(this.I);this.T.onended=()=>this.Uc()}m(){this.Ka();this.T.Mb.disconnect();super.m()}Z(){return this.T.Z()}Uc(){this.K=!0;this.wa=-1;Ob(this.B,"ended",this.ra,this.bc)}S(){return this.Z().ended}zc(){return this.K?!0:this.S()}Wa(){let b=this.Z().currentTime;this.aa||(b=Math.min(b,this.ja()));return b}Play(b,a,c){const d=this.Z();1!==d.playbackRate&&(d.playbackRate=1);d.loop!==b&&(d.loop=b);R(this,a);this.Da=!1;d.muted&&
-(d.muted=!1);if(d.currentTime!==c)try{d.currentTime=c}catch(e){console.warn(`[Construct] Exception seeking audio '${this.T.rb()}' to position '${c}': `,e)}this.B.Ma(d);this.M=this.K=!1;this.aa=b;this.pa=1}Ka(){const b=this.Z();b.paused||b.pause();this.B.Xa(b);this.K=!0;this.M=!1;this.wa=-1}ub(){if(!(this.M||this.K||this.S())){var b=this.Z();b.paused||b.pause();this.B.Xa(b);this.M=!0}}Vb(){!this.M||this.K||this.S()||(this.B.Ma(this.Z()),this.M=!1)}ac(){this.Z().muted=this.Da||this.Ub()}Jc(b){b=!!b;
-this.aa!==b&&(this.aa=b,this.Z().loop=b)}Pa(){let b=this.pa;this.kd&&(b*=this.B.uc);try{this.Z().playbackRate=b}catch(a){console.warn(`[Construct] Unable to set playback rate '${b}':`,a)}}Ic(b){if(!this.K&&!this.S())try{this.Z().currentTime=b}catch(a){console.warn(`[Construct] Error seeking audio to '${b}': `,a)}}Hc(){return this.Wa()}Kc(b){b?this.IsPlaying()?(this.Z().pause(),this.za=!0):this.za=!1:this.za&&(this.B.Ma(this.Z()),this.za=!1)}};"use strict";
-function T(b){b.v&&(b.v.onended=null,b.v.disconnect(),b.v.buffer=null);b.v=null;b.xb=null}
-self.Ne=class extends self.Dd{constructor(b,a,c){super(b,a,c);this.v=null;this.mc=d=>this.Uc(d);this.ed=!0;this.xb=null;this.V=this.oc=this.qc=0;this.pd=1}m(){this.Ka();T(this);this.mc=null;super.m()}Uc(b){this.M||this.za||b.target!==this.xb||(this.K=this.ed=!0,this.wa=-1,T(this),Ob(this.B,"ended",this.ra,this.bc))}S(){return!this.K&&this.v&&this.v.loop||this.M?!1:this.ed}zc(){return!this.v||this.K?!0:this.S()}Wa(){let b;b=this.M?this.V:this.oc+(S(this)-this.qc)*this.pa;this.aa||(b=Math.min(b,this.ja()));
-return b}Play(b,a,c,d){this.Da=!1;this.pd=1;R(this,a);T(this);this.v=this.Y().createBufferSource();this.v.buffer=this.T.la;this.v.connect(this.I);this.xb=this.v;this.v.onended=this.mc;this.v.loop=b;this.v.start(d,c);this.M=this.K=this.ed=!1;this.aa=b;this.pa=1;this.qc=S(this);this.oc=c}Ka(){if(this.v)try{this.v.stop(0)}catch(b){}this.K=!0;this.M=!1;this.wa=-1}ub(){this.M||this.K||this.S()||(this.V=this.Wa(),this.aa&&(this.V%=this.ja()),this.M=!0,this.v.stop(0))}Vb(){!this.M||this.K||this.S()||(T(this),
-this.v=this.Y().createBufferSource(),this.v.buffer=this.T.la,this.v.connect(this.I),this.xb=this.v,this.v.onended=this.mc,this.v.loop=this.aa,R(this,this.Va),this.Pa(),this.v.start(0,this.V),this.qc=S(this),this.oc=this.V,this.M=!1)}Gc(){return super.Gc()*this.pd}ac(){this.pd=this.Da||this.Ub()?0:1;R(this,this.Va)}Jc(b){b=!!b;this.aa!==b&&(this.aa=b,this.v&&(this.v.loop=b))}Pa(){let b=this.pa;this.kd&&(b*=this.B.uc);this.v&&(this.v.playbackRate.value=b)}Ic(b){this.K||this.S()||(this.M?this.V=b:(this.ub(),
-this.V=b,this.Vb()))}Hc(){return this.V}Kc(b){b?this.IsPlaying()?(this.za=!0,this.V=this.Wa(),this.aa&&(this.V%=this.ja()),this.v.stop(0)):this.za=!1:this.za&&(T(this),this.v=this.Y().createBufferSource(),this.v.buffer=this.T.la,this.v.connect(this.I),this.xb=this.v,this.v.onended=this.mc,this.v.loop=this.aa,R(this,this.Va),this.Pa(),this.v.start(0,this.V),this.qc=S(this),this.oc=this.V,this.za=!1)}Sc(b){super.Sc(b);this.V=b.resumePosition}};"use strict";function U(b){return b.h.createGain()}
-function V(b,a,c,d,e){a.cancelScheduledValues(0);if(0===e)a.value=c;else switch(b=b.h.currentTime,e+=b,d){case 0:a.setValueAtTime(c,e);break;case 1:a.setValueAtTime(a.value,b);a.linearRampToValueAtTime(c,e);break;case 2:a.setValueAtTime(a.value,b),a.exponentialRampToValueAtTime(c,e)}}class W{constructor(b){this.B=b;this.h=b.Y();this.fe=-1;this.W=this.ud="";this.u=null}m(){this.h=null}R(){}X(){}qb(){return{type:this.W,tag:this.ud,params:this.u}}}
-self.De=class extends W{constructor(b,a,c,d,e,f,h){super(b);this.W="filter";this.u=[a,c,d,e,f,h];this.C=U(this);this.j=U(this);this.j.gain.value=h;this.i=U(this);this.i.gain.value=1-h;this.G=this.h.createBiquadFilter();this.G.type=a;this.G.frequency.value=c;this.G.detune.value=d;this.G.Q.value=e;this.G.gain.vlaue=f;this.C.connect(this.G);this.C.connect(this.i);this.G.connect(this.j)}m(){this.C.disconnect();this.G.disconnect();this.j.disconnect();this.i.disconnect();super.m()}X(b){this.j.disconnect();
-this.j.connect(b);this.i.disconnect();this.i.connect(b)}R(){return this.C}ca(b,a,c,d){switch(b){case 0:a=Math.max(Math.min(a/100,1),0);this.u[5]=a;V(this,this.j.gain,a,c,d);V(this,this.i.gain,1-a,c,d);break;case 1:this.u[1]=a;V(this,this.G.frequency,a,c,d);break;case 2:this.u[2]=a;V(this,this.G.detune,a,c,d);break;case 3:this.u[3]=a;V(this,this.G.Q,a,c,d);break;case 4:this.u[4]=a,V(this,this.G.gain,a,c,d)}}};
-self.Be=class extends W{constructor(b,a,c,d){super(b);this.W="delay";this.u=[a,c,d];this.C=U(this);this.j=U(this);this.j.gain.value=d;this.i=U(this);this.i.gain.value=1-d;this.Kb=U(this);this.$=this.h.createDelay(a);this.$.delayTime.value=a;this.Bb=U(this);this.Bb.gain.value=c;this.C.connect(this.Kb);this.C.connect(this.i);this.Kb.connect(this.j);this.Kb.connect(this.$);this.$.connect(this.Bb);this.Bb.connect(this.Kb)}m(){this.C.disconnect();this.j.disconnect();this.i.disconnect();this.Kb.disconnect();
-this.$.disconnect();this.Bb.disconnect();super.m()}X(b){this.j.disconnect();this.j.connect(b);this.i.disconnect();this.i.connect(b)}R(){return this.C}ca(b,a,c,d){const e=self.ob.Fd;switch(b){case 0:a=Math.max(Math.min(a/100,1),0);this.u[2]=a;V(this,this.j.gain,a,c,d);V(this,this.i.gain,1-a,c,d);break;case 4:this.u[1]=e(a);V(this,this.Bb.gain,e(a),c,d);break;case 5:this.u[0]=a,V(this,this.$.delayTime,a,c,d)}}};
-self.Ae=class extends W{constructor(b,a,c,d){super(b);this.W="convolution";this.u=[c,d];this.Xd=this.Wd="";this.C=U(this);this.j=U(this);this.j.gain.value=d;this.i=U(this);this.i.gain.value=1-d;this.Ab=this.h.createConvolver();this.Ab.normalize=c;this.Ab.buffer=a;this.C.connect(this.Ab);this.C.connect(this.i);this.Ab.connect(this.j)}m(){this.C.disconnect();this.Ab.disconnect();this.j.disconnect();this.i.disconnect();super.m()}X(b){this.j.disconnect();this.j.connect(b);this.i.disconnect();this.i.connect(b)}R(){return this.C}ca(b,
-a,c,d){switch(b){case 0:a=Math.max(Math.min(a/100,1),0),this.u[1]=a,V(this,this.j.gain,a,c,d),V(this,this.i.gain,1-a,c,d)}}qb(){const b=super.qb();b.bufferOriginalUrl=this.Wd;b.bufferUrl="";b.bufferType=this.Xd;return b}};
-self.Ee=class extends W{constructor(b,a,c,d,e,f){super(b);this.W="flanger";this.u=[a,c,d,e,f];this.C=U(this);this.i=U(this);this.i.gain.value=1-f/2;this.j=U(this);this.j.gain.value=f/2;this.Db=U(this);this.Db.gain.value=e;this.$=this.h.createDelay(a+c);this.$.delayTime.value=a;this.F=this.h.createOscillator();this.F.frequency.value=d;this.N=U(this);this.N.gain.value=c;this.C.connect(this.$);this.C.connect(this.i);this.$.connect(this.j);this.$.connect(this.Db);this.Db.connect(this.$);this.F.connect(this.N);
-this.N.connect(this.$.delayTime);this.F.start(0)}m(){this.F.stop(0);this.C.disconnect();this.$.disconnect();this.F.disconnect();this.N.disconnect();this.i.disconnect();this.j.disconnect();this.Db.disconnect();super.m()}X(b){this.j.disconnect();this.j.connect(b);this.i.disconnect();this.i.connect(b)}R(){return this.C}ca(b,a,c,d){switch(b){case 0:a=Math.max(Math.min(a/100,1),0);this.u[4]=a;V(this,this.j.gain,a/2,c,d);V(this,this.i.gain,1-a/2,c,d);break;case 6:this.u[1]=a/1E3;V(this,this.N.gain,a/1E3,
-c,d);break;case 7:this.u[2]=a;V(this,this.F.frequency,a,c,d);break;case 8:this.u[3]=a/100,V(this,this.Db.gain,a/100,c,d)}}};
-self.Ge=class extends W{constructor(b,a,c,d,e,f,h){super(b);this.W="phaser";this.u=[a,c,d,e,f,h];this.C=U(this);this.i=U(this);this.i.gain.value=1-h/2;this.j=U(this);this.j.gain.value=h/2;this.G=this.h.createBiquadFilter();this.G.type="allpass";this.G.frequency.value=a;this.G.detune.value=c;this.G.Q.value=d;this.F=this.h.createOscillator();this.F.frequency.value=f;this.N=U(this);this.N.gain.value=e;this.C.connect(this.G);this.C.connect(this.i);this.G.connect(this.j);this.F.connect(this.N);this.N.connect(this.G.frequency);
-this.F.start(0)}m(){this.F.stop(0);this.C.disconnect();this.G.disconnect();this.F.disconnect();this.N.disconnect();this.i.disconnect();this.j.disconnect();super.m()}X(b){this.j.disconnect();this.j.connect(b);this.i.disconnect();this.i.connect(b)}R(){return this.C}ca(b,a,c,d){switch(b){case 0:a=Math.max(Math.min(a/100,1),0);this.u[5]=a;V(this,this.j.gain,a/2,c,d);V(this,this.i.gain,1-a/2,c,d);break;case 1:this.u[0]=a;V(this,this.G.frequency,a,c,d);break;case 2:this.u[1]=a;V(this,this.G.detune,a,c,
-d);break;case 3:this.u[2]=a;V(this,this.G.Q,a,c,d);break;case 6:this.u[3]=a;V(this,this.N.gain,a,c,d);break;case 7:this.u[4]=a,V(this,this.F.frequency,a,c,d)}}};self.Fe=class extends W{constructor(b,a){super(b);this.W="gain";this.u=[a];this.o=U(this);this.o.gain.value=a}m(){this.o.disconnect();super.m()}X(b){this.o.disconnect();this.o.connect(b)}R(){return this.o}ca(b,a,c,d){const e=self.ob.Fd;switch(b){case 4:this.u[0]=e(a),V(this,this.o.gain,e(a),c,d)}}};
-self.Ie=class extends W{constructor(b,a){super(b);this.W="stereopan";this.u=[a];this.o=this.h.createStereoPanner();this.o.pan.value=a}m(){this.o.disconnect();super.m()}X(b){this.o.disconnect();this.o.connect(b)}R(){return this.o}ca(b,a,c,d){a=Math.min(Math.max(a/100,-1),1);switch(b){case 9:this.u[0]=a,V(this,this.o.pan,a,c,d)}}};
-self.Je=class extends W{constructor(b,a,c){super(b);this.W="tremolo";this.u=[a,c];this.o=U(this);this.o.gain.value=1-c/2;this.F=this.h.createOscillator();this.F.frequency.value=a;this.N=U(this);this.N.gain.value=c/2;this.F.connect(this.N);this.N.connect(this.o.gain);this.F.start(0)}m(){this.F.stop(0);this.F.disconnect();this.N.disconnect();this.o.disconnect();super.m()}X(b){this.o.disconnect();this.o.connect(b)}R(){return this.o}ca(b,a,c,d){switch(b){case 0:a=Math.max(Math.min(a/100,1),0);this.u[1]=
-a;V(this,this.o.gain,1-a/2,c,d);V(this,this.N.gain,a/2,c,d);break;case 7:this.u[0]=a,V(this,this.F.frequency,a,c,d)}}};
-self.He=class extends W{constructor(b,a,c){super(b);this.W="ringmod";this.u=[a,c];this.C=U(this);this.j=U(this);this.j.gain.value=c;this.i=U(this);this.i.gain.value=1-c;this.Pb=U(this);this.Pb.gain.value=0;this.F=this.h.createOscillator();this.F.frequency.value=a;this.F.connect(this.Pb.gain);this.F.start(0);this.C.connect(this.Pb);this.C.connect(this.i);this.Pb.connect(this.j)}m(){this.F.stop(0);this.F.disconnect();this.Pb.disconnect();this.C.disconnect();this.j.disconnect();this.i.disconnect();super.m()}X(b){this.j.disconnect();
-this.j.connect(b);this.i.disconnect();this.i.connect(b)}R(){return this.C}ca(b,a,c,d){switch(b){case 0:a=Math.max(Math.min(a/100,1),0);this.u[1]=a;V(this,this.j.gain,a,c,d);V(this,this.i.gain,1-a,c,d);break;case 7:this.u[0]=a,V(this,this.F.frequency,a,c,d)}}};
-self.Ce=class extends W{constructor(b,a,c,d,e,f){super(b);this.W="distortion";this.u=[a,c,d,e,f];this.C=U(this);this.sc=U(this);this.rc=U(this);b=d;.01>b&&(b=.01);this.sc.gain.value=b;this.rc.gain.value=Math.pow(1/b,.6)*e;this.j=U(this);this.j.gain.value=f;this.i=U(this);this.i.gain.value=1-f;this.vc=this.h.createWaveShaper();this.$c=new Float32Array(65536);for(e=0;32768>e;++e)f=e/32768,b=1.05*c*a-a,d=0>f?-f:f,d<a?b=d:(d=1-Math.exp(-(1/b)*(d-a)),b=a+b*d),f=b*(0>f?-1:1),this.$c[32768+e]=f,this.$c[32768-
-e-1]=-f;this.vc.curve=this.$c;this.C.connect(this.sc);this.C.connect(this.i);this.sc.connect(this.vc);this.vc.connect(this.rc);this.rc.connect(this.j)}m(){this.C.disconnect();this.sc.disconnect();this.vc.disconnect();this.rc.disconnect();this.j.disconnect();this.i.disconnect();super.m()}X(b){this.j.disconnect();this.j.connect(b);this.i.disconnect();this.i.connect(b)}R(){return this.C}ca(b,a,c,d){switch(b){case 0:a=Math.max(Math.min(a/100,1),0),this.u[4]=a,V(this,this.j.gain,a,c,d),V(this,this.i.gain,
-1-a,c,d)}}};self.ze=class extends W{constructor(b,a,c,d,e,f){super(b);this.W="compressor";this.u=[a,c,d,e,f];this.o=this.h.createDynamicsCompressor();this.o.threshold.value=a;this.o.knee.value=c;this.o.ratio.value=d;this.o.attack.value=e;this.o.release.value=f}m(){this.o.disconnect();super.m()}X(b){this.o.disconnect();this.o.connect(b)}R(){return this.o}ca(){}};
-self.ye=class extends W{constructor(b,a,c){super(b);this.W="analyser";this.u=[a,c];this.o=this.h.createAnalyser();this.o.fftSize=a;this.o.smoothingTimeConstant=c;this.ce=new Float32Array(this.o.frequencyBinCount);this.qe=new Uint8Array(a);this.oe=this.ib=0;b=this.B;b.Za.add(this);Q(b)}m(){this.B.Za.delete(this);this.o.disconnect();super.m()}La(){this.o.getFloatFrequencyData(this.ce);this.o.getByteTimeDomainData(this.qe);const b=this.o.fftSize;let a=this.ib=0;for(var c=0;c<b;++c){let d=(this.qe[c]-
-128)/128;0>d&&(d=-d);this.ib<d&&(this.ib=d);a+=d*d}c=self.ob.Ve;this.ib=c(this.ib);this.oe=c(Math.sqrt(a/b))}X(b){this.o.disconnect();this.o.connect(b)}R(){return this.o}ca(){}};"use strict";function X(b){b.stopPropagation()}
-self.ba.sa(class extends self.Tb{constructor(b){super(b,"progress-bar")}Ac(b,a){const c=document.createElement("progress");c.style.position="absolute";c.style.userSelect="none";c.style.webkitUserSelect="none";c.addEventListener("pointerdown",X);c.addEventListener("pointermove",X);c.addEventListener("pointerrawupdate",X);c.addEventListener("pointerup",X);c.addEventListener("mousedown",X);c.addEventListener("mouseup",X);c.addEventListener("click",()=>ea(this,b));a.id&&(c.id=a.id);a.className&&(c.className=
-a.className);this.wb(c,a);return c}wb(b,a){b.title=a.title;const c=a.value;a=a.max;0<a&&0<=c?(b.max=a,b.value=c):(b.removeAttribute("value"),b.removeAttribute("max"))}});"use strict";async function Vb(b,a){a=a.type;let c=!0;0===a?c=await Wb():1===a&&(c=await Xb());l(b,"permission-result",{type:a,result:c})}
-async function Wb(){if(!self.DeviceOrientationEvent||!self.DeviceOrientationEvent.requestPermission)return!0;try{return"granted"===await self.DeviceOrientationEvent.requestPermission()}catch(b){return console.warn("[Touch] Failed to request orientation permission: ",b),!1}}
-async function Xb(){if(!self.DeviceMotionEvent||!self.DeviceMotionEvent.requestPermission)return!0;try{return"granted"===await self.DeviceMotionEvent.requestPermission()}catch(b){return console.warn("[Touch] Failed to request motion permission: ",b),!1}}self.ba.sa(class extends self.Ca{constructor(b){super(b,"touch");r(this,"request-permission",a=>Vb(this,a))}});"use strict";
-async function Yb(){try{return{isOk:!0,isPersistent:await navigator.storage.persist()}}catch(b){return console.error("[Construct] Error requesting persistent storage: ",b),{isOk:!1}}}self.ba.sa(class extends self.Ca{constructor(b){super(b,"localstorage");x(this,[["init",()=>this.Xb()],["request-persistent",()=>Yb()]])}async Xb(){let b=!1;try{b=await navigator.storage.persisted()}catch(a){b=!1,console.warn("[Construct] Error checking storage persisted state: ",a)}return{isPersistent:b}}});"use strict";
-function Y(b){b.stopPropagation()}
-self.ba.sa(class extends self.Tb{constructor(b){super(b,"sliderbar")}Ac(b,a){const c=document.createElement("input");c.type="range";c.style.position="absolute";c.style.userSelect="none";c.style.webkitUserSelect="none";c.addEventListener("pointerdown",Y);c.addEventListener("pointermove",Y);c.addEventListener("pointerrawupdate",Y);c.addEventListener("pointerup",Y);c.addEventListener("mousedown",Y);c.addEventListener("mouseup",Y);c.addEventListener("keydown",Y);c.addEventListener("keyup",Y);c.addEventListener("contextmenu",
-d=>d.preventDefault());c.addEventListener("click",()=>ea(this,b));c.addEventListener("change",()=>z(this,"change",b,{value:parseFloat(c.value)}));c.addEventListener("input",()=>z(this,"input",b,{value:parseFloat(c.value)}));a.id&&(c.id=a.id);a.className&&(c.className=a.className);this.wb(c,a);return c}wb(b,a){b.max=a.max;b.min=a.min;b.step=a.step;b.value=a.value;b.disabled=!a.isEnabled;b.title=a.title}});"use strict";let Z=null,Zb=null;
-window.addEventListener("beforeinstallprompt",b=>{b.preventDefault();Z=b;Zb&&l(Zb,"install-available");return!1});function $b(){}function ac(b){window.C3_RegisterSW&&window.OfflineClientInfo&&window.OfflineClientInfo.SetMessageCallback(a=>l(b,"sw-message",a.data))}
-function bc(b){b=b.orientation;if(screen.orientation&&screen.orientation.lock)screen.orientation.lock(b).catch(a=>console.warn("[Construct] Failed to lock orientation: ",a));else try{let a=!1;screen.lockOrientation?a=screen.lockOrientation(b):screen.webkitLockOrientation?a=screen.webkitLockOrientation(b):screen.mozLockOrientation?a=screen.mozLockOrientation(b):screen.msLockOrientation&&(a=screen.msLockOrientation(b));a||console.warn("[Construct] Failed to lock orientation")}catch(a){console.warn("[Construct] Failed to lock orientation: ",
-a)}}async function cc(){if(!Z)return{result:"unavailable"};try{return Z.prompt(),{result:(await Z.userChoice).outcome}}catch(b){return console.error("[Construct] Requesting install failed: ",b),{result:"failed"}}}
-self.ba.sa(class extends self.Ca{constructor(b){super(b,"browser");this.A="";x(this,[["get-initial-state",a=>{this.A=a.exportType;return{location:location.toString(),isOnline:!!navigator.onLine,referrer:document.referrer,title:document.title,isCookieEnabled:!!navigator.cookieEnabled,screenWidth:screen.width,screenHeight:screen.height,windowOuterWidth:window.outerWidth,windowOuterHeight:window.outerHeight,isConstructArcade:"undefined"!==typeof window.is_scirra_arcade}}],["ready-for-sw-messages",()=>
-ac(this)],["alert",a=>this.Tc(a)],["close",()=>{navigator.app&&navigator.app.exitApp?navigator.app.exitApp():navigator.device&&navigator.device.exitApp?navigator.device.exitApp():window.close()}],["set-focus",a=>this.Vc(a)],["vibrate",a=>{navigator.vibrate&&navigator.vibrate(a.pattern)}],["lock-orientation",a=>bc(a)],["unlock-orientation",()=>{try{screen.orientation&&screen.orientation.unlock?screen.orientation.unlock():screen.unlockOrientation?screen.unlockOrientation():screen.webkitUnlockOrientation?
-screen.webkitUnlockOrientation():screen.mozUnlockOrientation?screen.mozUnlockOrientation():screen.msUnlockOrientation&&screen.msUnlockOrientation()}catch(a){}}],["navigate",a=>{var c=a.type;if("back"===c)navigator.app&&navigator.app.backHistory?navigator.app.backHistory():window.history.back();else if("forward"===c)window.history.forward();else if("reload"===c)location.reload();else if("url"===c){c=a.url;const d=a.target;a=a.exportType;self.cordova&&self.cordova.InAppBrowser?self.cordova.InAppBrowser.open(c,
-"_system"):"preview"===a||this.l.ta()?window.open(c,"_blank"):this.xg||(2===d?window.top.location=c:1===d?window.parent.location=c:window.location=c)}else"new-window"===c&&(c=a.url,a=a.tag,self.cordova&&self.cordova.InAppBrowser?self.cordova.InAppBrowser.open(c,"_system"):window.open(c,a))}],["request-fullscreen",a=>{if(this.l.ta()||"macos-wkwebview"===this.A)self.ba.$b(!0),this.l.Oa({type:"set-fullscreen",fullscreen:!0});else{const c={navigationUI:"auto"};a=a.navUI;1===a?c.navigationUI="hide":2===
-a&&(c.navigationUI="show");a=document.documentElement;let d;a.requestFullscreen?d=a.requestFullscreen(c):a.mozRequestFullScreen?d=a.mozRequestFullScreen(c):a.msRequestFullscreen?d=a.msRequestFullscreen(c):a.webkitRequestFullScreen&&(d="undefined"!==typeof Element.ALLOW_KEYBOARD_INPUT?a.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT):a.webkitRequestFullScreen());d instanceof Promise&&d.catch($b)}}],["exit-fullscreen",()=>{if(this.l.ta()||"macos-wkwebview"===this.A)self.ba.$b(!1),this.l.Oa({type:"set-fullscreen",
-fullscreen:!1});else{let a;document.exitFullscreen?a=document.exitFullscreen():document.mozCancelFullScreen?a=document.mozCancelFullScreen():document.msExitFullscreen?a=document.msExitFullscreen():document.webkitCancelFullScreen&&(a=document.webkitCancelFullScreen());a instanceof Promise&&a.catch($b)}}],["set-hash",a=>{location.hash=a.hash}],["set-document-css-style",a=>{const c=a.prop,d=a.value;var e=a.selector;a=a["is-all"];try{if(e)if(a)var f=Array.from(document.querySelectorAll(e));else{var h=
-document.querySelector(e);f=h?[h]:[]}else f=[document.documentElement];e=f;for(const k of e)c.startsWith("--")?k.style.setProperty(c,d):k.style[c]=d}catch(k){console.warn("[Browser] Failed to set style: ",k)}}],["get-document-css-style",a=>{{const d=a.prop;a=a.selector;try{const e=document.querySelector(a);var c=e?{isOk:!0,result:window.getComputedStyle(e).getPropertyValue(d)}:{isOk:!1}}catch(e){console.warn("[Browser] Failed to get style: ",e),c={isOk:!1}}}return c}],["set-window-size",a=>{window.resizeTo(a.windowWidth,
-a.windowHeight)}],["set-window-position",a=>{window.moveTo(a.windowX,a.windowY)}],["request-install",()=>cc()],["set-warn-on-close",a=>{a.enabled?window.addEventListener("beforeunload",this.Vd):window.removeEventListener("beforeunload",this.Vd)}]]);window.addEventListener("online",()=>{l(this,"online-state",{isOnline:!0})});window.addEventListener("offline",()=>{l(this,"online-state",{isOnline:!1})});window.addEventListener("hashchange",()=>{l(this,"hashchange",{location:location.toString()})});this.Vd=
-a=>a.preventDefault();document.addEventListener("backbutton",()=>{l(this,"backbutton")})}yc(){Z?l(this,"install-available"):Zb=this;window.addEventListener("appinstalled",()=>{l(this,"app-installed")})}Tc(b){alert(b.message)}Vc(b){b=b.isFocus;if("nwjs"===this.A){const a="nwjs"===this.A?nw.Window.get():null;b?a.focus():a.blur()}else b?window.focus():window.blur()}});"use strict";
-async function dc(){return new Promise(b=>{const a=document.getElementsByTagName("head")[0],c=document.createElement("script");c.src="/sdk.js";c.async=!0;c.onload=async()=>b();a.appendChild(c)})}async function ec(b){b.g&&(b.g.onEvent(b.g.EVENTS.HISTORY_BACK,()=>{l(b.s,"ysdk-handle-event",{type:"HISTORY_BACK"})}),await b.Mc(),await fc(b))}async function fc(b){if(b.g){var a=await b.g.feedback.canReview();await p(b.s,"ysdk-update-can-review",{value:a.value})}}
-class gc{constructor(b){this.s=b;this.g=void 0;window.ysdk=void 0;r(this.s,"ysdk-initialize",this.Pe.bind(this));r(this.s,"ysdk-loading-api-ready",this.kf.bind(this));r(this.s,"ysdk-gameplay-api-start",this.Na.bind(this));r(this.s,"ysdk-gameplay-api-stop",this.Lc.bind(this));r(this.s,"ysdk-show-fullscreen-ad",this.tf.bind(this));r(this.s,"ysdk-show-rewarded-ad",this.uf.bind(this));r(this.s,"ysdk-show-sticky-banner",this.vf.bind(this));r(this.s,"ysdk-hide-sticky-banner",this.hf.bind(this));r(this.s,
-"ysdk-get-leaderboard-entries",this.cf.bind(this));r(this.s,"ysdk-set-leaderboard-score",this.pf.bind(this));r(this.s,"ysdk-purchase",this.lf.bind(this));r(this.s,"ysdk-consume-purchase",this.$e.bind(this));r(this.s,"ysdk-get-purchases",this.gf.bind(this));r(this.s,"ysdk-get-catalog",this.bf.bind(this));r(this.s,"ysdk-get-player",this.df.bind(this));r(this.s,"ysdk-get-player-data",this.ef.bind(this));r(this.s,"ysdk-get-player-stats",this.ff.bind(this));r(this.s,"ysdk-set-player-data",this.qf.bind(this));
-r(this.s,"ysdk-set-player-stats",this.rf.bind(this));r(this.s,"ysdk-increment-player-stats",this.jf.bind(this));r(this.s,"ysdk-dispatch-event",this.af.bind(this));r(this.s,"ysdk-shortcuts-show-prompt",this.sf.bind(this));r(this.s,"ysdk-remote-config-fetch",this.mf.bind(this));r(this.s,"ysdk-request-review",this.nf.bind(this));r(this.s,"ysdk-update-can-show-shortcut-prompt",this.Mc.bind(this))}async Pe(){await dc();if(window.YaGames)return this.g=await window.YaGames.init(),window.ysdk=this.g,window.g=
-this.g,await ec(this),this.g.features.PluginEngineDataReporterAPI?.report({engineName:"Construct",engineVersion:"3",pluginName:"yagames_sdk by LisGames",pluginVersion:"2.11.0"}),console.log("%c YandexGamesSDK for Construct 3 v2.11.0 ","background: #14151f; color: #fb923c"),{environment:{app:{id:this.g.environment.app.id},browser:{lang:this.g.environment.browser.lang},i18n:{lang:this.g.environment.i18n.lang,tld:this.g.environment.i18n.tld},payload:this.g.environment.payload},deviceType:this.g.deviceInfo.type}}kf(){this.g&&
-this.g.features.LoadingAPI?.ready()}Na(){this.g&&this.g.features.GameplayAPI?.start()}Lc(){this.g&&this.g.features.GameplayAPI?.stop()}tf(){this.g&&this.g.adv.showFullscreenAdv({callbacks:{onClose:b=>{this.Lc();l(this.s,"ysdk-fullscreen-ad-callback",{type:"onClose",wasShown:b})},onOpen:()=>{this.Na();l(this.s,"ysdk-fullscreen-ad-callback",{type:"onOpen"})},onError:b=>{this.Na();l(this.s,"ysdk-fullscreen-ad-callback",{type:"onError",error:JSON.stringify(b)})},onOffline:()=>{this.Na();l(this.s,"ysdk-fullscreen-ad-callback",
-{type:"onOffline"})}}})}uf(b){this.g&&this.g.adv.showRewardedVideo({callbacks:{onOpen:()=>{this.Lc();l(this.s,"ysdk-rewarded-ad-callback",{id:b.id,type:"onOpen"})},onRewarded:()=>{this.Na();l(this.s,"ysdk-rewarded-ad-callback",{id:b.id,type:"onRewarded"})},onClose:()=>{this.Na();l(this.s,"ysdk-rewarded-ad-callback",{id:b.id,type:"onClose"})},onError:a=>{this.Na();l(this.s,"ysdk-rewarded-ad-callback",{id:b.id,type:"onError",error:JSON.stringify(a)})}}})}vf(){this.g&&this.g.adv.showBannerAdv()}hf(){this.g&&
-this.g.adv.hideBannerAdv()}async cf(b){if(this.g)return b=await (await this.g.getLeaderboards()).getLeaderboardEntries(b.leaderboardName,b.options),{leaderboard:b.leaderboard,ranges:b.ranges,userRank:b.userRank,entries:b.entries.map(a=>({score:a.score,extraData:a.extraData,rank:a.rank,player:{avatarSrc:{small:a.player.getAvatarSrc("small"),medium:a.player.getAvatarSrc("medium"),large:a.player.getAvatarSrc("large")},avatarSrcSet:{small:a.player.getAvatarSrcSet("small"),medium:a.player.getAvatarSrcSet("medium"),
-large:a.player.getAvatarSrcSet("large")},lang:a.player.lang,publicName:a.player.publicName,scopePermissions:a.player.scopePermissions,uniqueID:a.player.uniqueID},formattedScore:a.formattedScore}))}}async pf(b){this.g&&await (await this.g.getLeaderboards()).setLeaderboardScore(b.leaderboardName,b.score,b.extraData||void 0)}async lf(b){if(this.g)try{const a=await (await this.g.getPayments({signed:!0})).purchase({id:b.productID,developerPayload:b.developerPayload});l(this.s,"ysdk-purchase-callback",
-{success:!0,productID:a.productID,purchaseToken:a.purchaseToken,developerPayload:a.developerPayload,signature:a.signature})}catch(a){console.error(a),l(this.s,"ysdk-purchase-callback",{error:JSON.stringify(a)})}}async $e(b){this.g&&await (await this.g.getPayments({signed:!0})).consumePurchase(b.purchaseToken)}async gf(){if(this.g){var b=await (await this.g.getPayments({signed:!0})).getPurchases(),a=[];for(let c=0;c<b.length;c++){const d=b[c];a[c]={productID:d.productID,purchaseToken:d.purchaseToken,
-developerPayload:d.developerPayload}}a.signature=b.signature;return a}}async bf(){if(this.g){var b=await (await this.g.getPayments({signed:!0})).getCatalog(),a=[];for(let c=0;c<b.length;c++){const d=b[c];a[c]={id:d.id,title:d.title,description:d.description,imageURI:d.imageURI,price:d.price,priceValue:d.priceValue,priceCurrencyCode:d.priceCurrencyCode,priceCurrencyImage:{small:d.getPriceCurrencyImage("small"),medium:d.getPriceCurrencyImage("medium"),svg:d.getPriceCurrencyImage("svg")}}}return a}}async ef(b){if(this.g)return await (await this.g.getPlayer()).getData(b)}async ff(b){if(this.g)return await (await this.g.getPlayer()).getStats(b)}async qf(b){this.g&&
-await (await this.g.getPlayer()).setData(b.data,b.flush)}async rf(b){this.g&&await (await this.g.getPlayer()).setStats(b)}async jf(b){this.g&&await (await this.g.getPlayer()).incrementStats(b)}async df(b){if(this.g)return b.requestPersonalInfo&&this.g.openAuthDialog?(b=await this.g.getPlayer({signed:!0,scopes:!0}),"lite"===b.getMode()&&(await this.g.openAuthDialog(),await this.g.getPlayer({signed:!0,scopes:!0})),b=await this.g.getPlayer({signed:!0,scopes:!0})):b=await this.g.getPlayer({scopes:!1}),
-await fc(this),{isAuthorized:"lite"!==b.getMode(),isAccessGranted:""!==b.getName(),uniqueID:b.getUniqueID(),publicName:b.getName(),avatars:{small:b.getPhoto("small"),medium:b.getPhoto("medium"),large:b.getPhoto("large")},signature:b.signature,payingStatus:b.getPayingStatus()}}af(b){this.g&&this.g.dispatchEvent(this.g.EVENTS[b.name])}async Mc(){if(this.g){var b=await this.g.shortcut.canShowPrompt();await p(this.s,"ysdk-update-can-show-shortcut-prompt",{canShow:b.canShow})}}async sf(){if(this.g){var b=
-await this.g.shortcut.showPrompt();await this.Mc();l(this.s,"ysdk-shortcut-show-prompt-result",{accepted:"accepted"===b.outcome})}}async mf(b){return this.g?await this.g.getFlags(b):b.yg}async nf(){if(this.g){if((await this.g.feedback.canReview()).value){const b=await this.g.feedback.requestReview();await fc(this);return{feedbackSent:b.feedbackSent}}return{feedbackSent:!1}}}}
-function hc(b){b.L=document.createElement("iframe");b.L.id="tv-emulator";b.L.src="";b.L.style.position="absolute";b.L.style.display="none";b.L.style.width="288px";b.L.style.height="640px";b.L.style.border="none";b.L.style.zIndex="999";b.L.style.transformOrigin="right bottom";document.body.appendChild(b.L);b.Ld(b.L);fetch("tv_emulator.html").then(a=>a.text()).then(a=>{b.L.contentWindow.document.write(a);window.addEventListener("resize",b.Ld.bind(b));window.addEventListener("message",b.Xe.bind(b));
-window.addEventListener("keydown",b.We.bind(b))});b.Ba={id:"TV Remote Emulator",index:0,axes:[0,0,0,0],connected:!1,buttons:Array(16).fill(0).map(()=>({pressed:!1,kg:!1,value:0})),timestamp:Math.floor(Date.now()/1E3)}}function ic(b){b.enabled=!0;b.L.style.display="block";const a=new Event("gamepadconnected");b.Ba.connected=!0;a.gamepad=b.Ba;b.Ba.timestamp=Math.floor(Date.now()/1E3);window.dispatchEvent(a);b.Zf=navigator.getGamepads;navigator.getGamepads=()=>[b.Ba]}
-class jc{constructor(b){this.s=b;this.enabled=!1;this.xe={tg:12,qg:13,rg:14,sg:15}}We(b){"F6"===b.key&&("none"===this.L.style.display?ic(this):(this.enabled=!1,this.L.style.display="none",b=new Event("gamepaddisconnected"),this.Ba.connected=!1,b.gamepad=this.Ba,this.Ba.timestamp=Math.floor(Date.now()/1E3),window.dispatchEvent(b),navigator.getGamepads=this.Zf))}Xe(b){if("tv-emulator-event"===b.data.event)switch(b.data.name){case "Enter":window.dispatchEvent(new KeyboardEvent(b.data.pressed?"keydown":
-"keyup",{key:"Enter",code:"Enter",keyCode:13}));break;case "Back":b.data.pressed||l(this.s,"ysdk-handle-event",{type:"HISTORY_BACK"});break;default:const a=this.Ba.buttons[this.xe[b.data.name]];a.pressed=b.data.pressed;a.value=b.data.pressed?1:0;a.kg=b.data.pressed;this.Ba.timestamp=Math.floor(Date.now()/1E3)}}Ld(){this.L.style.transform=`scale(${Math.min(window.innerWidth/288,window.innerHeight/640)})`;this.L.style.left=`${window.innerWidth-288}px`;this.L.style.top=`${window.innerHeight-640}px`}}
-function kc(b){const a=navigator.getGamepads().filter(c=>c);if(a.length){for(const c of a)c&&(b.data.upPressed=b.data.upPressed||c.buttons[12].pressed,b.data.downPressed=b.data.downPressed||c.buttons[13].pressed,b.data.leftPressed=b.data.leftPressed||c.buttons[14].pressed,b.data.rightPressed=b.data.rightPressed||c.buttons[15].pressed);l(b,"gamepads-update",b.data)}}
-self.ba.sa(class extends self.Ca{constructor(b){super(b,"yagames_sdk");this.pg=new gc(this);this.lg=new jc(this);r(this,"start-tv-remote-emulator",()=>{hc(this.lg)});r(this,"start-tv-remote-tracking",()=>{this.Uf=!0;window.addEventListener("keydown",a=>{"Enter"===a.key&&l(this,"tv-remote-ok-click",!0)});window.addEventListener("keyup",a=>{"Enter"===a.key&&l(this,"tv-remote-ok-click",!1)})});this.data={Fg:!1,zg:!1,Bg:!1,Dg:!1};y(this)}La(){this.Uf&&kc(this);var b=this.pg;b.g&&l(b.s,"ysdk-server-time-update",
-b.g.Eg())}});
+// Generated by Construct, the game and animation creation tool
+// Visit: https://www.construct.net
+
+// workers/domHandler.js
+'use strict';{window.DOMHandler=class DOMHandler{constructor(iRuntime,componentId){this._iRuntime=iRuntime;this._componentId=componentId;this._hasTickCallback=false;this._tickCallback=()=>this.Tick()}Attach(){}PostToRuntime(handler,data,dispatchOpts,transferables){this._iRuntime.PostToRuntimeComponent(this._componentId,handler,data,dispatchOpts,transferables)}PostToRuntimeAsync(handler,data,dispatchOpts,transferables){return this._iRuntime.PostToRuntimeComponentAsync(this._componentId,handler,data,
+dispatchOpts,transferables)}_PostToRuntimeMaybeSync(name,data,dispatchOpts){if(this._iRuntime.UsesWorker())this.PostToRuntime(name,data,dispatchOpts);else this._iRuntime._GetLocalRuntime()["_OnMessageFromDOM"]({"type":"event","component":this._componentId,"handler":name,"dispatchOpts":dispatchOpts||null,"data":data,"responseId":null})}AddRuntimeMessageHandler(handler,func){this._iRuntime.AddRuntimeComponentMessageHandler(this._componentId,handler,func)}AddRuntimeMessageHandlers(list){for(const [handler,
+func]of list)this.AddRuntimeMessageHandler(handler,func)}GetRuntimeInterface(){return this._iRuntime}GetComponentID(){return this._componentId}_StartTicking(){if(this._hasTickCallback)return;this._iRuntime._AddRAFCallback(this._tickCallback);this._hasTickCallback=true}_StopTicking(){if(!this._hasTickCallback)return;this._iRuntime._RemoveRAFCallback(this._tickCallback);this._hasTickCallback=false}Tick(){}};window.RateLimiter=class RateLimiter{constructor(callback,interval){this._callback=callback;
+this._interval=interval;this._timerId=-1;this._lastCallTime=-Infinity;this._timerCallFunc=()=>this._OnTimer();this._ignoreReset=false;this._canRunImmediate=false}SetCanRunImmediate(c){this._canRunImmediate=!!c}Call(){if(this._timerId!==-1)return;const nowTime=Date.now();const timeSinceLastCall=nowTime-this._lastCallTime;const interval=this._interval;if(timeSinceLastCall>=interval&&this._canRunImmediate){this._lastCallTime=nowTime;this._RunCallback()}else this._timerId=self.setTimeout(this._timerCallFunc,
+Math.max(interval-timeSinceLastCall,4))}_RunCallback(){this._ignoreReset=true;this._callback();this._ignoreReset=false}Reset(){if(this._ignoreReset)return;this._CancelTimer();this._lastCallTime=Date.now()}_OnTimer(){this._timerId=-1;this._lastCallTime=Date.now();this._RunCallback()}_CancelTimer(){if(this._timerId!==-1){self.clearTimeout(this._timerId);this._timerId=-1}}Release(){this._CancelTimer();this._callback=null;this._timerCallFunc=null}}};
+
+
+// workers/domElementHandler.js
+'use strict';{class ElementState{constructor(elem){this._elem=elem;this._hadFirstUpdate=false;this._isVisibleFlag=true;this._wantHtmlIndex=-1;this._actualHtmlIndex=-1;this._htmlZIndex=-1}SetVisibleFlag(f){this._isVisibleFlag=!!f}GetVisibleFlag(){return this._isVisibleFlag}HadFirstUpdate(){return this._hadFirstUpdate}SetHadFirstUpdate(){this._hadFirstUpdate=true}GetWantHTMLIndex(){return this._wantHtmlIndex}SetWantHTMLIndex(i){this._wantHtmlIndex=i}GetActualHTMLIndex(){return this._actualHtmlIndex}SetActualHTMLIndex(i){this._actualHtmlIndex=
+i}SetHTMLZIndex(z){this._htmlZIndex=z}GetHTMLZIndex(){return this._htmlZIndex}GetElement(){return this._elem}}window.DOMElementHandler=class DOMElementHandler extends self.DOMHandler{constructor(iRuntime,componentId){super(iRuntime,componentId);this._elementMap=new Map;this._autoAttach=true;this.AddRuntimeMessageHandlers([["create",e=>this._OnCreate(e)],["destroy",e=>this._OnDestroy(e)],["set-visible",e=>this._OnSetVisible(e)],["update-position",e=>this._OnUpdatePosition(e)],["update-state",e=>this._OnUpdateState(e)],
+["focus",e=>this._OnSetFocus(e)],["set-css-style",e=>this._OnSetCssStyle(e)],["set-attribute",e=>this._OnSetAttribute(e)],["remove-attribute",e=>this._OnRemoveAttribute(e)]]);this.AddDOMElementMessageHandler("get-element",elem=>elem)}SetAutoAttach(e){this._autoAttach=!!e}AddDOMElementMessageHandler(handler,func){this.AddRuntimeMessageHandler(handler,e=>{const elementId=e["elementId"];const elem=this.GetElementById(elementId);return func(elem,e)})}AddDOMElementMessageHandlers(arr){for(const [handler,
+func]of arr)this.AddDOMElementMessageHandler(handler,func)}_OnCreate(e){const elementId=e["elementId"];const elem=this.CreateElement(elementId,e);const elementState=new ElementState(elem);this._elementMap.set(elementId,elementState);elem.style.boxSizing="border-box";elem.style.display="none";elementState.SetVisibleFlag(e["isVisible"]);const focusElem=this._GetFocusElement(elem);focusElem.addEventListener("focus",e=>this._OnFocus(elementId));focusElem.addEventListener("blur",e=>this._OnBlur(elementId));
+const wantHtmlIndex=e["htmlIndex"];elementState.SetWantHTMLIndex(wantHtmlIndex);elementState.SetHTMLZIndex(e["htmlZIndex"]);if(this._autoAttach){const actualHtmlIndex=this.GetRuntimeInterface().GetAvailableHTMLIndex(wantHtmlIndex);elementState.SetActualHTMLIndex(actualHtmlIndex);const parent=this.GetRuntimeInterface().GetHTMLWrapElement(actualHtmlIndex);parent.appendChild(elem)}}CreateElement(elementId,e){throw new Error("required override");}DestroyElement(elem){}_OnDestroy(e){const elementId=e["elementId"];
+const elem=this.GetElementById(elementId);this.DestroyElement(elem);if(this._autoAttach)elem.parentElement.removeChild(elem);this._elementMap.delete(elementId)}PostToRuntimeElement(handler,elementId,data){if(!data)data={};data["elementId"]=elementId;this.PostToRuntime(handler,data)}_PostToRuntimeElementMaybeSync(handler,elementId,data){if(!data)data={};data["elementId"]=elementId;this._PostToRuntimeMaybeSync(handler,data)}_OnSetVisible(e){if(!this._autoAttach)return;const elemState=this._elementMap.get(e["elementId"]);
+const elem=elemState.GetElement();if(elemState.HadFirstUpdate())elem.style.display=e["isVisible"]?"":"none";else elemState.SetVisibleFlag(e["isVisible"])}_OnUpdatePosition(e){if(!this._autoAttach)return;const elemState=this._elementMap.get(e["elementId"]);const elem=elemState.GetElement();const iRuntime=this.GetRuntimeInterface();elem.style.left=e["left"]+"px";elem.style.top=e["top"]+"px";elem.style.width=e["width"]+"px";elem.style.height=e["height"]+"px";const fontSize=e["fontSize"];if(fontSize!==
+null)elem.style.fontSize=fontSize+"em";const wantHtmlIndex=e["htmlIndex"];elemState.SetWantHTMLIndex(wantHtmlIndex);const actualHtmlIndex=iRuntime.GetAvailableHTMLIndex(wantHtmlIndex);if(actualHtmlIndex!==elemState.GetActualHTMLIndex()){elem.remove();const parent=iRuntime.GetHTMLWrapElement(actualHtmlIndex);parent.appendChild(elem);elemState.SetActualHTMLIndex(actualHtmlIndex);iRuntime._UpdateHTMLElementsZOrder()}const htmlZIndex=e["htmlZIndex"];if(htmlZIndex!==elemState.GetHTMLZIndex()){elemState.SetHTMLZIndex(htmlZIndex);
+iRuntime._UpdateHTMLElementsZOrder()}if(!elemState.HadFirstUpdate()){elemState.SetHadFirstUpdate();if(elemState.GetVisibleFlag())elem.style.display=""}}_OnHTMLLayersChanged(){if(!this._autoAttach)return;for(const elemState of this._elementMap.values()){const wantHtmlIndex=this.GetRuntimeInterface().GetAvailableHTMLIndex(elemState.GetWantHTMLIndex());const actualHtmlIndex=elemState.GetActualHTMLIndex();if(wantHtmlIndex!==-1&&actualHtmlIndex!==-1&&wantHtmlIndex!==actualHtmlIndex){const elem=elemState.GetElement();
+elem.remove();const parent=this.GetRuntimeInterface().GetHTMLWrapElement(wantHtmlIndex);parent.appendChild(elem);elemState.SetActualHTMLIndex(wantHtmlIndex)}}}_GetAllElementStatesForZOrderUpdate(){if(!this._autoAttach)return null;return[...this._elementMap.values()]}_OnUpdateState(e){const elem=this.GetElementById(e["elementId"]);this.UpdateState(elem,e)}UpdateState(elem,e){throw new Error("required override");}_GetFocusElement(elem){return elem}_OnFocus(elementId){this.PostToRuntimeElement("elem-focused",
+elementId)}_OnBlur(elementId){this.PostToRuntimeElement("elem-blurred",elementId)}_OnSetFocus(e){const elem=this._GetFocusElement(this.GetElementById(e["elementId"]));if(e["focus"])elem.focus();else elem.blur()}_OnSetCssStyle(e){const elem=this.GetElementById(e["elementId"]);const prop=e["prop"];const val=e["val"];if(prop.startsWith("--"))elem.style.setProperty(prop,val);else elem.style[prop]=val}_OnSetAttribute(e){const elem=this.GetElementById(e["elementId"]);elem.setAttribute(e["name"],e["val"])}_OnRemoveAttribute(e){const elem=
+this.GetElementById(e["elementId"]);elem.removeAttribute(e["name"])}GetElementById(elementId){const elementState=this._elementMap.get(elementId);if(!elementState)throw new Error(`no element with id ${elementId}`);return elementState.GetElement()}}};
+
+
+// workers/domSide.js
+'use strict';{const isiOSLike=/(iphone|ipod|ipad|macos|macintosh|mac os x)/i.test(navigator.userAgent);const isAndroid=/android/i.test(navigator.userAgent);const isSafari=/safari/i.test(navigator.userAgent)&&!/(chrome|chromium|edg\/|OPR\/|nwjs)/i.test(navigator.userAgent);let resolveCounter=0;function AddScript(url){const elem=document.createElement("script");elem.async=false;elem.type="module";if(url.isStringSrc)return new Promise(resolve=>{const resolveName="c3_resolve_"+resolveCounter;++resolveCounter;
+self[resolveName]=resolve;elem.textContent=url.str+`\n\nself["${resolveName}"]();`;document.head.appendChild(elem)});else return new Promise((resolve,reject)=>{elem.onload=resolve;elem.onerror=reject;elem.src=url;document.head.appendChild(elem)})}async function CheckSupportsWorkerMode(){if(!navigator["userActivation"]||typeof OffscreenCanvas==="undefined")return false;try{const workerScript=`
+	self.addEventListener("message", () =>
+	{
+		try {
+			const offscreenCanvas = new OffscreenCanvas(32, 32);
+			const gl = offscreenCanvas.getContext("webgl");
+			self.postMessage(!!gl);
+		}
+		catch (err)
+		{
+			console.warn("Feature detection worker error:", err);
+			self.postMessage(false);
+		}
+	});`;let isWorkerModuleSupported=false;const workerScriptBlob=new Blob([workerScript],{"type":"text/javascript"});const w=new Worker(URL.createObjectURL(workerScriptBlob),{get type(){isWorkerModuleSupported=true}});const result=await new Promise(resolve=>{w.addEventListener("message",e=>{w.terminate();resolve(e.data)});w.postMessage("")});return isWorkerModuleSupported&&result}catch(err){console.warn("Error feature detecting worker mode: ",err);return false}}let tmpAudio=new Audio;const supportedAudioFormats=
+{"audio/webm; codecs=opus":!!tmpAudio.canPlayType("audio/webm; codecs=opus"),"audio/ogg; codecs=opus":!!tmpAudio.canPlayType("audio/ogg; codecs=opus"),"audio/webm; codecs=vorbis":!!tmpAudio.canPlayType("audio/webm; codecs=vorbis"),"audio/ogg; codecs=vorbis":!!tmpAudio.canPlayType("audio/ogg; codecs=vorbis"),"audio/mp4":!!tmpAudio.canPlayType("audio/mp4"),"audio/mpeg":!!tmpAudio.canPlayType("audio/mpeg")};tmpAudio=null;async function BlobToString(blob){const arrayBuffer=await BlobToArrayBuffer(blob);
+const textDecoder=new TextDecoder("utf-8");return textDecoder.decode(arrayBuffer)}function BlobToArrayBuffer(blob){return new Promise((resolve,reject)=>{const fileReader=new FileReader;fileReader.onload=e=>resolve(e.target.result);fileReader.onerror=err=>reject(err);fileReader.readAsArrayBuffer(blob)})}const queuedArrayBufferReads=[];let activeArrayBufferReads=0;const MAX_ARRAYBUFFER_READS=8;window["RealFile"]=window["File"];const domHandlerClasses=[];const runtimeEventHandlers=new Map;const pendingResponsePromises=
+new Map;let nextResponseId=0;const runOnStartupFunctions=[];self.runOnStartup=function runOnStartup(f){if(typeof f!=="function")throw new Error("runOnStartup called without a function");runOnStartupFunctions.push(f)};const WEBVIEW_EXPORT_TYPES=new Set(["cordova","playable-ad-single-file","playable-ad-zip","instant-games"]);function IsWebViewExportType(exportType){return WEBVIEW_EXPORT_TYPES.has(exportType)}let isWrapperFullscreen=false;window.RuntimeInterface=class RuntimeInterface{constructor(opts){this._useWorker=
+opts.useWorker;this._messageChannelPort=null;this._runtimeBaseUrl="";this._scriptFolder=opts.scriptFolder;this._worker=null;this._localRuntime=null;this._domHandlers=[];this._runtimeDomHandler=null;this._isFirstSizeUpdate=true;this._canvasLayers=[];this._pendingRemoveElements=[];this._pendingUpdateHTMLZOrder=false;this._updateHTMLZOrderRAFCallback=()=>this._DoUpdateHTMLElementsZOrder();this._isExportingToVideo=false;this._exportToVideoDuration=0;this._jobScheduler=null;this._rafId=-1;this._rafFunc=
+()=>this._OnRAFCallback();this._rafCallbacks=new Set;this._wrapperInitResolve=null;this._wrapperComponentIds=[];this._exportType=opts.exportType;this._isFileProtocol=location.protocol.substr(0,4)==="file";this._directoryHandles=[];if(this._exportType==="playable-ad-single-file"||this._exportType==="playable-ad-zip"||this._exportType==="instant-games")this._useWorker=false;if(isSafari)this._useWorker=false;if(this._exportType==="cordova"&&this._useWorker)if(isAndroid){const chromeVer=/Chrome\/(\d+)/i.exec(navigator.userAgent);
+if(!chromeVer||!(parseInt(chromeVer[1],10)>=90))this._useWorker=false}if(this.IsAnyWebView2Wrapper())self["chrome"]["webview"].addEventListener("message",e=>this._OnWrapperMessage(e.data,e["additionalObjects"]));else if(this._exportType==="macos-wkwebview")self["C3WrapperOnMessage"]=msg=>this._OnWrapperMessage(msg);this._localFileBlobs=null;this._localFileStrings=null;if(this._exportType==="html5"&&!window.isSecureContext)console.warn("[Construct] Warning: the browser indicates this is not a secure context. Some features may be unavailable. Use secure (HTTPS) hosting to ensure all features are available.");
+this.AddRuntimeComponentMessageHandler("canvas","update-size",e=>this._OnUpdateCanvasSize(e));this.AddRuntimeComponentMessageHandler("canvas","set-html-layer-count",e=>this["_OnSetHTMLLayerCount"](e));this.AddRuntimeComponentMessageHandler("canvas","cleanup-html-layers",()=>this._OnCleanUpHTMLLayers());this.AddRuntimeComponentMessageHandler("runtime","cordova-fetch-local-file",e=>this._OnCordovaFetchLocalFile(e));this.AddRuntimeComponentMessageHandler("runtime","create-job-worker",e=>this._OnCreateJobWorker(e));
+this.AddRuntimeComponentMessageHandler("runtime","send-wrapper-extension-message",e=>this._OnSendWrapperExtensionMessage(e));if(this._exportType==="cordova")document.addEventListener("deviceready",()=>this._Init(opts));else this._Init(opts)}Release(){this._CancelAnimationFrame();if(this._messageChannelPort){this._messageChannelPort.onmessage=null;this._messageChannelPort=null}if(this._worker){this._worker.terminate();this._worker=null}if(this._localRuntime){this._localRuntime.Release();this._localRuntime=
+null}for(const {canvas,htmlWrap}of this._canvasLayers){canvas.remove();htmlWrap.remove()}this._canvasLayers.length=0}GetMainCanvas(){return this._canvasLayers[0].canvas}GetAvailableHTMLIndex(index){return Math.min(index,this._canvasLayers.length-1)}GetHTMLWrapElement(index){if(index<0||index>=this._canvasLayers.length)throw new RangeError("invalid canvas layer");return this._canvasLayers[index].htmlWrap}["_GetHTMLWrapElement"](index){return this.GetHTMLWrapElement(index)}GetRuntimeBaseURL(){return this._runtimeBaseUrl}UsesWorker(){return this._useWorker}GetExportType(){return this._exportType}IsFileProtocol(){return this._isFileProtocol}GetScriptFolder(){return this._scriptFolder}IsiOSCordova(){return isiOSLike&&
+this._exportType==="cordova"}IsiOSWebView(){const ua=navigator.userAgent;return isiOSLike&&IsWebViewExportType(this._exportType)||navigator["standalone"]||/crios\/|fxios\/|edgios\//i.test(ua)}IsAndroid(){return isAndroid}IsAndroidWebView(){return isAndroid&&IsWebViewExportType(this._exportType)}IsWindowsWebView2(){return this._exportType==="windows-webview2"||!!(this._exportType==="preview"&&window["chrome"]&&window["chrome"]["webview"]&&window["chrome"]["webview"]["postMessage"])}IsAnyWebView2Wrapper(){return this.IsWindowsWebView2()||
+this._exportType==="xbox-uwp-webview2"}async _Init(opts){if(this._useWorker){const isWorkerModeSupported=await CheckSupportsWorkerMode();if(!isWorkerModeSupported)this._useWorker=false}if(this._exportType==="macos-wkwebview")this._SendWrapperMessage({"type":"ready"});else if(this.IsAnyWebView2Wrapper()){this._SetupWebView2Polyfills();const result=await this._InitWrapper();this._wrapperComponentIds=result["registeredComponentIds"]}if(this._exportType==="playable-ad-single-file"){this._localFileBlobs=
+self["c3_base64files"];this._localFileStrings={};await this._ConvertDataUrisToBlobs()}if(this._exportType==="nwjs"&&self["nw"]&&self["nw"]["App"]["manifest"]["c3-steam-mode"]){let frameNum=0;this._AddRAFCallback(()=>{frameNum++;document.documentElement.style.opacity=frameNum%2===0?"1":"0.999"})}if(opts.runtimeBaseUrl)this._runtimeBaseUrl=opts.runtimeBaseUrl;else{const origin=location.origin;this._runtimeBaseUrl=(origin==="null"?"file:///":origin)+location.pathname;const i=this._runtimeBaseUrl.lastIndexOf("/");
+if(i!==-1)this._runtimeBaseUrl=this._runtimeBaseUrl.substr(0,i+1)}const messageChannel=new MessageChannel;this._messageChannelPort=messageChannel.port1;this._messageChannelPort.onmessage=e=>this["_OnMessageFromRuntime"](e.data);if(window["c3_addPortMessageHandler"])window["c3_addPortMessageHandler"](e=>this._OnMessageFromDebugger(e));this._jobScheduler=new self.JobSchedulerDOM(this);await this._jobScheduler.Init();if(typeof window["StatusBar"]==="object")window["StatusBar"]["hide"]();if(typeof window["AndroidFullScreen"]===
+"object")try{await new Promise((resolve,reject)=>{window["AndroidFullScreen"]["immersiveMode"](resolve,reject)})}catch(err){console.error("Failed to enter Android immersive mode: ",err)}if(this._useWorker)await this._InitWorker(opts,messageChannel.port2);else await this._InitDOM(opts,messageChannel.port2)}_GetCommonRuntimeOptions(opts){return{"runtimeBaseUrl":this._runtimeBaseUrl,"previewUrl":location.href,"windowInnerWidth":this._GetWindowInnerWidth(),"windowInnerHeight":this._GetWindowInnerHeight(),
+"cssDisplayMode":this.GetCssDisplayMode(),"devicePixelRatio":window.devicePixelRatio,"isFullscreen":RuntimeInterface.IsDocumentFullscreen(),"swClientId":window["cr_swClientId"]||"","exportType":opts.exportType,"fileMap":globalThis.c3_swFileMap??new Map(Object.entries(this._localFileBlobs??{})),"scriptFolder":this._scriptFolder,"isDebug":(new URLSearchParams(self.location.search)).has("debug"),"ife":!!self.ife,"jobScheduler":this._jobScheduler.GetPortData(),"supportedAudioFormats":supportedAudioFormats,
+"isFileProtocol":this._isFileProtocol,"isiOSCordova":this.IsiOSCordova(),"isiOSWebView":this.IsiOSWebView(),"isWindowsWebView2":this.IsWindowsWebView2(),"isAnyWebView2Wrapper":this.IsAnyWebView2Wrapper(),"wrapperComponentIds":this._wrapperComponentIds,"isFBInstantAvailable":typeof self["FBInstant"]!=="undefined"}}async _InitWorker(opts,port2){const workerMainUrl=opts.workerMainUrl;if(this._exportType==="preview"){this._worker=new Worker("previewworker.js",{type:"module",name:"Runtime"});await new Promise((resolve,
+reject)=>{const messageHandler=e=>{this._worker.removeEventListener("message",messageHandler);if(e.data&&e.data["type"]==="ok")resolve();else reject()};this._worker.addEventListener("message",messageHandler);this._worker.postMessage({"type":"construct-worker-init","import":(new URL(workerMainUrl,this._runtimeBaseUrl)).toString()})})}else this._worker=await this.CreateWorker(workerMainUrl,{type:"module",name:"Runtime"});const canvas=document.createElement("canvas");canvas.style.display="none";const offscreenCanvas=
+canvas["transferControlToOffscreen"]();document.body.appendChild(canvas);const htmlWrap=document.createElement("div");htmlWrap.className="c3htmlwrap";document.body.appendChild(htmlWrap);this._canvasLayers.push({canvas,htmlWrap});window["c3canvas"]=canvas;if(self["C3_InsertHTMLPlaceholders"])self["C3_InsertHTMLPlaceholders"]();this._worker.postMessage(Object.assign(this._GetCommonRuntimeOptions(opts),{"type":"init-runtime","isInWorker":true,"messagePort":port2,"canvas":offscreenCanvas,"runtimeScriptList":opts.runtimeScriptList,
+"projectMainScriptPath":opts.projectMainScriptPath,"scriptsInEventsPath":opts.scriptsInEventsPath}),[port2,offscreenCanvas,...this._jobScheduler.GetPortTransferables()]);this._domHandlers=domHandlerClasses.map(C=>new C(this));this._FindRuntimeDOMHandler();this._runtimeDomHandler._AddDefaultCanvasEventHandlers(canvas);this._runtimeDomHandler._AddDefaultHTMLWrapEventHandlers(htmlWrap);this._runtimeDomHandler._EnableWindowResizeEvent();self["c3_callFunction"]=(name,params)=>this._runtimeDomHandler._InvokeFunctionFromJS(name,
+params);if(this._exportType==="preview")self["goToLastErrorScript"]=()=>this.PostToRuntimeComponent("runtime","go-to-last-error-script")}async _InitDOM(opts,port2){const canvas=document.createElement("canvas");canvas.style.display="none";document.body.appendChild(canvas);const htmlWrap=document.createElement("div");htmlWrap.className="c3htmlwrap";document.body.appendChild(htmlWrap);this._canvasLayers.push({canvas,htmlWrap});window["c3canvas"]=canvas;if(self["C3_InsertHTMLPlaceholders"])self["C3_InsertHTMLPlaceholders"]();
+this._domHandlers=domHandlerClasses.map(C=>new C(this));this._FindRuntimeDOMHandler();this._runtimeDomHandler._AddDefaultCanvasEventHandlers(canvas);this._runtimeDomHandler._AddDefaultHTMLWrapEventHandlers(htmlWrap);const runtimeScriptList=await Promise.all(opts.runtimeScriptList.map(url=>this._MaybeGetPlatformSpecificScriptURL(url)));await Promise.all(runtimeScriptList.map(url=>AddScript(url)));const projectMainScriptPath=opts.projectMainScriptPath;const scriptsInEventsPath=opts.scriptsInEventsPath;
+if(projectMainScriptPath)try{await AddScript(projectMainScriptPath);if(this._exportType==="preview"&&!globalThis.C3_ProjectMainScriptOK)throw new Error("main script did not run to completion");}catch(err){this._RemoveLoadingMessage();console.error("Error loading project main script: ",err);alert(`Failed to load the project main script (${projectMainScriptPath}). Check all your JavaScript code has valid syntax, all imports are written correctly, and that an exception was not thrown running the script. Press F12 and check the console for error details.`)}if(scriptsInEventsPath)try{await AddScript(scriptsInEventsPath);
+if(this._exportType==="preview"&&!globalThis.C3.ScriptsInEvents)throw new Error("scripts in events did not run to completion");}catch(err){this._RemoveLoadingMessage();console.error("Error loading scripts in events: ",err);alert(`Failed to load scripts in events. Check all your JavaScript code has valid syntax, all imports are written correctly, and that an exception was not thrown running the 'Imports for events' script. Press F12 and check the console for error details.`)}const runtimeOpts=Object.assign(this._GetCommonRuntimeOptions(opts),
+{"isInWorker":false,"messagePort":port2,"canvas":canvas,"runOnStartupFunctions":runOnStartupFunctions});this._runtimeDomHandler._EnableWindowResizeEvent();this._OnBeforeCreateRuntime();this._localRuntime=self["C3_CreateRuntime"](runtimeOpts);await self["C3_InitRuntime"](this._localRuntime,runtimeOpts)}async CreateWorker(url,workerOpts){if(url.startsWith("blob:"))return new Worker(url,workerOpts);if(this._exportType==="cordova"&&this._isFileProtocol){const arrayBuffer=await this.CordovaFetchLocalFileAsArrayBuffer(url);
+const blob=new Blob([arrayBuffer],{type:"application/javascript"});return new Worker(URL.createObjectURL(blob),workerOpts)}if(this._exportType==="playable-ad-single-file"){const blob=this._localFileBlobs[url];if(!blob)throw new Error("missing script: "+url);return new Worker(URL.createObjectURL(blob),workerOpts)}const absUrl=new URL(url,location.href);const isCrossOrigin=location.origin!==absUrl.origin;if(isCrossOrigin){const response=await fetch(absUrl);if(!response.ok)throw new Error("failed to fetch worker script");
+const blob=await response.blob();return new Worker(URL.createObjectURL(blob),workerOpts)}else return new Worker(absUrl,workerOpts)}_GetWindowInnerWidth(){return Math.max(window.innerWidth,1)}_GetWindowInnerHeight(){return Math.max(window.innerHeight,1)}GetCssDisplayMode(){if(this.IsAnyWebView2Wrapper())return"standalone";const exportType=this.GetExportType();const standaloneExportTypes=new Set(["cordova","nwjs","macos-wkwebview"]);if(standaloneExportTypes.has(exportType))return"standalone";if(window.matchMedia("(display-mode: fullscreen)").matches)return"fullscreen";
+else if(window.matchMedia("(display-mode: standalone)").matches)return"standalone";else if(window.matchMedia("(display-mode: minimal-ui)").matches)return"minimal-ui";else if(navigator["standalone"])return"standalone";else return"browser"}_OnBeforeCreateRuntime(){this._RemoveLoadingMessage()}_RemoveLoadingMessage(){const loadingElem=window["cr_previewLoadingElem"];if(loadingElem){loadingElem.parentElement.removeChild(loadingElem);window["cr_previewLoadingElem"]=null}}async _OnCreateJobWorker(e){const outputPort=
+await this._jobScheduler._CreateJobWorker();return{"outputPort":outputPort,"transferables":[outputPort]}}_OnUpdateCanvasSize(e){if(this.IsExportingToVideo())return;const widthPx=e["styleWidth"]+"px";const heightPx=e["styleHeight"]+"px";const leftPx=e["marginLeft"]+"px";const topPx=e["marginTop"]+"px";for(const {canvas,htmlWrap}of this._canvasLayers){canvas.style.width=widthPx;canvas.style.height=heightPx;canvas.style.marginLeft=leftPx;canvas.style.marginTop=topPx;htmlWrap.style.width=widthPx;htmlWrap.style.height=
+heightPx;htmlWrap.style.marginLeft=leftPx;htmlWrap.style.marginTop=topPx;if(this._isFirstSizeUpdate){canvas.style.display="";htmlWrap.style.display=""}}document.documentElement.style.setProperty("--construct-scale",e["displayScale"]);this._isFirstSizeUpdate=false}["_OnSetHTMLLayerCount"](e){const count=e["count"];const immediate=e["immediate"];const widthPx=e["styleWidth"]+"px";const heightPx=e["styleHeight"]+"px";const leftPx=e["marginLeft"]+"px";const topPx=e["marginTop"]+"px";const addedCanvases=
+[];const transferables=[];if(count<this._canvasLayers.length)while(this._canvasLayers.length>count){const {canvas,htmlWrap}=this._canvasLayers.pop();htmlWrap.remove();if(this._useWorker&&!immediate)this._pendingRemoveElements.push(canvas);else canvas.remove()}else if(count>this._canvasLayers.length)for(let i=0,len=count-this._canvasLayers.length;i<len;++i){const canvas=document.createElement("canvas");canvas.classList.add("c3overlay");if(this._useWorker){const offscreenCanvas=canvas["transferControlToOffscreen"]();
+addedCanvases.push(offscreenCanvas);transferables.push(offscreenCanvas)}else addedCanvases.push(canvas);document.body.appendChild(canvas);const htmlWrap=document.createElement("div");htmlWrap.classList.add("c3htmlwrap","c3overlay");document.body.appendChild(htmlWrap);canvas.style.width=widthPx;canvas.style.height=heightPx;canvas.style.marginLeft=leftPx;canvas.style.marginTop=topPx;htmlWrap.style.width=widthPx;htmlWrap.style.height=heightPx;htmlWrap.style.marginLeft=leftPx;htmlWrap.style.marginTop=
+topPx;this._runtimeDomHandler._AddDefaultCanvasEventHandlers(canvas);this._runtimeDomHandler._AddDefaultHTMLWrapEventHandlers(htmlWrap);this._canvasLayers.push({canvas,htmlWrap})}for(const domHandler of this._domHandlers)if(domHandler instanceof window.DOMElementHandler)domHandler._OnHTMLLayersChanged();this._UpdateHTMLElementsZOrder();return{"addedCanvases":addedCanvases,"transferables":transferables}}_OnCleanUpHTMLLayers(){for(const elem of this._pendingRemoveElements)elem.remove();this._pendingRemoveElements.length=
+0}_UpdateHTMLElementsZOrder(){if(this._pendingUpdateHTMLZOrder)return;this._pendingUpdateHTMLZOrder=true;this._AddRAFCallback(this._updateHTMLZOrderRAFCallback)}_DoUpdateHTMLElementsZOrder(){this._RemoveRAFCallback(this._updateHTMLZOrderRAFCallback);this._pendingUpdateHTMLZOrder=false;let allElementStates=[];for(const domHandler of this._domHandlers)if(domHandler instanceof window.DOMElementHandler){const elemStates=domHandler._GetAllElementStatesForZOrderUpdate();if(elemStates)allElementStates.push(...elemStates)}allElementStates.sort((a,
+b)=>{const a1=a.GetActualHTMLIndex();const b1=b.GetActualHTMLIndex();if(a1!==b1)return a1-b1;const a2=a.GetHTMLZIndex();const b2=b.GetHTMLZIndex();return a2-b2});let curHtmlIndex=0;let s=0,i=0,len=allElementStates.length;for(;i<len;++i){const es=allElementStates[i];if(es.GetActualHTMLIndex()!==curHtmlIndex){this._DoUpdateHTMLElementsZOrderOnHTMLLayer(curHtmlIndex,allElementStates.slice(s,i));curHtmlIndex=es.GetActualHTMLIndex();s=i}}if(s<i)this._DoUpdateHTMLElementsZOrderOnHTMLLayer(curHtmlIndex,
+allElementStates.slice(s,i))}_DoUpdateHTMLElementsZOrderOnHTMLLayer(htmlIndex,arr){if(arr.length<=1)return;if(htmlIndex>=this._canvasLayers.length)return;const newChildren=arr.map(es=>es.GetElement());const newChildrenSet=new Set(newChildren);const htmlWrap=this.GetHTMLWrapElement(htmlIndex);const existingChildren=Array.from(htmlWrap.children).filter(elem=>newChildrenSet.has(elem));let i=0,len=Math.min(newChildren.length,existingChildren.length);for(;i<len;++i)if(newChildren[i]!==existingChildren[i])break;
+let j=i;for(;j<len;++j)existingChildren[j].remove();j=i;for(;j<len;++j)htmlWrap.appendChild(newChildren[j])}_GetLocalRuntime(){if(this._useWorker)throw new Error("not available in worker mode");return this._localRuntime}PostToRuntimeComponent(component,handler,data,dispatchOpts,transferables){this._messageChannelPort.postMessage({"type":"event","component":component,"handler":handler,"dispatchOpts":dispatchOpts||null,"data":data,"responseId":null},transferables)}PostToRuntimeComponentAsync(component,
+handler,data,dispatchOpts,transferables){const responseId=nextResponseId++;const ret=new Promise((resolve,reject)=>{pendingResponsePromises.set(responseId,{resolve,reject})});this._messageChannelPort.postMessage({"type":"event","component":component,"handler":handler,"dispatchOpts":dispatchOpts||null,"data":data,"responseId":responseId},transferables);return ret}["_OnMessageFromRuntime"](data){const type=data["type"];if(type==="event")return this._OnEventFromRuntime(data);else if(type==="result")this._OnResultFromRuntime(data);
+else if(type==="runtime-ready")this._OnRuntimeReady();else if(type==="alert-error"){this._RemoveLoadingMessage();alert(data["message"])}else if(type==="creating-runtime")this._OnBeforeCreateRuntime();else throw new Error(`unknown message '${type}'`);}_OnEventFromRuntime(e){const component=e["component"];const handler=e["handler"];const data=e["data"];const responseId=e["responseId"];const handlerMap=runtimeEventHandlers.get(component);if(!handlerMap){console.warn(`[DOM] No event handlers for component '${component}'`);
+return}const func=handlerMap.get(handler);if(!func){console.warn(`[DOM] No handler '${handler}' for component '${component}'`);return}let ret=null;try{ret=func(data)}catch(err){console.error(`Exception in '${component}' handler '${handler}':`,err);if(responseId!==null)this._PostResultToRuntime(responseId,false,""+err);return}if(responseId===null)return ret;else if(ret&&ret.then)ret.then(result=>this._PostResultToRuntime(responseId,true,result)).catch(err=>{console.error(`Rejection from '${component}' handler '${handler}':`,
+err);this._PostResultToRuntime(responseId,false,""+err)});else this._PostResultToRuntime(responseId,true,ret)}_PostResultToRuntime(responseId,isOk,result){let transferables;if(result&&result["transferables"])transferables=result["transferables"];this._messageChannelPort.postMessage({"type":"result","responseId":responseId,"isOk":isOk,"result":result},transferables)}_OnResultFromRuntime(data){const responseId=data["responseId"];const isOk=data["isOk"];const result=data["result"];const pendingPromise=
+pendingResponsePromises.get(responseId);if(isOk)pendingPromise.resolve(result);else pendingPromise.reject(result);pendingResponsePromises.delete(responseId)}AddRuntimeComponentMessageHandler(component,handler,func){let handlerMap=runtimeEventHandlers.get(component);if(!handlerMap){handlerMap=new Map;runtimeEventHandlers.set(component,handlerMap)}if(handlerMap.has(handler))throw new Error(`[DOM] Component '${component}' already has handler '${handler}'`);handlerMap.set(handler,func)}static AddDOMHandlerClass(Class){if(domHandlerClasses.includes(Class))throw new Error("DOM handler already added");
+domHandlerClasses.push(Class)}_FindRuntimeDOMHandler(){for(const dh of this._domHandlers)if(dh.GetComponentID()==="runtime"){this._runtimeDomHandler=dh;return}throw new Error("cannot find runtime DOM handler");}_OnMessageFromDebugger(e){this.PostToRuntimeComponent("debugger","message",e)}_OnRuntimeReady(){for(const h of this._domHandlers)h.Attach()}static IsDocumentFullscreen(){return!!(document["fullscreenElement"]||document["webkitFullscreenElement"]||document["mozFullScreenElement"]||isWrapperFullscreen)}static _SetWrapperIsFullscreenFlag(f){isWrapperFullscreen=
+!!f}async GetRemotePreviewStatusInfo(){return await this.PostToRuntimeComponentAsync("runtime","get-remote-preview-status-info")}_AddRAFCallback(f){this._rafCallbacks.add(f);this._RequestAnimationFrame()}_RemoveRAFCallback(f){this._rafCallbacks.delete(f);if(this._rafCallbacks.size===0)this._CancelAnimationFrame()}_RequestAnimationFrame(){if(this._rafId===-1&&this._rafCallbacks.size>0)this._rafId=requestAnimationFrame(this._rafFunc)}_CancelAnimationFrame(){if(this._rafId!==-1){cancelAnimationFrame(this._rafId);
+this._rafId=-1}}_OnRAFCallback(){this._rafId=-1;for(const f of this._rafCallbacks)f();this._RequestAnimationFrame()}TryPlayMedia(mediaElem){this._runtimeDomHandler.TryPlayMedia(mediaElem)}RemovePendingPlay(mediaElem){this._runtimeDomHandler.RemovePendingPlay(mediaElem)}_PlayPendingMedia(){this._runtimeDomHandler._PlayPendingMedia()}SetSilent(s){this._runtimeDomHandler.SetSilent(s)}IsAudioFormatSupported(typeStr){return!!supportedAudioFormats[typeStr]}async _WasmDecodeWebMOpus(arrayBuffer){const result=
+await this.PostToRuntimeComponentAsync("runtime","opus-decode",{"arrayBuffer":arrayBuffer},null,[arrayBuffer]);return new Float32Array(result)}SetIsExportingToVideo(duration){this._isExportingToVideo=true;this._exportToVideoDuration=duration}IsExportingToVideo(){return this._isExportingToVideo}GetExportToVideoDuration(){return this._exportToVideoDuration}IsAbsoluteURL(url){return/^(?:[a-z\-]+:)?\/\//.test(url)||url.substr(0,5)==="data:"||url.substr(0,5)==="blob:"}IsRelativeURL(url){return!this.IsAbsoluteURL(url)}async _MaybeGetPlatformSpecificScriptURL(url){if(this._exportType===
+"cordova"&&(url.startsWith("file:")||this._isFileProtocol&&this.IsRelativeURL(url))){let filename=url;if(filename.startsWith(this._runtimeBaseUrl))filename=filename.substr(this._runtimeBaseUrl.length);const arrayBuffer=await this.CordovaFetchLocalFileAsArrayBuffer(filename);const blob=new Blob([arrayBuffer],{type:"application/javascript"});return URL.createObjectURL(blob)}else if(this._exportType==="playable-ad-single-file")if(this._localFileStrings.hasOwnProperty(url))return{isStringSrc:true,str:this._localFileStrings[url]};
+else if(this._localFileBlobs.hasOwnProperty(url))return URL.createObjectURL(this._localFileBlobs[url]);else throw new Error("missing script: "+url);else return url}async _OnCordovaFetchLocalFile(e){const filename=e["filename"];switch(e["as"]){case "text":return await this.CordovaFetchLocalFileAsText(filename);case "buffer":return await this.CordovaFetchLocalFileAsArrayBuffer(filename);default:throw new Error("unsupported type");}}CordovaFetchLocalFile(filename){const path=window["cordova"]["file"]["applicationDirectory"]+
+"www/"+filename;return new Promise((resolve,reject)=>{window["resolveLocalFileSystemURL"](path,entry=>{entry["file"](resolve,reject)},reject)})}async CordovaFetchLocalFileAsText(filename){const file=await this.CordovaFetchLocalFile(filename);return await BlobToString(file)}_CordovaMaybeStartNextArrayBufferRead(){if(!queuedArrayBufferReads.length)return;if(activeArrayBufferReads>=MAX_ARRAYBUFFER_READS)return;activeArrayBufferReads++;const job=queuedArrayBufferReads.shift();this._CordovaDoFetchLocalFileAsAsArrayBuffer(job.filename,
+job.successCallback,job.errorCallback)}CordovaFetchLocalFileAsArrayBuffer(filename){return new Promise((resolve,reject)=>{queuedArrayBufferReads.push({filename:filename,successCallback:result=>{activeArrayBufferReads--;this._CordovaMaybeStartNextArrayBufferRead();resolve(result)},errorCallback:err=>{activeArrayBufferReads--;this._CordovaMaybeStartNextArrayBufferRead();reject(err)}});this._CordovaMaybeStartNextArrayBufferRead()})}async _CordovaDoFetchLocalFileAsAsArrayBuffer(filename,successCallback,
+errorCallback){try{const file=await this.CordovaFetchLocalFile(filename);const arrayBuffer=await BlobToArrayBuffer(file);successCallback(arrayBuffer)}catch(err){errorCallback(err)}}["_PlayableAdFetchBlob"](url){if(this._localFileBlobs.hasOwnProperty(url))return this._localFileBlobs[url];else throw new Error("missing file: "+url);}_GetPermissionAPI(){const api=window["cordova"]&&window["cordova"]["plugins"]&&window["cordova"]["plugins"]["permissions"];if(typeof api!=="object")throw new Error("Permission API is not loaded");
+return api}_MapPermissionID(api,permission){const permissionID=api[permission];if(typeof permissionID!=="string")throw new Error("Invalid permission name");return permissionID}_HasPermission(id){const api=this._GetPermissionAPI();return new Promise((resolve,reject)=>api["checkPermission"](this._MapPermissionID(api,id),status=>resolve(!!status["hasPermission"]),reject))}_RequestPermission(id){const api=this._GetPermissionAPI();return new Promise((resolve,reject)=>api["requestPermission"](this._MapPermissionID(api,
+id),status=>resolve(!!status["hasPermission"]),reject))}async RequestPermissions(permissions){if(this.GetExportType()!=="cordova")return true;if(this.IsiOSCordova())return true;for(const id of permissions){const alreadyGranted=await this._HasPermission(id);if(alreadyGranted)continue;const granted=await this._RequestPermission(id);if(granted===false)return false}return true}async RequirePermissions(...permissions){if(await this.RequestPermissions(permissions)===false)throw new Error("Permission not granted");
+}_OnWrapperMessage(msg,additionalObjects){if(msg==="entered-fullscreen"){RuntimeInterface._SetWrapperIsFullscreenFlag(true);this._runtimeDomHandler._OnFullscreenChange()}else if(msg==="exited-fullscreen"){RuntimeInterface._SetWrapperIsFullscreenFlag(false);this._runtimeDomHandler._OnFullscreenChange()}else if(typeof msg==="object"){const type=msg["type"];if(type==="directory-handles")this._directoryHandles=additionalObjects;else if(type==="wrapper-init-response"){this._wrapperInitResolve(msg);this._wrapperInitResolve=
+null}else if(type==="extension-message")this.PostToRuntimeComponent("runtime","wrapper-extension-message",msg);else console.warn("Unknown wrapper message: ",msg)}else console.warn("Unknown wrapper message: ",msg)}_OnSendWrapperExtensionMessage(data){this._SendWrapperMessage({"type":"extension-message","componentId":data["componentId"],"messageId":data["messageId"],"params":data["params"]||[],"asyncId":data["asyncId"]})}_SendWrapperMessage(o){if(this.IsAnyWebView2Wrapper())window["chrome"]["webview"]["postMessage"](JSON.stringify(o));
+else if(this._exportType==="macos-wkwebview")window["webkit"]["messageHandlers"]["C3Wrapper"]["postMessage"](JSON.stringify(o));else;}_SetupWebView2Polyfills(){window.moveTo=(x,y)=>{this._SendWrapperMessage({"type":"set-window-position","windowX":Math.ceil(x),"windowY":Math.ceil(y)})};window.resizeTo=(w,h)=>{this._SendWrapperMessage({"type":"set-window-size","windowWidth":Math.ceil(w),"windowHeight":Math.ceil(h)})}}_InitWrapper(){if(!this.IsAnyWebView2Wrapper())return Promise.resolve();return new Promise(resolve=>
+{this._wrapperInitResolve=resolve;this._SendWrapperMessage({"type":"wrapper-init"})})}_GetDirectoryHandles(){return this._directoryHandles}async _ConvertDataUrisToBlobs(){const promises=[];for(const [filename,data]of Object.entries(this._localFileBlobs))promises.push(this._ConvertDataUriToBlobs(filename,data));await Promise.all(promises)}async _ConvertDataUriToBlobs(filename,data){if(typeof data==="object"){this._localFileBlobs[filename]=new Blob([data["str"]],{"type":data["type"]});this._localFileStrings[filename]=
+data["str"]}else{let blob=await this._FetchDataUri(data);if(!blob)blob=this._DataURIToBinaryBlobSync(data);this._localFileBlobs[filename]=blob}}async _FetchDataUri(dataUri){try{const response=await fetch(dataUri);return await response.blob()}catch(err){console.warn("Failed to fetch a data: URI. Falling back to a slower workaround. This is probably because the Content Security Policy unnecessarily blocked it. Allow data: URIs in your CSP to avoid this.",err);return null}}_DataURIToBinaryBlobSync(datauri){const o=
+this._ParseDataURI(datauri);return this._BinaryStringToBlob(o.data,o.mime_type)}_ParseDataURI(datauri){const comma=datauri.indexOf(",");if(comma<0)throw new URIError("expected comma in data: uri");const typepart=datauri.substring(5,comma);const datapart=datauri.substring(comma+1);const typearr=typepart.split(";");const mimetype=typearr[0]||"";const encoding1=typearr[1];const encoding2=typearr[2];let decodeddata;if(encoding1==="base64"||encoding2==="base64")decodeddata=atob(datapart);else decodeddata=
+decodeURIComponent(datapart);return{mime_type:mimetype,data:decodeddata}}_BinaryStringToBlob(binstr,mime_type){let len=binstr.length;let len32=len>>2;let a8=new Uint8Array(len);let a32=new Uint32Array(a8.buffer,0,len32);let i,j;for(i=0,j=0;i<len32;++i)a32[i]=binstr.charCodeAt(j++)|binstr.charCodeAt(j++)<<8|binstr.charCodeAt(j++)<<16|binstr.charCodeAt(j++)<<24;let tailLength=len&3;while(tailLength--){a8[j]=binstr.charCodeAt(j);++j}return new Blob([a8],{"type":mime_type})}}};
+
+
+// workers/runtimeDomEvents.js
+'use strict';{const RuntimeInterface=self.RuntimeInterface;function IsCompatibilityMouseEvent(e){return e["sourceCapabilities"]&&e["sourceCapabilities"]["firesTouchEvents"]||e["originalEvent"]&&e["originalEvent"]["sourceCapabilities"]&&e["originalEvent"]["sourceCapabilities"]["firesTouchEvents"]}const KEY_CODE_ALIASES=new Map([["OSLeft","MetaLeft"],["OSRight","MetaRight"]]);const DISPATCH_RUNTIME_AND_SCRIPT={"dispatchRuntimeEvent":true,"dispatchUserScriptEvent":true};const DISPATCH_SCRIPT_ONLY={"dispatchUserScriptEvent":true};
+const DISPATCH_RUNTIME_ONLY={"dispatchRuntimeEvent":true};function AddStyleSheet(cssUrl){return new Promise((resolve,reject)=>{const styleLink=document.createElement("link");styleLink.onload=()=>resolve(styleLink);styleLink.onerror=err=>reject(err);styleLink.rel="stylesheet";styleLink.href=cssUrl;document.head.appendChild(styleLink)})}function FetchImage(url){return new Promise((resolve,reject)=>{const img=new Image;img.onload=()=>resolve(img);img.onerror=err=>reject(err);img.src=url})}async function BlobToImage(blob){const blobUrl=
+URL.createObjectURL(blob);try{return await FetchImage(blobUrl)}finally{URL.revokeObjectURL(blobUrl)}}function BlobToString(blob){return new Promise((resolve,reject)=>{let fileReader=new FileReader;fileReader.onload=e=>resolve(e.target.result);fileReader.onerror=err=>reject(err);fileReader.readAsText(blob)})}function IsInContentEditable(el){do{if(el.parentNode&&el.hasAttribute("contenteditable"))return true;el=el.parentNode}while(el);return false}const keyboardInputElementTagNames=new Set(["input",
+"textarea","datalist","select"]);function IsKeyboardInputElement(elem){return keyboardInputElementTagNames.has(elem.tagName.toLowerCase())||IsInContentEditable(elem)}const canvasOrDocTags=new Set(["canvas","body","html"]);function PreventDefaultOnCanvasOrDoc(e){if(!e.target.tagName)return;const tagName=e.target.tagName.toLowerCase();if(canvasOrDocTags.has(tagName))e.preventDefault()}function PreventDefaultOnHTMLWrap(e){if(!e.target.tagName)return;if(e.target.classList.contains("c3htmlwrap"))e.preventDefault()}
+function BlockWheelZoom(e){if(e.metaKey||e.ctrlKey)e.preventDefault()}self["C3_GetSvgImageSize"]=async function(blob){const img=await BlobToImage(blob);if(img.width>0&&img.height>0)return[img.width,img.height];else{img.style.position="absolute";img.style.left="0px";img.style.top="0px";img.style.visibility="hidden";document.body.appendChild(img);const rc=img.getBoundingClientRect();document.body.removeChild(img);return[rc.width,rc.height]}};self["C3_RasterSvgImageBlob"]=async function(blob,imageWidth,
+imageHeight,surfaceWidth,surfaceHeight){const img=await BlobToImage(blob);const canvas=document.createElement("canvas");canvas.width=surfaceWidth;canvas.height=surfaceHeight;const ctx=canvas.getContext("2d");ctx.drawImage(img,0,0,imageWidth,imageHeight);return canvas};let isCordovaPaused=false;document.addEventListener("pause",()=>isCordovaPaused=true);document.addEventListener("resume",()=>isCordovaPaused=false);function ParentHasFocus(){try{return window.parent&&window.parent.document.hasFocus()}catch(err){return false}}
+const DOM_COMPONENT_ID="runtime";const HANDLER_CLASS=class RuntimeDOMHandler extends self.DOMHandler{constructor(iRuntime){super(iRuntime,DOM_COMPONENT_ID);this._enableWindowResizeEvent=false;this._simulatedResizeTimerId=-1;this._targetOrientation="any";this._attachedDeviceOrientationEvent=false;this._attachedDeviceMotionEvent=false;this._pageVisibilityIsHidden=false;this._screenReaderTextWrap=document.createElement("div");this._screenReaderTextWrap.className="c3-screen-reader-text";this._screenReaderTextWrap.setAttribute("aria-live",
+"polite");document.body.appendChild(this._screenReaderTextWrap);this._debugHighlightElem=null;this._isExportToVideo=false;this._exportVideoProgressMessage="";this._exportVideoUpdateTimerId=-1;this._enableAndroidVKDetection=false;this._lastWindowWidth=iRuntime._GetWindowInnerWidth();this._lastWindowHeight=iRuntime._GetWindowInnerHeight();this._virtualKeyboardHeight=0;this._vkTranslateYOffset=0;iRuntime.AddRuntimeComponentMessageHandler("runtime","invoke-download",e=>this._OnInvokeDownload(e));iRuntime.AddRuntimeComponentMessageHandler("runtime",
+"load-webfonts",e=>this._OnLoadWebFonts(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","raster-svg-image",e=>this._OnRasterSvgImage(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","get-svg-image-size",e=>this._OnGetSvgImageSize(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","set-target-orientation",e=>this._OnSetTargetOrientation(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","register-sw",()=>this._OnRegisterSW());iRuntime.AddRuntimeComponentMessageHandler("runtime",
+"post-to-debugger",e=>this._OnPostToDebugger(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","go-to-script",e=>this._OnPostToDebugger(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","before-start-ticking",()=>this._OnBeforeStartTicking());iRuntime.AddRuntimeComponentMessageHandler("runtime","debug-highlight",e=>this._OnDebugHighlight(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","enable-device-orientation",()=>this._AttachDeviceOrientationEvent());iRuntime.AddRuntimeComponentMessageHandler("runtime",
+"enable-device-motion",()=>this._AttachDeviceMotionEvent());iRuntime.AddRuntimeComponentMessageHandler("runtime","add-stylesheet",e=>this._OnAddStylesheet(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","script-create-worker",e=>this._OnScriptCreateWorker(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","alert",e=>this._OnAlert(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","screen-reader-text",e=>this._OnScreenReaderTextEvent(e));iRuntime.AddRuntimeComponentMessageHandler("runtime",
+"hide-cordova-splash",()=>this._OnHideCordovaSplash());iRuntime.AddRuntimeComponentMessageHandler("runtime","set-exporting-to-video",e=>this._SetExportingToVideo(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","export-to-video-progress",e=>this._OnExportVideoProgress(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","exported-to-video",e=>this._OnExportedToVideo(e));iRuntime.AddRuntimeComponentMessageHandler("runtime","exported-to-image-sequence",e=>this._OnExportedToImageSequence(e));
+const allowDefaultContextMenuTagNames=new Set(["input","textarea","datalist"]);window.addEventListener("contextmenu",e=>{const t=e.target;const name=t.tagName.toLowerCase();if(!allowDefaultContextMenuTagNames.has(name)&&!IsInContentEditable(t))e.preventDefault()});window.addEventListener("selectstart",PreventDefaultOnCanvasOrDoc);window.addEventListener("gesturehold",PreventDefaultOnCanvasOrDoc);window.addEventListener("touchstart",PreventDefaultOnCanvasOrDoc,{"passive":false});window.addEventListener("pointerdown",
+PreventDefaultOnCanvasOrDoc,{"passive":false});this._mousePointerLastButtons=0;window.addEventListener("mousedown",e=>{if(e.button===1)e.preventDefault()});window.addEventListener("mousewheel",BlockWheelZoom,{"passive":false});window.addEventListener("wheel",BlockWheelZoom,{"passive":false});window.addEventListener("resize",()=>this._OnWindowResize());window.addEventListener("fullscreenchange",()=>this._OnFullscreenChange());window.addEventListener("webkitfullscreenchange",()=>this._OnFullscreenChange());
+window.addEventListener("mozfullscreenchange",()=>this._OnFullscreenChange());window.addEventListener("fullscreenerror",e=>this._OnFullscreenError(e));window.addEventListener("webkitfullscreenerror",e=>this._OnFullscreenError(e));window.addEventListener("mozfullscreenerror",e=>this._OnFullscreenError(e));if(iRuntime.IsiOSWebView()){let lastVisualViewportHeight=Infinity;window["visualViewport"].addEventListener("resize",()=>{const curVisualViewportHeight=window["visualViewport"].height;if(curVisualViewportHeight>
+lastVisualViewportHeight){document.scrollingElement.scrollTop=0;document.scrollingElement.scrollLeft=0}lastVisualViewportHeight=curVisualViewportHeight});document.documentElement.setAttribute("ioswebview","")}this._mediaPendingPlay=new Set;this._mediaRemovedPendingPlay=new WeakSet;this._isSilent=false}_AddDefaultCanvasEventHandlers(canvas){canvas.addEventListener("selectstart",PreventDefaultOnCanvasOrDoc);canvas.addEventListener("gesturehold",PreventDefaultOnCanvasOrDoc);canvas.addEventListener("pointerdown",
+PreventDefaultOnCanvasOrDoc)}_AddDefaultHTMLWrapEventHandlers(htmlwrap){htmlwrap.addEventListener("selectstart",PreventDefaultOnHTMLWrap);htmlwrap.addEventListener("gesturehold",PreventDefaultOnHTMLWrap);htmlwrap.addEventListener("touchstart",PreventDefaultOnHTMLWrap)}_OnBeforeStartTicking(){self.setTimeout(()=>{this._enableAndroidVKDetection=true},1E3);if(this._iRuntime.GetExportType()==="cordova"){document.addEventListener("pause",()=>this._OnVisibilityChange(true));document.addEventListener("resume",
+()=>this._OnVisibilityChange(false))}else document.addEventListener("visibilitychange",()=>this._OnVisibilityChange(document.visibilityState==="hidden"));this._pageVisibilityIsHidden=!!(document.visibilityState==="hidden"||isCordovaPaused);return{"isSuspended":this._pageVisibilityIsHidden}}Attach(){window.addEventListener("focus",()=>this._PostRuntimeEvent("window-focus"));window.addEventListener("blur",()=>{this._PostRuntimeEvent("window-blur",{"parentHasFocus":ParentHasFocus()});this._mousePointerLastButtons=
+0});window.addEventListener("focusin",e=>{if(IsKeyboardInputElement(e.target))this._PostRuntimeEvent("keyboard-blur")});window.addEventListener("keydown",e=>this._OnKeyEvent("keydown",e));window.addEventListener("keyup",e=>this._OnKeyEvent("keyup",e));window.addEventListener("mousedown",e=>this._OnMouseEvent("mousedown",e,DISPATCH_SCRIPT_ONLY));window.addEventListener("mousemove",e=>this._OnMouseEvent("mousemove",e,DISPATCH_SCRIPT_ONLY));window.addEventListener("mouseup",e=>this._OnMouseEvent("mouseup",
+e,DISPATCH_SCRIPT_ONLY));window.addEventListener("dblclick",e=>this._OnMouseEvent("dblclick",e,DISPATCH_RUNTIME_AND_SCRIPT));window.addEventListener("wheel",e=>this._OnMouseWheelEvent("wheel",e,DISPATCH_RUNTIME_AND_SCRIPT));window.addEventListener("pointerdown",e=>{this._HandlePointerDownFocus(e);this._OnPointerEvent("pointerdown",e)});if(this._iRuntime.UsesWorker()&&typeof window["onpointerrawupdate"]!=="undefined"&&self===self.top)window.addEventListener("pointerrawupdate",e=>this._OnPointerRawUpdate(e));
+else window.addEventListener("pointermove",e=>this._OnPointerEvent("pointermove",e));window.addEventListener("pointerup",e=>this._OnPointerEvent("pointerup",e));window.addEventListener("pointercancel",e=>this._OnPointerEvent("pointercancel",e));const playFunc=()=>this._PlayPendingMedia();window.addEventListener("pointerup",playFunc,true);window.addEventListener("touchend",playFunc,true);window.addEventListener("click",playFunc,true);window.addEventListener("keydown",playFunc,true);window.addEventListener("gamepadconnected",
+playFunc,true);if(this._iRuntime.IsAndroid()&&!this._iRuntime.IsAndroidWebView()&&navigator["virtualKeyboard"]){navigator["virtualKeyboard"]["overlaysContent"]=true;navigator["virtualKeyboard"].addEventListener("geometrychange",()=>{this._OnAndroidVirtualKeyboardChange(this._GetWindowInnerHeight(),navigator["virtualKeyboard"]["boundingRect"]["height"])})}if(this._iRuntime.IsiOSWebView()){document.scrollingElement.scrollTop=0;document.scrollingElement.scrollLeft=0}}_OnAndroidVirtualKeyboardChange(windowHeight,
+vkHeight){document.body.style.position="";document.body.style.overflow="";document.body.style.transform="";this._vkTranslateYOffset=0;if(vkHeight>0){const activeElement=document.activeElement;if(activeElement){const rc=activeElement.getBoundingClientRect();const rcMidY=(rc.top+rc.bottom)/2;const targetY=(windowHeight-vkHeight)/2;let shiftY=rcMidY-targetY;if(shiftY>vkHeight)shiftY=vkHeight;if(shiftY<0)shiftY=0;if(shiftY>0){document.body.style.position="absolute";document.body.style.overflow="visible";
+document.body.style.transform=`translateY(${-shiftY}px)`;this._vkTranslateYOffset=shiftY}}}}_PostRuntimeEvent(name,data){this.PostToRuntime(name,data||null,DISPATCH_RUNTIME_ONLY)}_GetWindowInnerWidth(){return this._iRuntime._GetWindowInnerWidth()}_GetWindowInnerHeight(){return this._iRuntime._GetWindowInnerHeight()}_EnableWindowResizeEvent(){this._enableWindowResizeEvent=true;this._lastWindowWidth=this._iRuntime._GetWindowInnerWidth();this._lastWindowHeight=this._iRuntime._GetWindowInnerHeight()}_OnWindowResize(){if(this._isExportToVideo)return;
+if(!this._enableWindowResizeEvent)return;const width=this._GetWindowInnerWidth();const height=this._GetWindowInnerHeight();if(this._iRuntime.IsAndroidWebView())if(this._enableAndroidVKDetection)if(this._lastWindowWidth===width&&height<this._lastWindowHeight){this._virtualKeyboardHeight=this._lastWindowHeight-height;this._OnAndroidVirtualKeyboardChange(this._lastWindowHeight,this._virtualKeyboardHeight);return}else{if(this._virtualKeyboardHeight>0){this._virtualKeyboardHeight=0;this._OnAndroidVirtualKeyboardChange(height,
+this._virtualKeyboardHeight)}this._lastWindowWidth=width;this._lastWindowHeight=height}else{this._lastWindowWidth=width;this._lastWindowHeight=height}this.PostToRuntime("window-resize",{"innerWidth":width,"innerHeight":height,"devicePixelRatio":window.devicePixelRatio,"isFullscreen":RuntimeInterface.IsDocumentFullscreen(),"cssDisplayMode":this._iRuntime.GetCssDisplayMode()});if(this._iRuntime.IsiOSWebView()){if(this._simulatedResizeTimerId!==-1)clearTimeout(this._simulatedResizeTimerId);this._OnSimulatedResize(width,
+height,0)}}_ScheduleSimulatedResize(width,height,count){if(this._simulatedResizeTimerId!==-1)clearTimeout(this._simulatedResizeTimerId);this._simulatedResizeTimerId=setTimeout(()=>this._OnSimulatedResize(width,height,count),48)}_OnSimulatedResize(originalWidth,originalHeight,count){const width=this._GetWindowInnerWidth();const height=this._GetWindowInnerHeight();this._simulatedResizeTimerId=-1;if(width!=originalWidth||height!=originalHeight)this.PostToRuntime("window-resize",{"innerWidth":width,"innerHeight":height,
+"devicePixelRatio":window.devicePixelRatio,"isFullscreen":RuntimeInterface.IsDocumentFullscreen(),"cssDisplayMode":this._iRuntime.GetCssDisplayMode()});else if(count<10)this._ScheduleSimulatedResize(width,height,count+1)}_OnSetTargetOrientation(e){this._targetOrientation=e["targetOrientation"]}_TrySetTargetOrientation(){const orientation=this._targetOrientation;if(screen["orientation"]&&screen["orientation"]["lock"])screen["orientation"]["lock"](orientation).catch(err=>console.warn("[Construct] Failed to lock orientation: ",
+err));else try{let result=false;if(screen["lockOrientation"])result=screen["lockOrientation"](orientation);else if(screen["webkitLockOrientation"])result=screen["webkitLockOrientation"](orientation);else if(screen["mozLockOrientation"])result=screen["mozLockOrientation"](orientation);else if(screen["msLockOrientation"])result=screen["msLockOrientation"](orientation);if(!result)console.warn("[Construct] Failed to lock orientation")}catch(err){console.warn("[Construct] Failed to lock orientation: ",
+err)}}_OnFullscreenChange(){if(this._isExportToVideo)return;const isDocFullscreen=RuntimeInterface.IsDocumentFullscreen();if(isDocFullscreen&&this._targetOrientation!=="any")this._TrySetTargetOrientation();this.PostToRuntime("fullscreenchange",{"isFullscreen":isDocFullscreen,"innerWidth":this._GetWindowInnerWidth(),"innerHeight":this._GetWindowInnerHeight()})}_OnFullscreenError(e){console.warn("[Construct] Fullscreen request failed: ",e);this.PostToRuntime("fullscreenerror",{"isFullscreen":RuntimeInterface.IsDocumentFullscreen(),
+"innerWidth":this._GetWindowInnerWidth(),"innerHeight":this._GetWindowInnerHeight()})}_OnVisibilityChange(isHidden){if(this._pageVisibilityIsHidden===isHidden)return;this._pageVisibilityIsHidden=isHidden;if(isHidden)this._iRuntime._CancelAnimationFrame();else this._iRuntime._RequestAnimationFrame();this.PostToRuntime("visibilitychange",{"hidden":isHidden});if(!isHidden&&this._iRuntime.IsiOSWebView()){const resetScrollFunc=()=>{document.scrollingElement.scrollTop=0;document.scrollingElement.scrollLeft=
+0};setTimeout(resetScrollFunc,50);setTimeout(resetScrollFunc,100);setTimeout(resetScrollFunc,250);setTimeout(resetScrollFunc,500)}}_OnKeyEvent(name,e){if(typeof e.key==="undefined")return;if(e.key==="Backspace")PreventDefaultOnCanvasOrDoc(e);if(this._iRuntime.GetExportType()==="nwjs"&&e.key==="u"&&(e.ctrlKey||e.metaKey))e.preventDefault();if(this._isExportToVideo)return;const code=KEY_CODE_ALIASES.get(e.code)||e.code;this._PostToRuntimeMaybeSync(name,{"code":code,"key":e.key,"which":e.which,"repeat":e.repeat,
+"altKey":e.altKey,"ctrlKey":e.ctrlKey,"metaKey":e.metaKey,"shiftKey":e.shiftKey,"timeStamp":e.timeStamp},DISPATCH_RUNTIME_AND_SCRIPT)}_OnMouseWheelEvent(name,e,opts){if(this._isExportToVideo)return;this.PostToRuntime(name,{"clientX":e.clientX,"clientY":e.clientY+this._vkTranslateYOffset,"pageX":e.pageX,"pageY":e.pageY+this._vkTranslateYOffset,"deltaX":e.deltaX,"deltaY":e.deltaY,"deltaZ":e.deltaZ,"deltaMode":e.deltaMode,"timeStamp":e.timeStamp},opts)}_OnMouseEvent(name,e,opts){if(this._isExportToVideo)return;
+if(IsCompatibilityMouseEvent(e))return;this._PostToRuntimeMaybeSync(name,{"button":e.button,"buttons":e.buttons,"clientX":e.clientX,"clientY":e.clientY+this._vkTranslateYOffset,"pageX":e.pageX,"pageY":e.pageY+this._vkTranslateYOffset,"movementX":e.movementX||0,"movementY":e.movementY||0,"timeStamp":e.timeStamp},opts)}_OnPointerEvent(name,e){if(this._isExportToVideo)return;let lastButtons=0;if(e.pointerType==="mouse")lastButtons=this._mousePointerLastButtons;this._PostToRuntimeMaybeSync(name,{"pointerId":e.pointerId,
+"pointerType":e.pointerType,"button":e.button,"buttons":e.buttons,"lastButtons":lastButtons,"clientX":e.clientX,"clientY":e.clientY+this._vkTranslateYOffset,"pageX":e.pageX,"pageY":e.pageY+this._vkTranslateYOffset,"movementX":e.movementX||0,"movementY":e.movementY||0,"width":e.width||0,"height":e.height||0,"pressure":e.pressure||0,"tangentialPressure":e["tangentialPressure"]||0,"tiltX":e.tiltX||0,"tiltY":e.tiltY||0,"twist":e["twist"]||0,"timeStamp":e.timeStamp},DISPATCH_RUNTIME_AND_SCRIPT);if(e.pointerType===
+"mouse")this._mousePointerLastButtons=e.buttons}_OnPointerRawUpdate(e){this._OnPointerEvent("pointermove",e)}_OnTouchEvent(fireName,e){if(this._isExportToVideo)return;for(let i=0,len=e.changedTouches.length;i<len;++i){const t=e.changedTouches[i];this._PostToRuntimeMaybeSync(fireName,{"pointerId":t.identifier,"pointerType":"touch","button":0,"buttons":0,"lastButtons":0,"clientX":t.clientX,"clientY":t.clientY+this._vkTranslateYOffset,"pageX":t.pageX,"pageY":t.pageY+this._vkTranslateYOffset,"movementX":e.movementX||
+0,"movementY":e.movementY||0,"width":(t["radiusX"]||t["webkitRadiusX"]||0)*2,"height":(t["radiusY"]||t["webkitRadiusY"]||0)*2,"pressure":t["force"]||t["webkitForce"]||0,"tangentialPressure":0,"tiltX":0,"tiltY":0,"twist":t["rotationAngle"]||0,"timeStamp":e.timeStamp},DISPATCH_RUNTIME_AND_SCRIPT)}}_HandlePointerDownFocus(e){if(window!==window.top)window.focus();if(this._IsElementCanvasOrDocument(e.target)&&document.activeElement&&!this._IsElementCanvasOrDocument(document.activeElement))document.activeElement.blur()}_IsElementCanvasOrDocument(elem){return!elem||
+elem===document||elem===window||elem===document.body||elem.tagName.toLowerCase()==="canvas"}_AttachDeviceOrientationEvent(){if(this._attachedDeviceOrientationEvent)return;this._attachedDeviceOrientationEvent=true;window.addEventListener("deviceorientation",e=>this._OnDeviceOrientation(e));window.addEventListener("deviceorientationabsolute",e=>this._OnDeviceOrientationAbsolute(e))}_AttachDeviceMotionEvent(){if(this._attachedDeviceMotionEvent)return;this._attachedDeviceMotionEvent=true;window.addEventListener("devicemotion",
+e=>this._OnDeviceMotion(e))}_OnDeviceOrientation(e){if(this._isExportToVideo)return;this.PostToRuntime("deviceorientation",{"absolute":!!e["absolute"],"alpha":e["alpha"]||0,"beta":e["beta"]||0,"gamma":e["gamma"]||0,"timeStamp":e.timeStamp,"webkitCompassHeading":e["webkitCompassHeading"],"webkitCompassAccuracy":e["webkitCompassAccuracy"]},DISPATCH_RUNTIME_AND_SCRIPT)}_OnDeviceOrientationAbsolute(e){if(this._isExportToVideo)return;this.PostToRuntime("deviceorientationabsolute",{"absolute":!!e["absolute"],
+"alpha":e["alpha"]||0,"beta":e["beta"]||0,"gamma":e["gamma"]||0,"timeStamp":e.timeStamp},DISPATCH_RUNTIME_AND_SCRIPT)}_OnDeviceMotion(e){if(this._isExportToVideo)return;let accProp=null;const acc=e["acceleration"];if(acc)accProp={"x":acc["x"]||0,"y":acc["y"]||0,"z":acc["z"]||0};let withGProp=null;const withG=e["accelerationIncludingGravity"];if(withG)withGProp={"x":withG["x"]||0,"y":withG["y"]||0,"z":withG["z"]||0};let rotationRateProp=null;const rotationRate=e["rotationRate"];if(rotationRate)rotationRateProp=
+{"alpha":rotationRate["alpha"]||0,"beta":rotationRate["beta"]||0,"gamma":rotationRate["gamma"]||0};this.PostToRuntime("devicemotion",{"acceleration":accProp,"accelerationIncludingGravity":withGProp,"rotationRate":rotationRateProp,"interval":e["interval"],"timeStamp":e.timeStamp},DISPATCH_RUNTIME_AND_SCRIPT)}_OnInvokeDownload(e){const url=e["url"];const filename=e["filename"];const a=document.createElement("a");const body=document.body;a.textContent=filename;a.href=url;a.download=filename;body.appendChild(a);
+a.click();body.removeChild(a)}async _OnLoadWebFonts(e){const webfonts=e["webfonts"];await Promise.all(webfonts.map(async info=>{const fontFace=new FontFace(info.name,`url('${info.url}')`);document.fonts.add(fontFace);await fontFace.load()}))}async _OnRasterSvgImage(e){const blob=e["blob"];const imageWidth=e["imageWidth"];const imageHeight=e["imageHeight"];const surfaceWidth=e["surfaceWidth"];const surfaceHeight=e["surfaceHeight"];const imageBitmapOpts=e["imageBitmapOpts"];const canvas=await self["C3_RasterSvgImageBlob"](blob,
+imageWidth,imageHeight,surfaceWidth,surfaceHeight);let ret;if(imageBitmapOpts)ret=await createImageBitmap(canvas,imageBitmapOpts);else ret=await createImageBitmap(canvas);return{"imageBitmap":ret,"transferables":[ret]}}async _OnGetSvgImageSize(e){return await self["C3_GetSvgImageSize"](e["blob"])}async _OnAddStylesheet(e){await AddStyleSheet(e["url"])}_PlayPendingMedia(){const mediaToTryPlay=[...this._mediaPendingPlay];this._mediaPendingPlay.clear();if(!this._isSilent)for(const mediaElem of mediaToTryPlay){const playRet=
+mediaElem.play();if(playRet)playRet.catch(err=>{if(!this._mediaRemovedPendingPlay.has(mediaElem))this._mediaPendingPlay.add(mediaElem)})}}TryPlayMedia(mediaElem){if(typeof mediaElem.play!=="function")throw new Error("missing play function");this._mediaRemovedPendingPlay.delete(mediaElem);let playRet;try{playRet=mediaElem.play()}catch(err){this._mediaPendingPlay.add(mediaElem);return}if(playRet)playRet.catch(err=>{if(!this._mediaRemovedPendingPlay.has(mediaElem))this._mediaPendingPlay.add(mediaElem)})}RemovePendingPlay(mediaElem){this._mediaPendingPlay.delete(mediaElem);
+this._mediaRemovedPendingPlay.add(mediaElem)}SetSilent(s){this._isSilent=!!s}_OnHideCordovaSplash(){if(navigator["splashscreen"]&&navigator["splashscreen"]["hide"])navigator["splashscreen"]["hide"]()}_OnDebugHighlight(e){const show=e["show"];if(!show){if(this._debugHighlightElem)this._debugHighlightElem.style.display="none";return}if(!this._debugHighlightElem){this._debugHighlightElem=document.createElement("div");this._debugHighlightElem.id="inspectOutline";document.body.appendChild(this._debugHighlightElem)}const elem=
+this._debugHighlightElem;elem.style.display="";elem.style.left=e["left"]-1+"px";elem.style.top=e["top"]-1+"px";elem.style.width=e["width"]+2+"px";elem.style.height=e["height"]+2+"px";elem.textContent=e["name"]}_OnRegisterSW(){if(window["C3_RegisterSW"])window["C3_RegisterSW"]()}_OnPostToDebugger(data){if(!window["c3_postToMessagePort"])return;data["from"]="runtime";window["c3_postToMessagePort"](data)}_InvokeFunctionFromJS(name,params){return this.PostToRuntimeAsync("js-invoke-function",{"name":name,
+"params":params})}_OnScriptCreateWorker(e){const url=e["url"];const opts=e["opts"];const port2=e["port2"];const worker=new Worker(url,opts);worker.postMessage({"type":"construct-worker-init","port2":port2},[port2])}_OnAlert(e){alert(e["message"])}_OnScreenReaderTextEvent(e){const type=e["type"];if(type==="create"){const p=document.createElement("p");p.id="c3-sr-"+e["id"];p.textContent=e["text"];this._screenReaderTextWrap.appendChild(p)}else if(type==="update"){const p=document.getElementById("c3-sr-"+
+e["id"]);if(p)p.textContent=e["text"];else console.warn(`[Construct] Missing screen reader text with id ${e["id"]}`)}else if(type==="release"){const p=document.getElementById("c3-sr-"+e["id"]);if(p)p.remove();else console.warn(`[Construct] Missing screen reader text with id ${e["id"]}`)}else console.warn(`[Construct] Unknown screen reader text update '${type}'`)}_SetExportingToVideo(e){this._isExportToVideo=true;const headerElem=document.createElement("h1");headerElem.id="exportToVideoMessage";headerElem.textContent=
+e["message"];document.body.prepend(headerElem);document.body.classList.add("exportingToVideo");this.GetRuntimeInterface().GetMainCanvas().style.display="";this._iRuntime.SetIsExportingToVideo(e["duration"])}_OnExportVideoProgress(e){this._exportVideoProgressMessage=e["message"];if(this._exportVideoUpdateTimerId===-1)this._exportVideoUpdateTimerId=setTimeout(()=>this._DoUpdateExportVideoProgressMessage(),250)}_DoUpdateExportVideoProgressMessage(){this._exportVideoUpdateTimerId=-1;const headerElem=
+document.getElementById("exportToVideoMessage");if(headerElem)headerElem.textContent=this._exportVideoProgressMessage}_OnExportedToVideo(e){window.c3_postToMessagePort({"type":"exported-video","arrayBuffer":e["arrayBuffer"],"contentType":e["contentType"],"time":e["time"]})}_OnExportedToImageSequence(e){window.c3_postToMessagePort({"type":"exported-image-sequence","blobArr":e["blobArr"],"time":e["time"],"gif":e["gif"]})}};RuntimeInterface.AddDOMHandlerClass(HANDLER_CLASS)};
+
+
+// workers/jobSchedulerDom.js
+'use strict';{const DISPATCH_WORKER_SCRIPT_NAME="dispatchworker.js";const JOB_WORKER_SCRIPT_NAME="jobworker.js";self.JobSchedulerDOM=class JobSchedulerDOM{constructor(runtimeInterface){this._runtimeInterface=runtimeInterface;this._maxNumWorkers=Math.min(navigator.hardwareConcurrency||2,16);this._dispatchWorker=null;this._jobWorkers=[];this._inputPort=null;this._outputPort=null}async Init(){if(this._hasInitialised)throw new Error("already initialised");this._hasInitialised=true;const dispatchWorkerScriptUrl=
+this._runtimeInterface.GetScriptFolder()+DISPATCH_WORKER_SCRIPT_NAME;this._dispatchWorker=await this._runtimeInterface.CreateWorker(dispatchWorkerScriptUrl,{name:"DispatchWorker"});const messageChannel=new MessageChannel;this._inputPort=messageChannel.port1;this._dispatchWorker.postMessage({"type":"_init","in-port":messageChannel.port2},[messageChannel.port2]);this._outputPort=await this._CreateJobWorker()}async _CreateJobWorker(){const number=this._jobWorkers.length;const jobWorkerScriptUrl=this._runtimeInterface.GetScriptFolder()+
+JOB_WORKER_SCRIPT_NAME;const jobWorker=await this._runtimeInterface.CreateWorker(jobWorkerScriptUrl,{name:"JobWorker"+number});const dispatchChannel=new MessageChannel;const outputChannel=new MessageChannel;this._dispatchWorker.postMessage({"type":"_addJobWorker","port":dispatchChannel.port1},[dispatchChannel.port1]);jobWorker.postMessage({"type":"init","number":number,"dispatch-port":dispatchChannel.port2,"output-port":outputChannel.port2},[dispatchChannel.port2,outputChannel.port2]);this._jobWorkers.push(jobWorker);
+return outputChannel.port1}GetPortData(){return{"inputPort":this._inputPort,"outputPort":this._outputPort,"maxNumWorkers":this._maxNumWorkers}}GetPortTransferables(){return[this._inputPort,this._outputPort]}}};
+
+
+// scripts/plugins/Mouse/dom/domSide.js
+'use strict';{const DOM_COMPONENT_ID="mouse";const HANDLER_CLASS=class MouseDOMHandler extends self.DOMHandler{constructor(iRuntime){super(iRuntime,DOM_COMPONENT_ID);this.AddRuntimeMessageHandlers([["cursor",e=>this._OnChangeCursorStyle(e)],["request-pointer-lock",e=>this._OnRequestPointerLock(e)],["release-pointer-lock",()=>this._OnReleasePointerLock()]]);document.addEventListener("pointerlockchange",e=>this._OnPointerLockChange());document.addEventListener("pointerlockerror",e=>this._OnPointerLockError())}_OnChangeCursorStyle(e){document.documentElement.style.cursor=
+e}_OnRequestPointerLock(opts){this._iRuntime.GetMainCanvas().requestPointerLock(opts)}_OnReleasePointerLock(){document.exitPointerLock()}_OnPointerLockChange(){this.PostToRuntime("pointer-lock-change",{"has-pointer-lock":!!document.pointerLockElement})}_OnPointerLockError(){this.PostToRuntime("pointer-lock-error",{"has-pointer-lock":!!document.pointerLockElement})}};self.RuntimeInterface.AddDOMHandlerClass(HANDLER_CLASS)};
+
+
+// scripts/plugins/Audio/dom/domSide.js
+'use strict';{const R_TO_D=180/Math.PI;const DOM_COMPONENT_ID="audio";self.AudioDOMHandler=class AudioDOMHandler extends self.DOMHandler{constructor(iRuntime){super(iRuntime,DOM_COMPONENT_ID);this._audioContext=null;this._destinationNode=null;this._hasUnblocked=false;this._hasAttachedUnblockEvents=false;this._unblockFunc=()=>this._UnblockAudioContext();this._audioBuffers=[];this._audioInstances=[];this._lastAudioInstance=null;this._lastPlayedTags=[];this._loadedAudioUrls=new Set;this._lastTickCount=
+-1;this._pendingTags=new Map;this._masterVolume=1;this._isSilent=false;this._timeScaleMode=0;this._timeScale=1;this._gameTime=0;this._panningModel="HRTF";this._distanceModel="inverse";this._refDistance=600;this._maxDistance=1E4;this._rolloffFactor=1;this._lastListenerPos=[0,0,0];this._lastListenerOrientation=[0,0,-1,0,1,0];this._playMusicAsSound=false;this._hasAnySoftwareDecodedMusic=false;this._supportsWebMOpus=this._iRuntime.IsAudioFormatSupported("audio/webm; codecs=opus");this._effects=new Map;
+this._analysers=new Set;this._isPendingPostFxState=false;this._hasStartedOfflineRender=false;this._microphoneTag="";this._microphoneSource=null;self["C3Audio_OnMicrophoneStream"]=(localMediaStream,tag)=>this._OnMicrophoneStream(localMediaStream,tag);this._destMediaStreamNode=null;self["C3Audio_GetOutputStream"]=()=>this._OnGetOutputStream();self["C3Audio_DOMInterface"]=this;this.AddRuntimeMessageHandlers([["create-audio-context",e=>this._CreateAudioContext(e)],["play",e=>this._Play(e)],["stop",e=>
+this._Stop(e)],["stop-all",()=>this._StopAll()],["set-paused",e=>this._SetPaused(e)],["set-volume",e=>this._SetVolume(e)],["fade-volume",e=>this._FadeVolume(e)],["set-master-volume",e=>this._SetMasterVolume(e)],["set-muted",e=>this._SetMuted(e)],["set-silent",e=>this._SetSilent(e)],["set-looping",e=>this._SetLooping(e)],["set-playback-rate",e=>this._SetPlaybackRate(e)],["set-stereo-pan",e=>this._SetStereoPan(e)],["seek",e=>this._Seek(e)],["preload",e=>this._Preload(e)],["unload",e=>this._Unload(e)],
+["unload-all",()=>this._UnloadAll()],["set-suspended",e=>this._SetSuspended(e)],["add-effect",e=>this._AddEffect(e)],["set-effect-param",e=>this._SetEffectParam(e)],["remove-effects",e=>this._RemoveEffects(e)],["tick",e=>this._OnTick(e)],["load-state",e=>this._OnLoadState(e)],["offline-render-audio",e=>this._OnOfflineRenderAudio(e)],["offline-render-finish",()=>this._OnOfflineRenderFinish()]])}async _CreateAudioContext(e){if(e["usePlayMusicAsSoundWorkaround"])this._playMusicAsSound=true;this._timeScaleMode=
+e["timeScaleMode"];this._panningModel=["equalpower","HRTF","soundfield"][e["panningModel"]];this._distanceModel=["linear","inverse","exponential"][e["distanceModel"]];this._refDistance=e["refDistance"];this._maxDistance=e["maxDistance"];this._rolloffFactor=e["rolloffFactor"];if(this._iRuntime.IsExportingToVideo()){this._playMusicAsSound=true;const sampleRate=48E3;this._audioContext=new OfflineAudioContext({"numberOfChannels":2,"sampleRate":sampleRate,"length":Math.ceil(this._iRuntime.GetExportToVideoDuration()*
+sampleRate)})}else{const opts={"latencyHint":e["latencyHint"]};if(!this.SupportsWebMOpus())opts["sampleRate"]=48E3;if(typeof AudioContext!=="undefined")this._audioContext=new AudioContext(opts);else if(typeof webkitAudioContext!=="undefined")this._audioContext=new webkitAudioContext(opts);else throw new Error("Web Audio API not supported");this._AttachUnblockEvents();this._audioContext.onstatechange=()=>{if(this._audioContext.state!=="running")this._AttachUnblockEvents();this.PostToRuntime("audiocontext-state",
+{"audioContextState":this._audioContext.state})}}this._destinationNode=this._audioContext["createGain"]();this._destinationNode["connect"](this._audioContext["destination"]);const listenerPos=e["listenerPos"];this._lastListenerPos[0]=listenerPos[0];this._lastListenerPos[1]=listenerPos[1];this._lastListenerPos[2]=listenerPos[2];this._audioContext["listener"]["setPosition"](listenerPos[0],listenerPos[1],listenerPos[2]);this._audioContext["listener"]["setOrientation"](...this._lastListenerOrientation);
+self["C3_GetAudioContextCurrentTime"]=()=>this.GetAudioCurrentTime();try{await Promise.all(e["preloadList"].map(o=>this._GetAudioBuffer(o["originalUrl"],o["url"],o["type"],false)))}catch(err){console.error("[Construct] Preloading sounds failed: ",err)}return{"sampleRate":this._audioContext["sampleRate"],"audioContextState":this._audioContext.state,"outputLatency":this._audioContext["outputLatency"]||0}}_AttachUnblockEvents(){if(this._hasAttachedUnblockEvents)return;this._hasUnblocked=false;window.addEventListener("pointerup",
+this._unblockFunc,true);window.addEventListener("touchend",this._unblockFunc,true);window.addEventListener("click",this._unblockFunc,true);window.addEventListener("keydown",this._unblockFunc,true);this._hasAttachedUnblockEvents=true}_DetachUnblockEvents(){if(!this._hasAttachedUnblockEvents)return;this._hasUnblocked=true;window.removeEventListener("pointerup",this._unblockFunc,true);window.removeEventListener("touchend",this._unblockFunc,true);window.removeEventListener("click",this._unblockFunc,true);
+window.removeEventListener("keydown",this._unblockFunc,true);this._hasAttachedUnblockEvents=false}_UnblockAudioContext(){if(this._hasUnblocked)return;const audioContext=this._audioContext;if(audioContext["state"]==="suspended"&&audioContext["resume"])audioContext["resume"]();const buffer=audioContext["createBuffer"](1,220,22050);const source=audioContext["createBufferSource"]();source["buffer"]=buffer;source["connect"](audioContext["destination"]);source["start"](0);if(audioContext["state"]==="running")this._DetachUnblockEvents()}_MatchTagLists(tagArr1,
+tagArr2){for(const t2 of tagArr2){let found=false;for(const t1 of tagArr1)if(self.AudioDOMHandler.EqualsNoCase(t1,t2)){found=true;break}if(!found)return false}return true}GetAudioContext(){return this._audioContext}GetAudioCurrentTime(){return this._audioContext["currentTime"]}GetDestinationNode(){return this._destinationNode}["GetAudioContextExtern"](){return this.GetAudioContext()}["GetDestinationNodeExtern"](){return this.GetDestinationNode()}GetDestinationForTag(tag){const fxChain=this._effects.get(tag.toLowerCase());
+if(fxChain)return fxChain[0].GetInputNode();else return this.GetDestinationNode()}AddEffectForTag(tag,effect){tag=tag.toLowerCase();let fxChain=this._effects.get(tag);if(!fxChain){fxChain=[];this._effects.set(tag,fxChain)}effect._SetIndex(fxChain.length);effect._SetTag(tag);fxChain.push(effect);this._ReconnectEffects(tag)}_ReconnectEffects(tag){tag=tag.toLowerCase();let destNode=this.GetDestinationNode();const fxChain=this._effects.get(tag);if(fxChain&&fxChain.length){destNode=fxChain[0].GetInputNode();
+for(let i=0,len=fxChain.length;i<len;++i){const n=fxChain[i];if(i+1===len)n.ConnectTo(this.GetDestinationNode());else n.ConnectTo(fxChain[i+1].GetInputNode())}}for(const ai of this.audioInstancesByEffectTag(tag))ai.Reconnect(destNode);if(this._microphoneSource&&this._microphoneTag===tag){this._microphoneSource["disconnect"]();this._microphoneSource["connect"](destNode)}}GetMasterVolume(){return this._masterVolume}IsSilent(){return this._isSilent}GetTimeScaleMode(){return this._timeScaleMode}GetTimeScale(){return this._timeScale}GetGameTime(){return this._gameTime}IsPlayMusicAsSound(){return this._playMusicAsSound}SupportsWebMOpus(){return this._supportsWebMOpus}_SetHasAnySoftwareDecodedMusic(){this._hasAnySoftwareDecodedMusic=
+true}GetPanningModel(){return this._panningModel}GetDistanceModel(){return this._distanceModel}GetReferenceDistance(){return this._refDistance}GetMaxDistance(){return this._maxDistance}GetRolloffFactor(){return this._rolloffFactor}DecodeAudioData(audioData,needsSoftwareDecode){if(needsSoftwareDecode)return this._iRuntime._WasmDecodeWebMOpus(audioData).then(rawAudio=>{const audioBuffer=this._audioContext["createBuffer"](1,rawAudio.length,48E3);const channelBuffer=audioBuffer["getChannelData"](0);channelBuffer.set(rawAudio);
+return audioBuffer});else return new Promise((resolve,reject)=>{this._audioContext["decodeAudioData"](audioData,resolve,reject)})}TryPlayMedia(mediaElem){this._iRuntime.TryPlayMedia(mediaElem)}RemovePendingPlay(mediaElem){this._iRuntime.RemovePendingPlay(mediaElem)}ReleaseInstancesForBuffer(buffer){let j=0;for(let i=0,len=this._audioInstances.length;i<len;++i){const a=this._audioInstances[i];this._audioInstances[j]=a;if(a.GetBuffer()===buffer)a.Release();else++j}this._audioInstances.length=j}ReleaseAllMusicBuffers(){let j=
+0;for(let i=0,len=this._audioBuffers.length;i<len;++i){const b=this._audioBuffers[i];this._audioBuffers[j]=b;if(b.IsMusic())b.Release();else++j}this._audioBuffers.length=j}*audioInstancesMatchingTags(tags){if(tags.length>0)for(const ai of this._audioInstances){if(this._MatchTagLists(ai.GetTags(),tags))yield ai}else if(this._lastAudioInstance&&!this._lastAudioInstance.HasEnded())yield this._lastAudioInstance}*audioInstancesByEffectTag(tag){if(tag)for(const ai of this._audioInstances){if(self.AudioDOMHandler.EqualsNoCase(ai.GetEffectTag(),
+tag))yield ai}else if(this._lastAudioInstance&&!this._lastAudioInstance.HasEnded())yield this._lastAudioInstance}async _GetAudioBuffer(originalUrl,url,type,isMusic,dontCreate){for(const ab of this._audioBuffers)if(ab.GetUrl()===url){await ab.Load();return ab}if(dontCreate)return null;if(isMusic&&(this._playMusicAsSound||this._hasAnySoftwareDecodedMusic))this.ReleaseAllMusicBuffers();const ret=self.C3AudioBuffer.Create(this,originalUrl,url,type,isMusic);this._audioBuffers.push(ret);await ret.Load();
+if(!this._loadedAudioUrls.has(originalUrl)){this.PostToRuntime("buffer-metadata",{"originalUrl":originalUrl,"duration":ret.GetDuration()});this._loadedAudioUrls.add(originalUrl)}return ret}async _GetAudioInstance(originalUrl,url,type,tags,isMusic){for(const ai of this._audioInstances)if(ai.GetUrl()===url&&(ai.CanBeRecycled()||isMusic)){ai.SetTags(tags);return ai}const buffer=await this._GetAudioBuffer(originalUrl,url,type,isMusic);const ret=buffer.CreateInstance(tags);this._audioInstances.push(ret);
+return ret}_AddPendingTags(tags){const tagStr=tags.join(" ");let info=this._pendingTags.get(tagStr);if(!info){let resolve=null;const promise=new Promise(r=>resolve=r);info={pendingCount:0,promise,resolve};this._pendingTags.set(tagStr,info)}info.pendingCount++}_RemovePendingTags(tags){const tagStr=tags.join(" ");const info=this._pendingTags.get(tagStr);if(!info)throw new Error("expected pending tag");info.pendingCount--;if(info.pendingCount===0){info.resolve();this._pendingTags.delete(tagStr)}}TagsReady(tags){const tagStr=
+(tags.length===0?this._lastPlayedTags:tags).join(" ");const info=this._pendingTags.get(tagStr);if(info)return info.promise;else return Promise.resolve()}_MaybeStartTicking(){if(this._analysers.size>0){this._StartTicking();return}for(const ai of this._audioInstances)if(ai.IsActive()){this._StartTicking();return}}Tick(){for(const a of this._analysers)a.Tick();const currentTime=this.GetAudioCurrentTime();for(const ai of this._audioInstances)ai.Tick(currentTime);const instStates=this._audioInstances.filter(a=>
+a.IsActive()).map(a=>a.GetState());this.PostToRuntime("state",{"tickCount":this._lastTickCount,"outputLatency":this._audioContext["outputLatency"]||0,"audioInstances":instStates,"analysers":[...this._analysers].map(a=>a.GetData())});if(instStates.length===0&&this._analysers.size===0)this._StopTicking()}PostTrigger(type,tags,aiid){this.PostToRuntime("trigger",{"type":type,"tags":tags,"aiid":aiid})}async _Play(e){const originalUrl=e["originalUrl"];const url=e["url"];const type=e["type"];const isMusic=
+e["isMusic"];const tags=e["tags"];const isLooping=e["isLooping"];const volume=e["vol"];const position=e["pos"];const panning=e["panning"];const stereoPan=e["stereoPan"];let startTime=e["off"];if(startTime>0&&!e["trueClock"])if(this._audioContext["getOutputTimestamp"]){const outputTimestamp=this._audioContext["getOutputTimestamp"]();startTime=startTime-outputTimestamp["performanceTime"]/1E3+outputTimestamp["contextTime"]}else startTime=startTime-performance.now()/1E3+this._audioContext["currentTime"];
+this._lastPlayedTags=tags.slice(0);this._AddPendingTags(tags);try{this._lastAudioInstance=await this._GetAudioInstance(originalUrl,url,type,tags,isMusic);if(panning){this._lastAudioInstance.SetPannerEnabled(true);this._lastAudioInstance.SetPan(panning["x"],panning["y"],panning["z"],panning["angle"],panning["innerAngle"],panning["outerAngle"],panning["outerGain"]);if(panning.hasOwnProperty("uid"))this._lastAudioInstance.SetUID(panning["uid"])}else if(typeof stereoPan==="number"&&stereoPan!==0){this._lastAudioInstance.SetStereoPannerEnabled(true);
+this._lastAudioInstance.SetStereoPan(stereoPan)}else{this._lastAudioInstance.SetPannerEnabled(false);this._lastAudioInstance.SetStereoPannerEnabled(false)}this._lastAudioInstance.Play(isLooping,volume,position,startTime)}catch(err){console.error("[Construct] Audio: error starting playback: ",err);return}finally{this._RemovePendingTags(tags)}this._StartTicking()}_Stop(e){const tags=e["tags"];for(const ai of this.audioInstancesMatchingTags(tags))ai.Stop()}_StopAll(){for(const ai of this._audioInstances)ai.Stop()}_SetPaused(e){const tags=
+e["tags"];const paused=e["paused"];for(const ai of this.audioInstancesMatchingTags(tags))if(paused)ai.Pause();else ai.Resume();this._MaybeStartTicking()}_SetVolume(e){const tags=e["tags"];const vol=e["vol"];for(const ai of this.audioInstancesMatchingTags(tags))ai.SetVolume(vol)}_SetStereoPan(e){const tags=e["tags"];const p=e["p"];for(const ai of this.audioInstancesMatchingTags(tags)){ai.SetStereoPannerEnabled(true);ai.SetStereoPan(p)}}async _FadeVolume(e){const tags=e["tags"];const vol=e["vol"];const duration=
+e["duration"];const stopOnEnd=e["stopOnEnd"];await this.TagsReady(tags);for(const ai of this.audioInstancesMatchingTags(tags))ai.FadeVolume(vol,duration,stopOnEnd);this._MaybeStartTicking()}_SetMasterVolume(e){this._masterVolume=e["vol"];this._destinationNode["gain"]["value"]=this._masterVolume}_SetMuted(e){const tags=e["tags"];const isMuted=e["isMuted"];for(const ai of this.audioInstancesMatchingTags(tags))ai.SetMuted(isMuted)}_SetSilent(e){this._isSilent=e["isSilent"];this._iRuntime.SetSilent(this._isSilent);
+for(const ai of this._audioInstances)ai._UpdateMuted()}_SetLooping(e){const tags=e["tags"];const isLooping=e["isLooping"];for(const ai of this.audioInstancesMatchingTags(tags))ai.SetLooping(isLooping)}async _SetPlaybackRate(e){const tags=e["tags"];const rate=e["rate"];await this.TagsReady(tags);for(const ai of this.audioInstancesMatchingTags(tags))ai.SetPlaybackRate(rate)}async _Seek(e){const tags=e["tags"];const pos=e["pos"];await this.TagsReady(tags);for(const ai of this.audioInstancesMatchingTags(tags))ai.Seek(pos)}async _Preload(e){const originalUrl=
+e["originalUrl"];const url=e["url"];const type=e["type"];const isMusic=e["isMusic"];try{await this._GetAudioInstance(originalUrl,url,type,"",isMusic)}catch(err){console.error("[Construct] Audio: error preloading: ",err)}}async _Unload(e){const url=e["url"];const type=e["type"];const isMusic=e["isMusic"];const buffer=await this._GetAudioBuffer("",url,type,isMusic,true);if(!buffer)return;buffer.Release();const i=this._audioBuffers.indexOf(buffer);if(i!==-1)this._audioBuffers.splice(i,1)}_UnloadAll(){for(const buffer of this._audioBuffers)buffer.Release();
+this._audioBuffers.length=0}_SetSuspended(e){const isSuspended=e["isSuspended"];if(!isSuspended&&this._audioContext["resume"])this._audioContext["resume"]();for(const ai of this._audioInstances)ai.SetSuspended(isSuspended);if(isSuspended&&this._audioContext["suspend"])this._audioContext["suspend"]()}_OnTick(e){this._timeScale=e["timeScale"];this._gameTime=e["gameTime"];this._lastTickCount=e["tickCount"];if(this._timeScaleMode!==0)for(const ai of this._audioInstances)ai._UpdatePlaybackRate();const listenerPos=
+e["listenerPos"];if(listenerPos&&(this._lastListenerPos[0]!==listenerPos[0]||this._lastListenerPos[1]!==listenerPos[1]||this._lastListenerPos[2]!==listenerPos[2])){this._lastListenerPos[0]=listenerPos[0];this._lastListenerPos[1]=listenerPos[1];this._lastListenerPos[2]=listenerPos[2];this._audioContext["listener"]["setPosition"](listenerPos[0],listenerPos[1],listenerPos[2])}const listenerOrientation=e["listenerOrientation"];if(listenerOrientation&&(this._lastListenerOrientation[0]!==listenerOrientation[0]||
+this._lastListenerOrientation[1]!==listenerOrientation[1]||this._lastListenerOrientation[2]!==listenerOrientation[2]||this._lastListenerOrientation[3]!==listenerOrientation[3]||this._lastListenerOrientation[4]!==listenerOrientation[4]||this._lastListenerOrientation[5]!==listenerOrientation[5])){for(let i=0;i<6;++i)this._lastListenerOrientation[i]=listenerOrientation[i];this._audioContext["listener"]["setOrientation"](...this._lastListenerOrientation)}for(const instPan of e["instPans"]){const uid=
+instPan["uid"];for(const ai of this._audioInstances)if(ai.GetUID()===uid)ai.SetPanXYZA(instPan["x"],instPan["y"],instPan["z"],instPan["angle"])}}async _AddEffect(e){const type=e["type"];const tags=e.hasOwnProperty("tags")?e["tags"]:[e["tag"]];const params=e["params"];let effect;let convolutionBuffer;if(type==="convolution")try{convolutionBuffer=await this._GetAudioBuffer(e["bufferOriginalUrl"],e["bufferUrl"],e["bufferType"],false)}catch(err){console.log("[Construct] Audio: error loading convolution: ",
+err);return}for(const tag of tags){if(type==="filter")effect=new self.C3AudioFilterFX(this,...params);else if(type==="delay")effect=new self.C3AudioDelayFX(this,...params);else if(type==="convolution"){effect=new self.C3AudioConvolveFX(this,convolutionBuffer.GetAudioBuffer(),...params);effect._SetBufferInfo(e["bufferOriginalUrl"],e["bufferUrl"],e["bufferType"])}else if(type==="flanger")effect=new self.C3AudioFlangerFX(this,...params);else if(type==="phaser")effect=new self.C3AudioPhaserFX(this,...params);
+else if(type==="gain")effect=new self.C3AudioGainFX(this,...params);else if(type==="stereopan")effect=new self.C3AudioStereoPanFX(this,...params);else if(type==="tremolo")effect=new self.C3AudioTremoloFX(this,...params);else if(type==="ringmod")effect=new self.C3AudioRingModFX(this,...params);else if(type==="distortion")effect=new self.C3AudioDistortionFX(this,...params);else if(type==="compressor")effect=new self.C3AudioCompressorFX(this,...params);else if(type==="analyser")effect=new self.C3AudioAnalyserFX(this,
+...params);else throw new Error("invalid effect type");this.AddEffectForTag(tag,effect)}this._PostUpdatedFxState()}_SetEffectParam(e){const tags=e["tags"];const index=e["index"];const param=e["param"];const value=e["value"];const ramp=e["ramp"];const time=e["time"];for(const tag of tags){const fxChain=this._effects.get(tag.toLowerCase());if(!fxChain||index<0||index>=fxChain.length)continue;fxChain[index].SetParam(param,value,ramp,time)}this._PostUpdatedFxState()}_RemoveEffects(e){const tags=e["tags"];
+for(const tag of tags){const lowerTag=tag.toLowerCase();const fxChain=this._effects.get(lowerTag);if(!fxChain||!fxChain.length)return;for(const effect of fxChain)effect.Release();this._effects.delete(lowerTag);this._ReconnectEffects(lowerTag)}}_AddAnalyser(analyser){this._analysers.add(analyser);this._MaybeStartTicking()}_RemoveAnalyser(analyser){this._analysers.delete(analyser)}_PostUpdatedFxState(){if(this._isPendingPostFxState)return;this._isPendingPostFxState=true;Promise.resolve().then(()=>this._DoPostUpdatedFxState())}_DoPostUpdatedFxState(){const fxstate=
+{};for(const [tag,fxChain]of this._effects)fxstate[tag]=fxChain.map(e=>e.GetState());this.PostToRuntime("fxstate",{"fxstate":fxstate});this._isPendingPostFxState=false}async _OnLoadState(e){const saveLoadMode=e["saveLoadMode"];if(saveLoadMode!==3){const keepAudioInstances=[];for(const ai of this._audioInstances)if(ai.IsMusic()&&saveLoadMode===1||!ai.IsMusic()&&saveLoadMode===2)keepAudioInstances.push(ai);else ai.Release();this._audioInstances=keepAudioInstances}for(const fxChain of this._effects.values())for(const effect of fxChain)effect.Release();
+this._effects.clear();this._timeScale=e["timeScale"];this._gameTime=e["gameTime"];const listenerPos=e["listenerPos"];this._lastListenerPos[0]=listenerPos[0];this._lastListenerPos[1]=listenerPos[1];this._lastListenerPos[2]=listenerPos[2];this._audioContext["listener"]["setPosition"](listenerPos[0],listenerPos[1],listenerPos[2]);const listenerOrientation=e["listenerOrientation"];if(Array.isArray(listenerOrientation)){for(let i=0;i<6;++i)this._lastListenerOrientation[i]=listenerOrientation[i];this._audioContext["listener"]["setOrientation"](...this._lastListenerOrientation)}this._isSilent=
+e["isSilent"];this._iRuntime.SetSilent(this._isSilent);this._masterVolume=e["masterVolume"];this._destinationNode["gain"]["value"]=this._masterVolume;const promises=[];for(const fxChainData of Object.values(e["effects"]))promises.push(Promise.all(fxChainData.map(d=>this._AddEffect(d))));await Promise.all(promises);await Promise.all(e["playing"].map(d=>this._LoadAudioInstance(d,saveLoadMode)));this._MaybeStartTicking()}async _LoadAudioInstance(d,saveLoadMode){if(saveLoadMode===3)return;const originalUrl=
+d["bufferOriginalUrl"];const url=d["bufferUrl"];const type=d["bufferType"];const isMusic=d["isMusic"];const tags=d["tags"];const isLooping=d["isLooping"];const volume=d["volume"];const position=d["playbackTime"];if(isMusic&&saveLoadMode===1)return;if(!isMusic&&saveLoadMode===2)return;let ai=null;try{ai=await this._GetAudioInstance(originalUrl,url,type,tags,isMusic)}catch(err){console.error("[Construct] Audio: error loading audio state: ",err);return}ai.LoadPanState(d["pan"]);ai.LoadStereoPanState(d["stereoPan"]);
+ai.Play(isLooping,volume,position,0);if(!d["isPlaying"])ai.Pause();ai._LoadAdditionalState(d)}_OnMicrophoneStream(localMediaStream,tag){if(this._microphoneSource)this._microphoneSource["disconnect"]();this._microphoneTag=tag.toLowerCase();this._microphoneSource=this._audioContext["createMediaStreamSource"](localMediaStream);this._microphoneSource["connect"](this.GetDestinationForTag(this._microphoneTag))}_OnGetOutputStream(){if(!this._destMediaStreamNode){this._destMediaStreamNode=this._audioContext["createMediaStreamDestination"]();
+this._destinationNode["connect"](this._destMediaStreamNode)}return this._destMediaStreamNode["stream"]}async _OnOfflineRenderAudio(e){try{const time=e["time"];const suspendPromise=this._audioContext["suspend"](time);if(!this._hasStartedOfflineRender){this._audioContext["startRendering"]().then(buffer=>this._OnOfflineRenderCompleted(buffer)).catch(err=>this._OnOfflineRenderError(err));this._hasStartedOfflineRender=true}else this._audioContext["resume"]();await suspendPromise}catch(err){this._OnOfflineRenderError(err)}}_OnOfflineRenderFinish(){this._audioContext["resume"]()}_OnOfflineRenderCompleted(buffer){const channelArrayBuffers=
+[];for(let i=0,len=buffer["numberOfChannels"];i<len;++i){const f32arr=buffer["getChannelData"](i);channelArrayBuffers.push(f32arr.buffer)}this._iRuntime.PostToRuntimeComponent("runtime","offline-audio-render-completed",{"duration":buffer["duration"],"length":buffer["length"],"numberOfChannels":buffer["numberOfChannels"],"sampleRate":buffer["sampleRate"],"channelData":channelArrayBuffers},null,channelArrayBuffers)}_OnOfflineRenderError(err){console.error(`[Audio] Offline rendering error: `,err)}static EqualsNoCase(a,
+b){return a===b||a.normalize().toLowerCase()===b.normalize().toLowerCase()}static ToDegrees(x){return x*R_TO_D}static DbToLinearNoCap(x){return Math.pow(10,x/20)}static DbToLinear(x){return Math.max(Math.min(self.AudioDOMHandler.DbToLinearNoCap(x),1),0)}static LinearToDbNoCap(x){return Math.log(x)/Math.log(10)*20}static LinearToDb(x){return self.AudioDOMHandler.LinearToDbNoCap(Math.max(Math.min(x,1),0))}static e4(x,k){return 1-Math.exp(-k*x)}};self.RuntimeInterface.AddDOMHandlerClass(self.AudioDOMHandler)};
+
+
+// scripts/plugins/Audio/dom/audioBuffer.js
+'use strict';{self.C3AudioBuffer=class C3AudioBuffer{constructor(audioDomHandler,originalUrl,url,type,isMusic){this._audioDomHandler=audioDomHandler;this._originalUrl=originalUrl;this._url=url;this._type=type;this._isMusic=isMusic;this._api="";this._loadState="not-loaded";this._loadPromise=null}Release(){this._loadState="not-loaded";this._audioDomHandler=null;this._loadPromise=null}static Create(audioDomHandler,originalUrl,url,type,isMusic){const needsSoftwareDecode=type==="audio/webm; codecs=opus"&&
+!audioDomHandler.SupportsWebMOpus();if(isMusic&&needsSoftwareDecode)audioDomHandler._SetHasAnySoftwareDecodedMusic();if(!isMusic||audioDomHandler.IsPlayMusicAsSound()||needsSoftwareDecode)return new self.C3WebAudioBuffer(audioDomHandler,originalUrl,url,type,isMusic,needsSoftwareDecode);else return new self.C3Html5AudioBuffer(audioDomHandler,originalUrl,url,type,isMusic)}CreateInstance(tags){if(this._api==="html5")return new self.C3Html5AudioInstance(this._audioDomHandler,this,tags);else return new self.C3WebAudioInstance(this._audioDomHandler,
+this,tags)}_Load(){}Load(){if(!this._loadPromise)this._loadPromise=this._Load();return this._loadPromise}IsLoaded(){}IsLoadedAndDecoded(){}HasFailedToLoad(){return this._loadState==="failed"}GetAudioContext(){return this._audioDomHandler.GetAudioContext()}GetApi(){return this._api}GetOriginalUrl(){return this._originalUrl}GetUrl(){return this._url}GetContentType(){return this._type}IsMusic(){return this._isMusic}GetDuration(){}}};
+
+
+// scripts/plugins/Audio/dom/html5AudioBuffer.js
+'use strict';{self.C3Html5AudioBuffer=class C3Html5AudioBuffer extends self.C3AudioBuffer{constructor(audioDomHandler,originalUrl,url,type,isMusic){super(audioDomHandler,originalUrl,url,type,isMusic);this._api="html5";this._audioElem=new Audio;this._audioElem.crossOrigin="anonymous";this._audioElem.autoplay=false;this._audioElem.preload="auto";this._loadResolve=null;this._loadReject=null;this._reachedCanPlayThrough=false;this._audioElem.addEventListener("canplaythrough",()=>this._reachedCanPlayThrough=
+true);this._outNode=this.GetAudioContext()["createGain"]();this._mediaSourceNode=null;this._audioElem.addEventListener("canplay",()=>{if(this._loadResolve){this._loadState="loaded";this._loadResolve();this._loadResolve=null;this._loadReject=null}if(this._mediaSourceNode||!this._audioElem)return;this._mediaSourceNode=this.GetAudioContext()["createMediaElementSource"](this._audioElem);this._mediaSourceNode["connect"](this._outNode)});this.onended=null;this._audioElem.addEventListener("ended",()=>{if(this.onended)this.onended()});
+this._audioElem.addEventListener("error",e=>this._OnError(e))}Release(){this._audioDomHandler.ReleaseInstancesForBuffer(this);this._outNode["disconnect"]();this._outNode=null;this._mediaSourceNode["disconnect"]();this._mediaSourceNode=null;if(this._audioElem&&!this._audioElem.paused)this._audioElem.pause();this.onended=null;this._audioElem=null;super.Release()}_Load(){this._loadState="loading";return new Promise((resolve,reject)=>{this._loadResolve=resolve;this._loadReject=reject;this._audioElem.src=
+this._url})}_OnError(e){console.error(`[Construct] Audio '${this._url}' error: `,e);if(this._loadReject){this._loadState="failed";this._loadReject(e);this._loadResolve=null;this._loadReject=null}}IsLoaded(){const ret=this._audioElem["readyState"]>=4;if(ret)this._reachedCanPlayThrough=true;return ret||this._reachedCanPlayThrough}IsLoadedAndDecoded(){return this.IsLoaded()}GetAudioElement(){return this._audioElem}GetOutputNode(){return this._outNode}GetDuration(){return this._audioElem["duration"]}}};
+
+
+// scripts/plugins/Audio/dom/webAudioBuffer.js
+'use strict';{self.C3WebAudioBuffer=class C3WebAudioBuffer extends self.C3AudioBuffer{constructor(audioDomHandler,originalUrl,url,type,isMusic,needsSoftwareDecode){super(audioDomHandler,originalUrl,url,type,isMusic);this._api="webaudio";this._audioData=null;this._audioBuffer=null;this._needsSoftwareDecode=!!needsSoftwareDecode}Release(){this._audioDomHandler.ReleaseInstancesForBuffer(this);this._audioData=null;this._audioBuffer=null;super.Release()}async _Fetch(){if(this._audioData)return this._audioData;
+const iRuntime=this._audioDomHandler.GetRuntimeInterface();if(iRuntime.GetExportType()==="cordova"&&iRuntime.IsRelativeURL(this._url)&&iRuntime.IsFileProtocol())this._audioData=await iRuntime.CordovaFetchLocalFileAsArrayBuffer(this._url);else if(iRuntime.GetExportType()==="playable-ad-single-file"&&iRuntime.IsRelativeURL(this._url)){const blob=iRuntime["_PlayableAdFetchBlob"](this._url);this._audioData=await blob.arrayBuffer()}else{const response=await fetch(this._url);if(!response.ok)throw new Error(`error fetching audio data: ${response.status} ${response.statusText}`);
+this._audioData=await response.arrayBuffer()}}async _Decode(){if(this._audioBuffer)return this._audioBuffer;this._audioBuffer=await this._audioDomHandler.DecodeAudioData(this._audioData,this._needsSoftwareDecode);this._audioData=null}async _Load(){try{this._loadState="loading";await this._Fetch();await this._Decode();this._loadState="loaded"}catch(err){this._loadState="failed";console.error(`[Construct] Failed to load audio '${this._url}': `,err)}}IsLoaded(){return!!(this._audioData||this._audioBuffer)}IsLoadedAndDecoded(){return!!this._audioBuffer}GetAudioBuffer(){return this._audioBuffer}GetDuration(){return this._audioBuffer?
+this._audioBuffer["duration"]:0}}};
+
+
+// scripts/plugins/Audio/dom/audioInstance.js
+'use strict';{let nextAiId=0;self.C3AudioInstance=class C3AudioInstance{constructor(audioDomHandler,buffer,tags){this._audioDomHandler=audioDomHandler;this._buffer=buffer;this._tags=tags;this._aiId=nextAiId++;this._gainNode=this.GetAudioContext()["createGain"]();this._gainNode["connect"](this.GetDestinationNode());this._pannerNode=null;this._isPannerEnabled=false;this._pannerPosition=[0,0,0];this._pannerOrientation=[0,0,0];this._pannerConeParams=[0,0,0];this._stereoPannerNode=null;this._isStereoPannerEnabled=
+false;this._stereoPan=0;this._isStopped=true;this._isPaused=false;this._resumeMe=false;this._isLooping=false;this._volume=1;this._isMuted=false;this._playbackRate=1;const timeScaleMode=this._audioDomHandler.GetTimeScaleMode();this._isTimescaled=timeScaleMode===1&&!this.IsMusic()||timeScaleMode===2;this._instUid=-1;this._fadeEndTime=-1;this._stopOnFadeEnd=false}Release(){this._audioDomHandler=null;this._buffer=null;if(this._pannerNode){this._pannerNode["disconnect"]();this._pannerNode=null}if(this._stereoPannerNode){this._stereoPannerNode["disconnect"]();
+this._stereoPannerNode=null}this._gainNode["disconnect"]();this._gainNode=null}GetAudioContext(){return this._audioDomHandler.GetAudioContext()}SetTags(tags){this._tags=tags}GetTags(){return this._tags}GetEffectTag(){return this._tags.length>0?this._tags[0]:""}GetDestinationNode(){return this._audioDomHandler.GetDestinationForTag(this.GetEffectTag())}GetCurrentTime(){if(this._isTimescaled)return this._audioDomHandler.GetGameTime();else return performance.now()/1E3}GetOriginalUrl(){return this._buffer.GetOriginalUrl()}GetUrl(){return this._buffer.GetUrl()}GetContentType(){return this._buffer.GetContentType()}GetBuffer(){return this._buffer}IsMusic(){return this._buffer.IsMusic()}GetAiId(){return this._aiId}HasEnded(){}CanBeRecycled(){}IsPlaying(){return!this._isStopped&&
+!this._isPaused&&!this.HasEnded()}IsActive(){return!this._isStopped&&!this.HasEnded()}GetPlaybackTime(){}GetDuration(applyPlaybackRate){let ret=this._buffer.GetDuration();if(applyPlaybackRate)ret/=this._playbackRate||.001;return ret}Play(isLooping,vol,seekPos,scheduledTime){}Stop(){}Pause(){}IsPaused(){return this._isPaused}Resume(){}SetVolume(v){this._volume=v;this._gainNode["gain"]["cancelScheduledValues"](0);this._fadeEndTime=-1;this._gainNode["gain"]["value"]=this.GetOutputVolume()}FadeVolume(vol,
+duration,stopOnEnd){if(this.IsMuted())return;const gainParam=this._gainNode["gain"];gainParam["cancelScheduledValues"](0);const currentTime=this._audioDomHandler.GetAudioCurrentTime();const endTime=currentTime+duration;gainParam["setValueAtTime"](gainParam["value"],currentTime);gainParam["linearRampToValueAtTime"](vol,endTime);this._volume=vol;this._fadeEndTime=endTime;this._stopOnFadeEnd=stopOnEnd}_UpdateVolume(){this.SetVolume(this._volume)}Tick(currentTime){if(this._fadeEndTime!==-1&&currentTime>=
+this._fadeEndTime){this._fadeEndTime=-1;if(this._stopOnFadeEnd)this.Stop();this._audioDomHandler.PostTrigger("fade-ended",this._tags,this._aiId)}}GetOutputVolume(){const ret=this._volume;return isFinite(ret)?ret:0}SetMuted(m){m=!!m;if(this._isMuted===m)return;this._isMuted=m;this._UpdateMuted()}IsMuted(){return this._isMuted}IsSilent(){return this._audioDomHandler.IsSilent()}_UpdateMuted(){}SetLooping(l){}IsLooping(){return this._isLooping}SetPlaybackRate(r){if(this._playbackRate===r)return;this._playbackRate=
+r;this._UpdatePlaybackRate()}_UpdatePlaybackRate(){}GetPlaybackRate(){return this._playbackRate}Seek(pos){}SetSuspended(s){}SetPannerEnabled(e){e=!!e;if(this._isPannerEnabled===e)return;this._isPannerEnabled=e;if(this._isPannerEnabled){this.SetStereoPannerEnabled(false);if(!this._pannerNode){this._pannerNode=this.GetAudioContext()["createPanner"]();this._pannerNode["panningModel"]=this._audioDomHandler.GetPanningModel();this._pannerNode["distanceModel"]=this._audioDomHandler.GetDistanceModel();this._pannerNode["refDistance"]=
+this._audioDomHandler.GetReferenceDistance();this._pannerNode["maxDistance"]=this._audioDomHandler.GetMaxDistance();this._pannerNode["rolloffFactor"]=this._audioDomHandler.GetRolloffFactor()}this._gainNode["disconnect"]();this._gainNode["connect"](this._pannerNode);this._pannerNode["connect"](this.GetDestinationNode())}else{this._pannerNode["disconnect"]();this._gainNode["disconnect"]();this._gainNode["connect"](this.GetDestinationNode())}}SetPan(x,y,z,angle,innerAngle,outerAngle,outerGain){if(!this._isPannerEnabled)return;
+this.SetPanXYZA(x,y,z,angle);const toDegrees=self.AudioDOMHandler.ToDegrees;if(this._pannerConeParams[0]!==toDegrees(innerAngle)){this._pannerConeParams[0]=toDegrees(innerAngle);this._pannerNode["coneInnerAngle"]=toDegrees(innerAngle)}if(this._pannerConeParams[1]!==toDegrees(outerAngle)){this._pannerConeParams[1]=toDegrees(outerAngle);this._pannerNode["coneOuterAngle"]=toDegrees(outerAngle)}if(this._pannerConeParams[2]!==outerGain){this._pannerConeParams[2]=outerGain;this._pannerNode["coneOuterGain"]=
+outerGain}}SetPanXYZA(x,y,z,angle){if(!this._isPannerEnabled)return;const pos=this._pannerPosition;const orient=this._pannerOrientation;const cosa=Math.cos(angle);const sina=Math.sin(angle);if(pos[0]!==x||pos[1]!==y||pos[2]!==z){pos[0]=x;pos[1]=y;pos[2]=z;this._pannerNode["setPosition"](...pos)}if(orient[0]!==cosa||orient[1]!==sina||orient[2]!==0){orient[0]=cosa;orient[1]=sina;orient[2]=0;this._pannerNode["setOrientation"](...orient)}}SetStereoPannerEnabled(e){e=!!e;if(this._isStereoPannerEnabled===
+e)return;this._isStereoPannerEnabled=e;if(this._isStereoPannerEnabled){this.SetPannerEnabled(false);this._stereoPannerNode=this.GetAudioContext()["createStereoPanner"]();this._gainNode["disconnect"]();this._gainNode["connect"](this._stereoPannerNode);this._stereoPannerNode["connect"](this.GetDestinationNode())}else{this._stereoPannerNode["disconnect"]();this._stereoPannerNode=null;this._gainNode["disconnect"]();this._gainNode["connect"](this.GetDestinationNode())}}SetStereoPan(p){if(!this._isStereoPannerEnabled)return;
+if(this._stereoPan===p)return;this._stereoPannerNode["pan"]["value"]=p;this._stereoPan=p}SetUID(uid){this._instUid=uid}GetUID(){return this._instUid}GetResumePosition(){}Reconnect(toNode){const outNode=this._stereoPannerNode||this._pannerNode||this._gainNode;outNode["disconnect"]();outNode["connect"](toNode)}GetState(){return{"aiid":this.GetAiId(),"tags":this._tags,"duration":this.GetDuration(),"volume":this._fadeEndTime===-1?this._volume:this._gainNode["gain"]["value"],"isPlaying":this.IsPlaying(),
+"playbackTime":this.GetPlaybackTime(),"playbackRate":this.GetPlaybackRate(),"uid":this._instUid,"bufferOriginalUrl":this.GetOriginalUrl(),"bufferUrl":"","bufferType":this.GetContentType(),"isMusic":this.IsMusic(),"isLooping":this.IsLooping(),"isMuted":this.IsMuted(),"resumePosition":this.GetResumePosition(),"pan":this.GetPanState(),"stereoPan":this.GetStereoPanState()}}_LoadAdditionalState(d){this.SetPlaybackRate(d["playbackRate"]);this.SetMuted(d["isMuted"])}GetPanState(){if(!this._pannerNode)return null;
+const pn=this._pannerNode;return{"pos":this._pannerPosition,"orient":this._pannerOrientation,"cia":pn["coneInnerAngle"],"coa":pn["coneOuterAngle"],"cog":pn["coneOuterGain"],"uid":this._instUid}}LoadPanState(d){if(!d){this.SetPannerEnabled(false);return}this.SetPannerEnabled(true);const pn=this._pannerNode;const panPos=d["pos"];this._pannerPosition[0]=panPos[0];this._pannerPosition[1]=panPos[1];this._pannerPosition[2]=panPos[2];const panOrient=d["orient"];this._pannerOrientation[0]=panOrient[0];this._pannerOrientation[1]=
+panOrient[1];this._pannerOrientation[2]=panOrient[2];pn["setPosition"](...this._pannerPosition);pn["setOrientation"](...this._pannerOrientation);this._pannerConeParams[0]=d["cia"];this._pannerConeParams[1]=d["coa"];this._pannerConeParams[2]=d["cog"];pn["coneInnerAngle"]=d["cia"];pn["coneOuterAngle"]=d["coa"];pn["coneOuterGain"]=d["cog"];this._instUid=d["uid"]}GetStereoPanState(){if(this._stereoPannerNode)return this._stereoPan;else return null}LoadStereoPanState(p){if(typeof p!=="number"){this.SetStereoPannerEnabled(false);
+return}this.SetStereoPannerEnabled(true);this.SetStereoPan(p)}}};
+
+
+// scripts/plugins/Audio/dom/html5AudioInstance.js
+'use strict';{self.C3Html5AudioInstance=class C3Html5AudioInstance extends self.C3AudioInstance{constructor(audioDomHandler,buffer,tags){super(audioDomHandler,buffer,tags);this._buffer.GetOutputNode()["connect"](this._gainNode);this._buffer.onended=()=>this._OnEnded()}Release(){this.Stop();this._buffer.GetOutputNode()["disconnect"]();super.Release()}GetAudioElement(){return this._buffer.GetAudioElement()}_OnEnded(){this._isStopped=true;this._instUid=-1;this._audioDomHandler.PostTrigger("ended",this._tags,
+this._aiId)}HasEnded(){return this.GetAudioElement()["ended"]}CanBeRecycled(){if(this._isStopped)return true;return this.HasEnded()}GetPlaybackTime(){let ret=this.GetAudioElement()["currentTime"];if(!this._isLooping)ret=Math.min(ret,this.GetDuration());return ret}Play(isLooping,vol,seekPos,scheduledTime){const audioElem=this.GetAudioElement();if(audioElem.playbackRate!==1)audioElem.playbackRate=1;if(audioElem.loop!==isLooping)audioElem.loop=isLooping;this.SetVolume(vol);this._isMuted=false;if(audioElem.muted)audioElem.muted=
+false;if(audioElem.currentTime!==seekPos)try{audioElem.currentTime=seekPos}catch(err){console.warn(`[Construct] Exception seeking audio '${this._buffer.GetUrl()}' to position '${seekPos}': `,err)}this._audioDomHandler.TryPlayMedia(audioElem);this._isStopped=false;this._isPaused=false;this._isLooping=isLooping;this._playbackRate=1}Stop(){const audioElem=this.GetAudioElement();if(!audioElem.paused)audioElem.pause();this._audioDomHandler.RemovePendingPlay(audioElem);this._isStopped=true;this._isPaused=
+false;this._instUid=-1}Pause(){if(this._isPaused||this._isStopped||this.HasEnded())return;const audioElem=this.GetAudioElement();if(!audioElem.paused)audioElem.pause();this._audioDomHandler.RemovePendingPlay(audioElem);this._isPaused=true}Resume(){if(!this._isPaused||this._isStopped||this.HasEnded())return;this._audioDomHandler.TryPlayMedia(this.GetAudioElement());this._isPaused=false}_UpdateMuted(){this.GetAudioElement().muted=this._isMuted||this.IsSilent()}SetLooping(l){l=!!l;if(this._isLooping===
+l)return;this._isLooping=l;this.GetAudioElement().loop=l}_UpdatePlaybackRate(){let r=this._playbackRate;if(this._isTimescaled)r*=this._audioDomHandler.GetTimeScale();try{this.GetAudioElement()["playbackRate"]=r}catch(err){console.warn(`[Construct] Unable to set playback rate '${r}':`,err)}}Seek(pos){if(this._isStopped||this.HasEnded())return;try{this.GetAudioElement()["currentTime"]=pos}catch(err){console.warn(`[Construct] Error seeking audio to '${pos}': `,err)}}GetResumePosition(){return this.GetPlaybackTime()}SetSuspended(s){if(s)if(this.IsPlaying()){this.GetAudioElement()["pause"]();
+this._resumeMe=true}else this._resumeMe=false;else if(this._resumeMe){this._audioDomHandler.TryPlayMedia(this.GetAudioElement());this._resumeMe=false}}}};
+
+
+// scripts/plugins/Audio/dom/webAudioInstance.js
+'use strict';{self.C3WebAudioInstance=class C3WebAudioInstance extends self.C3AudioInstance{constructor(audioDomHandler,buffer,tags){super(audioDomHandler,buffer,tags);this._bufferSource=null;this._onended_handler=e=>this._OnEnded(e);this._hasPlaybackEnded=true;this._activeSource=null;this._playStartTime=0;this._playFromSeekPos=0;this._resumePosition=0;this._muteVol=1}Release(){this.Stop();this._ReleaseBufferSource();this._onended_handler=null;super.Release()}_ReleaseBufferSource(){if(this._bufferSource){this._bufferSource["onended"]=
+null;this._bufferSource["disconnect"]();this._bufferSource["buffer"]=null}this._bufferSource=null;this._activeSource=null}_OnEnded(e){if(this._isPaused||this._resumeMe)return;if(e.target!==this._activeSource)return;this._hasPlaybackEnded=true;this._isStopped=true;this._instUid=-1;this._ReleaseBufferSource();this._audioDomHandler.PostTrigger("ended",this._tags,this._aiId)}HasEnded(){if(!this._isStopped&&this._bufferSource&&this._bufferSource["loop"])return false;if(this._isPaused)return false;return this._hasPlaybackEnded}CanBeRecycled(){if(!this._bufferSource||
+this._isStopped)return true;return this.HasEnded()}GetPlaybackTime(){let ret=0;if(this._isPaused)ret=this._resumePosition;else ret=this._playFromSeekPos+(this.GetCurrentTime()-this._playStartTime)*this._playbackRate;if(!this._isLooping)ret=Math.min(ret,this.GetDuration());return ret}Play(isLooping,vol,seekPos,scheduledTime){this._isMuted=false;this._muteVol=1;this.SetVolume(vol);this._ReleaseBufferSource();this._bufferSource=this.GetAudioContext()["createBufferSource"]();this._bufferSource["buffer"]=
+this._buffer.GetAudioBuffer();this._bufferSource["connect"](this._gainNode);this._activeSource=this._bufferSource;this._bufferSource["onended"]=this._onended_handler;this._bufferSource["loop"]=isLooping;this._bufferSource["start"](scheduledTime,seekPos);this._hasPlaybackEnded=false;this._isStopped=false;this._isPaused=false;this._isLooping=isLooping;this._playbackRate=1;this._playStartTime=this.GetCurrentTime();this._playFromSeekPos=seekPos}Stop(){if(this._bufferSource)try{this._bufferSource["stop"](0)}catch(err){}this._isStopped=
+true;this._isPaused=false;this._instUid=-1}Pause(){if(this._isPaused||this._isStopped||this.HasEnded())return;this._resumePosition=this.GetPlaybackTime();if(this._isLooping)this._resumePosition%=this.GetDuration();this._isPaused=true;this._bufferSource["stop"](0)}Resume(){if(!this._isPaused||this._isStopped||this.HasEnded())return;this._ReleaseBufferSource();this._bufferSource=this.GetAudioContext()["createBufferSource"]();this._bufferSource["buffer"]=this._buffer.GetAudioBuffer();this._bufferSource["connect"](this._gainNode);
+this._activeSource=this._bufferSource;this._bufferSource["onended"]=this._onended_handler;this._bufferSource["loop"]=this._isLooping;this._UpdateVolume();this._UpdatePlaybackRate();this._bufferSource["start"](0,this._resumePosition);this._playStartTime=this.GetCurrentTime();this._playFromSeekPos=this._resumePosition;this._isPaused=false}GetOutputVolume(){return super.GetOutputVolume()*this._muteVol}_UpdateMuted(){this._muteVol=this._isMuted||this.IsSilent()?0:1;this._UpdateVolume()}SetLooping(l){l=
+!!l;if(this._isLooping===l)return;this._isLooping=l;if(this._bufferSource)this._bufferSource["loop"]=l}_UpdatePlaybackRate(){let r=this._playbackRate;if(this._isTimescaled)r*=this._audioDomHandler.GetTimeScale();if(this._bufferSource)this._bufferSource["playbackRate"]["value"]=r}Seek(pos){if(this._isStopped||this.HasEnded())return;if(this._isPaused)this._resumePosition=pos;else{this.Pause();this._resumePosition=pos;this.Resume()}}GetResumePosition(){return this._resumePosition}SetSuspended(s){if(s)if(this.IsPlaying()){this._resumeMe=
+true;this._resumePosition=this.GetPlaybackTime();if(this._isLooping)this._resumePosition%=this.GetDuration();this._bufferSource["stop"](0)}else this._resumeMe=false;else if(this._resumeMe){this._ReleaseBufferSource();this._bufferSource=this.GetAudioContext()["createBufferSource"]();this._bufferSource["buffer"]=this._buffer.GetAudioBuffer();this._bufferSource["connect"](this._gainNode);this._activeSource=this._bufferSource;this._bufferSource["onended"]=this._onended_handler;this._bufferSource["loop"]=
+this._isLooping;this._UpdateVolume();this._UpdatePlaybackRate();this._bufferSource["start"](0,this._resumePosition);this._playStartTime=this.GetCurrentTime();this._playFromSeekPos=this._resumePosition;this._resumeMe=false}}_LoadAdditionalState(d){super._LoadAdditionalState(d);this._resumePosition=d["resumePosition"]}}};
+
+
+// scripts/plugins/Audio/dom/effects.js
+'use strict';{class AudioFXBase{constructor(audioDomHandler){this._audioDomHandler=audioDomHandler;this._audioContext=audioDomHandler.GetAudioContext();this._index=-1;this._tag="";this._type="";this._params=null}Release(){this._audioContext=null}_SetIndex(i){this._index=i}GetIndex(){return this._index}_SetTag(t){this._tag=t}GetTag(){return this._tag}CreateGain(){return this._audioContext["createGain"]()}GetInputNode(){}ConnectTo(node){}SetAudioParam(ap,value,ramp,time){ap["cancelScheduledValues"](0);
+if(time===0){ap["value"]=value;return}const curTime=this._audioContext["currentTime"];time+=curTime;switch(ramp){case 0:ap["setValueAtTime"](value,time);break;case 1:ap["setValueAtTime"](ap["value"],curTime);ap["linearRampToValueAtTime"](value,time);break;case 2:ap["setValueAtTime"](ap["value"],curTime);ap["exponentialRampToValueAtTime"](value,time);break}}GetState(){return{"type":this._type,"tag":this._tag,"params":this._params}}}self.C3AudioFilterFX=class C3AudioFilterFX extends AudioFXBase{constructor(audioDomHandler,
+type,freq,detune,q,gain,mix){super(audioDomHandler);this._type="filter";this._params=[type,freq,detune,q,gain,mix];this._inputNode=this.CreateGain();this._wetNode=this.CreateGain();this._wetNode["gain"]["value"]=mix;this._dryNode=this.CreateGain();this._dryNode["gain"]["value"]=1-mix;this._filterNode=this._audioContext["createBiquadFilter"]();this._filterNode["type"]=type;this._filterNode["frequency"]["value"]=freq;this._filterNode["detune"]["value"]=detune;this._filterNode["Q"]["value"]=q;this._filterNode["gain"]["vlaue"]=
+gain;this._inputNode["connect"](this._filterNode);this._inputNode["connect"](this._dryNode);this._filterNode["connect"](this._wetNode)}Release(){this._inputNode["disconnect"]();this._filterNode["disconnect"]();this._wetNode["disconnect"]();this._dryNode["disconnect"]();super.Release()}ConnectTo(node){this._wetNode["disconnect"]();this._wetNode["connect"](node);this._dryNode["disconnect"]();this._dryNode["connect"](node)}GetInputNode(){return this._inputNode}SetParam(param,value,ramp,time){switch(param){case 0:value=
+Math.max(Math.min(value/100,1),0);this._params[5]=value;this.SetAudioParam(this._wetNode["gain"],value,ramp,time);this.SetAudioParam(this._dryNode["gain"],1-value,ramp,time);break;case 1:this._params[1]=value;this.SetAudioParam(this._filterNode["frequency"],value,ramp,time);break;case 2:this._params[2]=value;this.SetAudioParam(this._filterNode["detune"],value,ramp,time);break;case 3:this._params[3]=value;this.SetAudioParam(this._filterNode["Q"],value,ramp,time);break;case 4:this._params[4]=value;
+this.SetAudioParam(this._filterNode["gain"],value,ramp,time);break}}};self.C3AudioDelayFX=class C3AudioDelayFX extends AudioFXBase{constructor(audioDomHandler,delayTime,delayGain,mix){super(audioDomHandler);this._type="delay";this._params=[delayTime,delayGain,mix];this._inputNode=this.CreateGain();this._wetNode=this.CreateGain();this._wetNode["gain"]["value"]=mix;this._dryNode=this.CreateGain();this._dryNode["gain"]["value"]=1-mix;this._mainNode=this.CreateGain();this._delayNode=this._audioContext["createDelay"](delayTime);
+this._delayNode["delayTime"]["value"]=delayTime;this._delayGainNode=this.CreateGain();this._delayGainNode["gain"]["value"]=delayGain;this._inputNode["connect"](this._mainNode);this._inputNode["connect"](this._dryNode);this._mainNode["connect"](this._wetNode);this._mainNode["connect"](this._delayNode);this._delayNode["connect"](this._delayGainNode);this._delayGainNode["connect"](this._mainNode)}Release(){this._inputNode["disconnect"]();this._wetNode["disconnect"]();this._dryNode["disconnect"]();this._mainNode["disconnect"]();
+this._delayNode["disconnect"]();this._delayGainNode["disconnect"]();super.Release()}ConnectTo(node){this._wetNode["disconnect"]();this._wetNode["connect"](node);this._dryNode["disconnect"]();this._dryNode["connect"](node)}GetInputNode(){return this._inputNode}SetParam(param,value,ramp,time){const DbToLinear=self.AudioDOMHandler.DbToLinear;switch(param){case 0:value=Math.max(Math.min(value/100,1),0);this._params[2]=value;this.SetAudioParam(this._wetNode["gain"],value,ramp,time);this.SetAudioParam(this._dryNode["gain"],
+1-value,ramp,time);break;case 4:this._params[1]=DbToLinear(value);this.SetAudioParam(this._delayGainNode["gain"],DbToLinear(value),ramp,time);break;case 5:this._params[0]=value;this.SetAudioParam(this._delayNode["delayTime"],value,ramp,time);break}}};self.C3AudioConvolveFX=class C3AudioConvolveFX extends AudioFXBase{constructor(audioDomHandler,buffer,normalize,mix){super(audioDomHandler);this._type="convolution";this._params=[normalize,mix];this._bufferOriginalUrl="";this._bufferUrl="";this._bufferType=
+"";this._inputNode=this.CreateGain();this._wetNode=this.CreateGain();this._wetNode["gain"]["value"]=mix;this._dryNode=this.CreateGain();this._dryNode["gain"]["value"]=1-mix;this._convolveNode=this._audioContext["createConvolver"]();this._convolveNode["normalize"]=normalize;this._convolveNode["buffer"]=buffer;this._inputNode["connect"](this._convolveNode);this._inputNode["connect"](this._dryNode);this._convolveNode["connect"](this._wetNode)}Release(){this._inputNode["disconnect"]();this._convolveNode["disconnect"]();
+this._wetNode["disconnect"]();this._dryNode["disconnect"]();super.Release()}ConnectTo(node){this._wetNode["disconnect"]();this._wetNode["connect"](node);this._dryNode["disconnect"]();this._dryNode["connect"](node)}GetInputNode(){return this._inputNode}SetParam(param,value,ramp,time){switch(param){case 0:value=Math.max(Math.min(value/100,1),0);this._params[1]=value;this.SetAudioParam(this._wetNode["gain"],value,ramp,time);this.SetAudioParam(this._dryNode["gain"],1-value,ramp,time);break}}_SetBufferInfo(bufferOriginalUrl,
+bufferUrl,bufferType){this._bufferOriginalUrl=bufferOriginalUrl;this._bufferUrl=bufferUrl;this._bufferType=bufferType}GetState(){const ret=super.GetState();ret["bufferOriginalUrl"]=this._bufferOriginalUrl;ret["bufferUrl"]="";ret["bufferType"]=this._bufferType;return ret}};self.C3AudioFlangerFX=class C3AudioFlangerFX extends AudioFXBase{constructor(audioDomHandler,delay,modulation,freq,feedback,mix){super(audioDomHandler);this._type="flanger";this._params=[delay,modulation,freq,feedback,mix];this._inputNode=
+this.CreateGain();this._dryNode=this.CreateGain();this._dryNode["gain"]["value"]=1-mix/2;this._wetNode=this.CreateGain();this._wetNode["gain"]["value"]=mix/2;this._feedbackNode=this.CreateGain();this._feedbackNode["gain"]["value"]=feedback;this._delayNode=this._audioContext["createDelay"](delay+modulation);this._delayNode["delayTime"]["value"]=delay;this._oscNode=this._audioContext["createOscillator"]();this._oscNode["frequency"]["value"]=freq;this._oscGainNode=this.CreateGain();this._oscGainNode["gain"]["value"]=
+modulation;this._inputNode["connect"](this._delayNode);this._inputNode["connect"](this._dryNode);this._delayNode["connect"](this._wetNode);this._delayNode["connect"](this._feedbackNode);this._feedbackNode["connect"](this._delayNode);this._oscNode["connect"](this._oscGainNode);this._oscGainNode["connect"](this._delayNode["delayTime"]);this._oscNode["start"](0)}Release(){this._oscNode["stop"](0);this._inputNode["disconnect"]();this._delayNode["disconnect"]();this._oscNode["disconnect"]();this._oscGainNode["disconnect"]();
+this._dryNode["disconnect"]();this._wetNode["disconnect"]();this._feedbackNode["disconnect"]();super.Release()}ConnectTo(node){this._wetNode["disconnect"]();this._wetNode["connect"](node);this._dryNode["disconnect"]();this._dryNode["connect"](node)}GetInputNode(){return this._inputNode}SetParam(param,value,ramp,time){switch(param){case 0:value=Math.max(Math.min(value/100,1),0);this._params[4]=value;this.SetAudioParam(this._wetNode["gain"],value/2,ramp,time);this.SetAudioParam(this._dryNode["gain"],
+1-value/2,ramp,time);break;case 6:this._params[1]=value/1E3;this.SetAudioParam(this._oscGainNode["gain"],value/1E3,ramp,time);break;case 7:this._params[2]=value;this.SetAudioParam(this._oscNode["frequency"],value,ramp,time);break;case 8:this._params[3]=value/100;this.SetAudioParam(this._feedbackNode["gain"],value/100,ramp,time);break}}};self.C3AudioPhaserFX=class C3AudioPhaserFX extends AudioFXBase{constructor(audioDomHandler,freq,detune,q,modulation,modfreq,mix){super(audioDomHandler);this._type=
+"phaser";this._params=[freq,detune,q,modulation,modfreq,mix];this._inputNode=this.CreateGain();this._dryNode=this.CreateGain();this._dryNode["gain"]["value"]=1-mix/2;this._wetNode=this.CreateGain();this._wetNode["gain"]["value"]=mix/2;this._filterNode=this._audioContext["createBiquadFilter"]();this._filterNode["type"]="allpass";this._filterNode["frequency"]["value"]=freq;this._filterNode["detune"]["value"]=detune;this._filterNode["Q"]["value"]=q;this._oscNode=this._audioContext["createOscillator"]();
+this._oscNode["frequency"]["value"]=modfreq;this._oscGainNode=this.CreateGain();this._oscGainNode["gain"]["value"]=modulation;this._inputNode["connect"](this._filterNode);this._inputNode["connect"](this._dryNode);this._filterNode["connect"](this._wetNode);this._oscNode["connect"](this._oscGainNode);this._oscGainNode["connect"](this._filterNode["frequency"]);this._oscNode["start"](0)}Release(){this._oscNode["stop"](0);this._inputNode["disconnect"]();this._filterNode["disconnect"]();this._oscNode["disconnect"]();
+this._oscGainNode["disconnect"]();this._dryNode["disconnect"]();this._wetNode["disconnect"]();super.Release()}ConnectTo(node){this._wetNode["disconnect"]();this._wetNode["connect"](node);this._dryNode["disconnect"]();this._dryNode["connect"](node)}GetInputNode(){return this._inputNode}SetParam(param,value,ramp,time){switch(param){case 0:value=Math.max(Math.min(value/100,1),0);this._params[5]=value;this.SetAudioParam(this._wetNode["gain"],value/2,ramp,time);this.SetAudioParam(this._dryNode["gain"],
+1-value/2,ramp,time);break;case 1:this._params[0]=value;this.SetAudioParam(this._filterNode["frequency"],value,ramp,time);break;case 2:this._params[1]=value;this.SetAudioParam(this._filterNode["detune"],value,ramp,time);break;case 3:this._params[2]=value;this.SetAudioParam(this._filterNode["Q"],value,ramp,time);break;case 6:this._params[3]=value;this.SetAudioParam(this._oscGainNode["gain"],value,ramp,time);break;case 7:this._params[4]=value;this.SetAudioParam(this._oscNode["frequency"],value,ramp,
+time);break}}};self.C3AudioGainFX=class C3AudioGainFX extends AudioFXBase{constructor(audioDomHandler,g){super(audioDomHandler);this._type="gain";this._params=[g];this._node=this.CreateGain();this._node["gain"]["value"]=g}Release(){this._node["disconnect"]();super.Release()}ConnectTo(node){this._node["disconnect"]();this._node["connect"](node)}GetInputNode(){return this._node}SetParam(param,value,ramp,time){const DbToLinear=self.AudioDOMHandler.DbToLinear;switch(param){case 4:this._params[0]=DbToLinear(value);
+this.SetAudioParam(this._node["gain"],DbToLinear(value),ramp,time);break}}};self.C3AudioStereoPanFX=class C3AudioStereoPanFX extends AudioFXBase{constructor(audioDomHandler,p){super(audioDomHandler);this._type="stereopan";this._params=[p];this._node=this._audioContext["createStereoPanner"]();this._node["pan"]["value"]=p}Release(){this._node["disconnect"]();super.Release()}ConnectTo(node){this._node["disconnect"]();this._node["connect"](node)}GetInputNode(){return this._node}SetParam(param,value,ramp,
+time){value=Math.min(Math.max(value/100,-1),1);switch(param){case 9:this._params[0]=value;this.SetAudioParam(this._node["pan"],value,ramp,time);break}}};self.C3AudioTremoloFX=class C3AudioTremoloFX extends AudioFXBase{constructor(audioDomHandler,freq,mix){super(audioDomHandler);this._type="tremolo";this._params=[freq,mix];this._node=this.CreateGain();this._node["gain"]["value"]=1-mix/2;this._oscNode=this._audioContext["createOscillator"]();this._oscNode["frequency"]["value"]=freq;this._oscGainNode=
+this.CreateGain();this._oscGainNode["gain"]["value"]=mix/2;this._oscNode["connect"](this._oscGainNode);this._oscGainNode["connect"](this._node["gain"]);this._oscNode["start"](0)}Release(){this._oscNode["stop"](0);this._oscNode["disconnect"]();this._oscGainNode["disconnect"]();this._node["disconnect"]();super.Release()}ConnectTo(node){this._node["disconnect"]();this._node["connect"](node)}GetInputNode(){return this._node}SetParam(param,value,ramp,time){switch(param){case 0:value=Math.max(Math.min(value/
+100,1),0);this._params[1]=value;this.SetAudioParam(this._node["gain"],1-value/2,ramp,time);this.SetAudioParam(this._oscGainNode["gain"],value/2,ramp,time);break;case 7:this._params[0]=value;this.SetAudioParam(this._oscNode["frequency"],value,ramp,time);break}}};self.C3AudioRingModFX=class C3AudioRingModFX extends AudioFXBase{constructor(audioDomHandler,freq,mix){super(audioDomHandler);this._type="ringmod";this._params=[freq,mix];this._inputNode=this.CreateGain();this._wetNode=this.CreateGain();this._wetNode["gain"]["value"]=
+mix;this._dryNode=this.CreateGain();this._dryNode["gain"]["value"]=1-mix;this._ringNode=this.CreateGain();this._ringNode["gain"]["value"]=0;this._oscNode=this._audioContext["createOscillator"]();this._oscNode["frequency"]["value"]=freq;this._oscNode["connect"](this._ringNode["gain"]);this._oscNode["start"](0);this._inputNode["connect"](this._ringNode);this._inputNode["connect"](this._dryNode);this._ringNode["connect"](this._wetNode)}Release(){this._oscNode["stop"](0);this._oscNode["disconnect"]();
+this._ringNode["disconnect"]();this._inputNode["disconnect"]();this._wetNode["disconnect"]();this._dryNode["disconnect"]();super.Release()}ConnectTo(node){this._wetNode["disconnect"]();this._wetNode["connect"](node);this._dryNode["disconnect"]();this._dryNode["connect"](node)}GetInputNode(){return this._inputNode}SetParam(param,value,ramp,time){switch(param){case 0:value=Math.max(Math.min(value/100,1),0);this._params[1]=value;this.SetAudioParam(this._wetNode["gain"],value,ramp,time);this.SetAudioParam(this._dryNode["gain"],
+1-value,ramp,time);break;case 7:this._params[0]=value;this.SetAudioParam(this._oscNode["frequency"],value,ramp,time);break}}};self.C3AudioDistortionFX=class C3AudioDistortionFX extends AudioFXBase{constructor(audioDomHandler,threshold,headroom,drive,makeupgain,mix){super(audioDomHandler);this._type="distortion";this._params=[threshold,headroom,drive,makeupgain,mix];this._inputNode=this.CreateGain();this._preGain=this.CreateGain();this._postGain=this.CreateGain();this._SetDrive(drive,makeupgain);this._wetNode=
+this.CreateGain();this._wetNode["gain"]["value"]=mix;this._dryNode=this.CreateGain();this._dryNode["gain"]["value"]=1-mix;this._waveShaper=this._audioContext["createWaveShaper"]();this._curve=new Float32Array(65536);this._GenerateColortouchCurve(threshold,headroom);this._waveShaper.curve=this._curve;this._inputNode["connect"](this._preGain);this._inputNode["connect"](this._dryNode);this._preGain["connect"](this._waveShaper);this._waveShaper["connect"](this._postGain);this._postGain["connect"](this._wetNode)}Release(){this._inputNode["disconnect"]();
+this._preGain["disconnect"]();this._waveShaper["disconnect"]();this._postGain["disconnect"]();this._wetNode["disconnect"]();this._dryNode["disconnect"]();super.Release()}_SetDrive(drive,makeupgain){if(drive<.01)drive=.01;this._preGain["gain"]["value"]=drive;this._postGain["gain"]["value"]=Math.pow(1/drive,.6)*makeupgain}_GenerateColortouchCurve(threshold,headroom){const n=65536;const n2=n/2;for(let i=0;i<n2;++i){let x=i/n2;x=this._Shape(x,threshold,headroom);this._curve[n2+i]=x;this._curve[n2-i-1]=
+-x}}_Shape(x,threshold,headroom){const maximum=1.05*headroom*threshold;const kk=maximum-threshold;const sign=x<0?-1:+1;const absx=x<0?-x:x;let shapedInput=absx<threshold?absx:threshold+kk*self.AudioDOMHandler.e4(absx-threshold,1/kk);shapedInput*=sign;return shapedInput}ConnectTo(node){this._wetNode["disconnect"]();this._wetNode["connect"](node);this._dryNode["disconnect"]();this._dryNode["connect"](node)}GetInputNode(){return this._inputNode}SetParam(param,value,ramp,time){switch(param){case 0:value=
+Math.max(Math.min(value/100,1),0);this._params[4]=value;this.SetAudioParam(this._wetNode["gain"],value,ramp,time);this.SetAudioParam(this._dryNode["gain"],1-value,ramp,time);break}}};self.C3AudioCompressorFX=class C3AudioCompressorFX extends AudioFXBase{constructor(audioDomHandler,threshold,knee,ratio,attack,release){super(audioDomHandler);this._type="compressor";this._params=[threshold,knee,ratio,attack,release];this._node=this._audioContext["createDynamicsCompressor"]();this._node["threshold"]["value"]=
+threshold;this._node["knee"]["value"]=knee;this._node["ratio"]["value"]=ratio;this._node["attack"]["value"]=attack;this._node["release"]["value"]=release}Release(){this._node["disconnect"]();super.Release()}ConnectTo(node){this._node["disconnect"]();this._node["connect"](node)}GetInputNode(){return this._node}SetParam(param,value,ramp,time){}};self.C3AudioAnalyserFX=class C3AudioAnalyserFX extends AudioFXBase{constructor(audioDomHandler,fftSize,smoothing){super(audioDomHandler);this._type="analyser";
+this._params=[fftSize,smoothing];this._node=this._audioContext["createAnalyser"]();this._node["fftSize"]=fftSize;this._node["smoothingTimeConstant"]=smoothing;this._freqBins=new Float32Array(this._node["frequencyBinCount"]);this._signal=new Uint8Array(fftSize);this._peak=0;this._rms=0;this._audioDomHandler._AddAnalyser(this)}Release(){this._audioDomHandler._RemoveAnalyser(this);this._node["disconnect"]();super.Release()}Tick(){this._node["getFloatFrequencyData"](this._freqBins);this._node["getByteTimeDomainData"](this._signal);
+const fftSize=this._node["fftSize"];this._peak=0;let rmsSquaredSum=0;for(let i=0;i<fftSize;++i){let s=(this._signal[i]-128)/128;if(s<0)s=-s;if(this._peak<s)this._peak=s;rmsSquaredSum+=s*s}const LinearToDb=self.AudioDOMHandler.LinearToDb;this._peak=LinearToDb(this._peak);this._rms=LinearToDb(Math.sqrt(rmsSquaredSum/fftSize))}ConnectTo(node){this._node["disconnect"]();this._node["connect"](node)}GetInputNode(){return this._node}SetParam(param,value,ramp,time){}GetData(){return{"tag":this.GetTag(),"index":this.GetIndex(),
+"peak":this._peak,"rms":this._rms,"binCount":this._node["frequencyBinCount"],"freqBins":this._freqBins}}}};
+
+
+// scripts/plugins/progressbar/dom/domSide.js
+'use strict';{const DOM_COMPONENT_ID="progress-bar";function StopPropagation(e){e.stopPropagation()}const HANDLER_CLASS=class ProgressBarDOMHandler extends self.DOMElementHandler{constructor(iRuntime){super(iRuntime,DOM_COMPONENT_ID)}CreateElement(elementId,e){const elem=document.createElement("progress");elem.style.position="absolute";elem.style.userSelect="none";elem.style.webkitUserSelect="none";elem.addEventListener("pointerdown",StopPropagation);elem.addEventListener("pointermove",StopPropagation);
+elem.addEventListener("pointerrawupdate",StopPropagation);elem.addEventListener("pointerup",StopPropagation);elem.addEventListener("mousedown",StopPropagation);elem.addEventListener("mouseup",StopPropagation);elem.addEventListener("click",()=>this._PostToRuntimeElementMaybeSync("click",elementId));if(e["id"])elem.id=e["id"];if(e["className"])elem.className=e["className"];this.UpdateState(elem,e);return elem}UpdateState(elem,e){elem.title=e["title"];const value=e["value"];const max=e["max"];if(max>
+0&&value>=0){elem.max=max;elem.value=value}else{elem.removeAttribute("value");elem.removeAttribute("max")}}};self.RuntimeInterface.AddDOMHandlerClass(HANDLER_CLASS)};
+
+
+// scripts/plugins/Touch/dom/domSide.js
+'use strict';{const DOM_COMPONENT_ID="touch";const HANDLER_CLASS=class TouchDOMHandler extends self.DOMHandler{constructor(iRuntime){super(iRuntime,DOM_COMPONENT_ID);this.AddRuntimeMessageHandler("request-permission",e=>this._OnRequestPermission(e))}async _OnRequestPermission(e){const type=e["type"];let result=true;if(type===0)result=await this._RequestOrientationPermission();else if(type===1)result=await this._RequestMotionPermission();this.PostToRuntime("permission-result",{"type":type,"result":result})}async _RequestOrientationPermission(){if(!self["DeviceOrientationEvent"]||
+!self["DeviceOrientationEvent"]["requestPermission"])return true;try{const state=await self["DeviceOrientationEvent"]["requestPermission"]();return state==="granted"}catch(err){console.warn("[Touch] Failed to request orientation permission: ",err);return false}}async _RequestMotionPermission(){if(!self["DeviceMotionEvent"]||!self["DeviceMotionEvent"]["requestPermission"])return true;try{const state=await self["DeviceMotionEvent"]["requestPermission"]();return state==="granted"}catch(err){console.warn("[Touch] Failed to request motion permission: ",
+err);return false}}};self.RuntimeInterface.AddDOMHandlerClass(HANDLER_CLASS)};
+
+
+// scripts/plugins/LocalStorage/dom/domSide.js
+'use strict';{const DOM_COMPONENT_ID="localstorage";const HANDLER_CLASS=class LocalStorageDOMHandler extends self.DOMHandler{constructor(iRuntime){super(iRuntime,DOM_COMPONENT_ID);this.AddRuntimeMessageHandlers([["init",()=>this._Init()],["request-persistent",()=>this._OnRequestPersistent()]])}async _Init(){let isPersistent=false;try{isPersistent=await navigator["storage"]["persisted"]()}catch(err){isPersistent=false;console.warn("[Construct] Error checking storage persisted state: ",err)}return{"isPersistent":isPersistent}}async _OnRequestPersistent(){try{const isPersistent=
+await navigator["storage"]["persist"]();return{"isOk":true,"isPersistent":isPersistent}}catch(err){console.error("[Construct] Error requesting persistent storage: ",err);return{"isOk":false}}}};self.RuntimeInterface.AddDOMHandlerClass(HANDLER_CLASS)};
+
+
+// scripts/plugins/sliderbar/dom/domSide.js
+'use strict';{const DOM_COMPONENT_ID="sliderbar";function StopPropagation(e){e.stopPropagation()}const HANDLER_CLASS=class SliderBarDOMHandler extends self.DOMElementHandler{constructor(iRuntime){super(iRuntime,DOM_COMPONENT_ID)}CreateElement(elementId,e){const elem=document.createElement("input");elem.type="range";elem.style.position="absolute";elem.style.userSelect="none";elem.style.webkitUserSelect="none";elem.addEventListener("pointerdown",StopPropagation);elem.addEventListener("pointermove",
+StopPropagation);elem.addEventListener("pointerrawupdate",StopPropagation);elem.addEventListener("pointerup",StopPropagation);elem.addEventListener("mousedown",StopPropagation);elem.addEventListener("mouseup",StopPropagation);elem.addEventListener("keydown",StopPropagation);elem.addEventListener("keyup",StopPropagation);elem.addEventListener("contextmenu",e=>e.preventDefault());elem.addEventListener("click",()=>this._PostToRuntimeElementMaybeSync("click",elementId));elem.addEventListener("change",
+()=>this.PostToRuntimeElement("change",elementId,{"value":parseFloat(elem.value)}));elem.addEventListener("input",()=>this.PostToRuntimeElement("input",elementId,{"value":parseFloat(elem.value)}));if(e["id"])elem.id=e["id"];if(e["className"])elem.className=e["className"];this.UpdateState(elem,e);return elem}UpdateState(elem,e){elem.max=e["max"];elem.min=e["min"];elem.step=e["step"];elem.value=e["value"];elem.disabled=!e["isEnabled"];elem.title=e["title"]}};self.RuntimeInterface.AddDOMHandlerClass(HANDLER_CLASS)};
+
+
+// scripts/plugins/Browser/dom/domSide.js
+'use strict';{let deferredInstallPromptEvent=null;let browserDomHandler=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstallPromptEvent=e;if(browserDomHandler)browserDomHandler._OnBeforeInstallPrompt();return false});function elemsForSelector(selector,isAll){if(!selector)return[document.documentElement];else if(isAll)return Array.from(document.querySelectorAll(selector));else{const e=document.querySelector(selector);return e?[e]:[]}}function noop(){}const DOM_COMPONENT_ID=
+"browser";const HANDLER_CLASS=class BrowserDOMHandler extends self.DOMHandler{constructor(iRuntime){super(iRuntime,DOM_COMPONENT_ID);this._exportType="";this.AddRuntimeMessageHandlers([["get-initial-state",e=>this._OnGetInitialState(e)],["ready-for-sw-messages",()=>this._OnReadyForSWMessages()],["alert",e=>this._OnAlert(e)],["close",()=>this._OnClose()],["set-focus",e=>this._OnSetFocus(e)],["vibrate",e=>this._OnVibrate(e)],["lock-orientation",e=>this._OnLockOrientation(e)],["unlock-orientation",()=>
+this._OnUnlockOrientation()],["navigate",e=>this._OnNavigate(e)],["request-fullscreen",e=>this._OnRequestFullscreen(e)],["exit-fullscreen",()=>this._OnExitFullscreen()],["set-hash",e=>this._OnSetHash(e)],["set-document-css-style",e=>this._OnSetDocumentCSSStyle(e)],["get-document-css-style",e=>this._OnGetDocumentCSSStyle(e)],["set-window-size",e=>this._OnSetWindowSize(e)],["set-window-position",e=>this._OnSetWindowPosition(e)],["request-install",()=>this._OnRequestInstall()],["set-warn-on-close",e=>
+this._OnSetWarnOnClose(e)]]);window.addEventListener("online",()=>this._OnOnlineStateChanged(true));window.addEventListener("offline",()=>this._OnOnlineStateChanged(false));window.addEventListener("hashchange",()=>this._OnHashChange());this._beforeunload_handler=e=>e.preventDefault();document.addEventListener("backbutton",()=>this._OnCordovaBackButton())}Attach(){if(deferredInstallPromptEvent)this._OnBeforeInstallPrompt();else browserDomHandler=this;window.addEventListener("appinstalled",()=>this._OnAppInstalled())}_OnGetInitialState(e){this._exportType=
+e["exportType"];return{"location":location.toString(),"isOnline":!!navigator.onLine,"referrer":document.referrer,"title":document.title,"isCookieEnabled":!!navigator.cookieEnabled,"screenWidth":screen.width,"screenHeight":screen.height,"windowOuterWidth":window.outerWidth,"windowOuterHeight":window.outerHeight,"isConstructArcade":typeof window["is_scirra_arcade"]!=="undefined"}}_OnReadyForSWMessages(){if(!window["C3_RegisterSW"]||!window["OfflineClientInfo"])return;window["OfflineClientInfo"]["SetMessageCallback"](e=>
+this.PostToRuntime("sw-message",e["data"]))}_OnBeforeInstallPrompt(){this.PostToRuntime("install-available")}async _OnRequestInstall(){if(!deferredInstallPromptEvent)return{"result":"unavailable"};try{deferredInstallPromptEvent["prompt"]();const result=await deferredInstallPromptEvent["userChoice"];return{"result":result["outcome"]}}catch(err){console.error("[Construct] Requesting install failed: ",err);return{"result":"failed"}}}_OnAppInstalled(){this.PostToRuntime("app-installed")}_OnOnlineStateChanged(isOnline){this.PostToRuntime("online-state",
+{"isOnline":isOnline})}_OnCordovaBackButton(){this.PostToRuntime("backbutton")}GetNWjsWindow(){if(this._exportType==="nwjs")return nw["Window"]["get"]();else return null}_OnAlert(e){alert(e["message"])}_OnClose(){if(navigator["app"]&&navigator["app"]["exitApp"])navigator["app"]["exitApp"]();else if(navigator["device"]&&navigator["device"]["exitApp"])navigator["device"]["exitApp"]();else window.close()}_OnSetFocus(e){const isFocus=e["isFocus"];if(this._exportType==="nwjs"){const win=this.GetNWjsWindow();
+if(isFocus)win["focus"]();else win["blur"]()}else if(isFocus)window.focus();else window.blur()}_OnVibrate(e){if(navigator["vibrate"])navigator["vibrate"](e["pattern"])}_OnLockOrientation(e){const orientation=e["orientation"];if(screen["orientation"]&&screen["orientation"]["lock"])screen["orientation"]["lock"](orientation).catch(err=>console.warn("[Construct] Failed to lock orientation: ",err));else try{let result=false;if(screen["lockOrientation"])result=screen["lockOrientation"](orientation);else if(screen["webkitLockOrientation"])result=
+screen["webkitLockOrientation"](orientation);else if(screen["mozLockOrientation"])result=screen["mozLockOrientation"](orientation);else if(screen["msLockOrientation"])result=screen["msLockOrientation"](orientation);if(!result)console.warn("[Construct] Failed to lock orientation")}catch(err){console.warn("[Construct] Failed to lock orientation: ",err)}}_OnUnlockOrientation(){try{if(screen["orientation"]&&screen["orientation"]["unlock"])screen["orientation"]["unlock"]();else if(screen["unlockOrientation"])screen["unlockOrientation"]();
+else if(screen["webkitUnlockOrientation"])screen["webkitUnlockOrientation"]();else if(screen["mozUnlockOrientation"])screen["mozUnlockOrientation"]();else if(screen["msUnlockOrientation"])screen["msUnlockOrientation"]()}catch(err){}}_OnNavigate(e){const type=e["type"];if(type==="back")if(navigator["app"]&&navigator["app"]["backHistory"])navigator["app"]["backHistory"]();else window.history.back();else if(type==="forward")window.history.forward();else if(type==="reload")location.reload();else if(type===
+"url"){const url=e["url"];const target=e["target"];const exportType=e["exportType"];if(self["cordova"]&&self["cordova"]["InAppBrowser"])self["cordova"]["InAppBrowser"]["open"](url,"_system");else if(exportType==="preview"||this._iRuntime.IsAnyWebView2Wrapper())window.open(url,"_blank");else if(!this._isConstructArcade)if(target===2)window.top.location=url;else if(target===1)window.parent.location=url;else window.location=url}else if(type==="new-window"){const url=e["url"];const tag=e["tag"];if(self["cordova"]&&
+self["cordova"]["InAppBrowser"])self["cordova"]["InAppBrowser"]["open"](url,"_system");else window.open(url,tag)}}_OnRequestFullscreen(e){if(this._iRuntime.IsAnyWebView2Wrapper()||this._exportType==="macos-wkwebview"){self.RuntimeInterface._SetWrapperIsFullscreenFlag(true);this._iRuntime._SendWrapperMessage({"type":"set-fullscreen","fullscreen":true})}else{const opts={"navigationUI":"auto"};const navUI=e["navUI"];if(navUI===1)opts["navigationUI"]="hide";else if(navUI===2)opts["navigationUI"]="show";
+const elem=document.documentElement;let ret;if(elem["requestFullscreen"])ret=elem["requestFullscreen"](opts);else if(elem["mozRequestFullScreen"])ret=elem["mozRequestFullScreen"](opts);else if(elem["msRequestFullscreen"])ret=elem["msRequestFullscreen"](opts);else if(elem["webkitRequestFullScreen"])if(typeof Element["ALLOW_KEYBOARD_INPUT"]!=="undefined")ret=elem["webkitRequestFullScreen"](Element["ALLOW_KEYBOARD_INPUT"]);else ret=elem["webkitRequestFullScreen"]();if(ret instanceof Promise)ret.catch(noop)}}_OnExitFullscreen(){if(this._iRuntime.IsAnyWebView2Wrapper()||
+this._exportType==="macos-wkwebview"){self.RuntimeInterface._SetWrapperIsFullscreenFlag(false);this._iRuntime._SendWrapperMessage({"type":"set-fullscreen","fullscreen":false})}else{let ret;if(document["exitFullscreen"])ret=document["exitFullscreen"]();else if(document["mozCancelFullScreen"])ret=document["mozCancelFullScreen"]();else if(document["msExitFullscreen"])ret=document["msExitFullscreen"]();else if(document["webkitCancelFullScreen"])ret=document["webkitCancelFullScreen"]();if(ret instanceof
+Promise)ret.catch(noop)}}_OnSetHash(e){location.hash=e["hash"]}_OnHashChange(){this.PostToRuntime("hashchange",{"location":location.toString()})}_OnSetDocumentCSSStyle(e){const prop=e["prop"];const value=e["value"];const selector=e["selector"];const isAll=e["is-all"];try{const arr=elemsForSelector(selector,isAll);for(const e of arr)if(prop.startsWith("--"))e.style.setProperty(prop,value);else e.style[prop]=value}catch(err){console.warn("[Browser] Failed to set style: ",err)}}_OnGetDocumentCSSStyle(e){const prop=
+e["prop"];const selector=e["selector"];try{const elem=document.querySelector(selector);if(elem){const computedStyle=window.getComputedStyle(elem);return{"isOk":true,"result":computedStyle.getPropertyValue(prop)}}else return{"isOk":false}}catch(err){console.warn("[Browser] Failed to get style: ",err);return{"isOk":false}}}_OnSetWindowSize(e){window.resizeTo(e["windowWidth"],e["windowHeight"])}_OnSetWindowPosition(e){window.moveTo(e["windowX"],e["windowY"])}_OnSetWarnOnClose(e){const enabled=e["enabled"];
+if(enabled)window.addEventListener("beforeunload",this._beforeunload_handler);else window.removeEventListener("beforeunload",this._beforeunload_handler)}};self.RuntimeInterface.AddDOMHandlerClass(HANDLER_CLASS)};
+
+
+// scripts/plugins/yagames_sdk/c3runtime/domSide.js
+'use strict';
+{
+  const DOM_COMPONENT_ID = 'yagames_sdk';
+
+  const HANDLER_CLASS = class extends self.DOMHandler {
+    constructor(iRuntime) {
+      super(iRuntime, DOM_COMPONENT_ID);
+
+      /** @type {YandexGamesSDKHandler} */
+      this.ysdkHandler = new YandexGamesSDKHandler(this);
+
+      /** @type {TVRemoteEmulator} */
+      this.tvRemoteEmulator = new TVRemoteEmulator(this);
+
+      this.AddRuntimeMessageHandler('start-tv-remote-emulator', () => {
+        this.tvRemoteEmulator.Start();
+      });
+
+      this.AddRuntimeMessageHandler('start-tv-remote-tracking', () => {
+        this._gamepadsUpdates = true;
+
+        window.addEventListener('keydown', (event) => {
+          if (event['key'] === 'Enter') this.PostToRuntime('tv-remote-ok-click', true);
+        });
+
+        window.addEventListener('keyup', (event) => {
+          if (event['key'] === 'Enter') this.PostToRuntime('tv-remote-ok-click', false);
+        });
+      });
+
+      this.data = {
+        upPressed: false,
+        downPressed: false,
+        leftPressed: false,
+        rightPressed: false,
+      };
+
+      this._StartTicking();
+    }
+
+    Tick() {
+      if (this._gamepadsUpdates) {
+        this.GamepadsUpdate();
+      }
+
+      this.ysdkHandler.YSDKServerTimeUpdate();
+    }
+
+    GamepadsUpdate() {
+      const gamepads = navigator.getGamepads().filter((gamepad) => gamepad);
+      if (!gamepads.length) return;
+
+      for (const gamepad of gamepads) {
+        if (!gamepad) continue;
+        this.data['upPressed'] = this.data['upPressed'] || gamepad.buttons[12].pressed;
+        this.data['downPressed'] = this.data['downPressed'] || gamepad.buttons[13].pressed;
+        this.data['leftPressed'] = this.data['leftPressed'] || gamepad.buttons[14].pressed;
+        this.data['rightPressed'] = this.data['rightPressed'] || gamepad.buttons[15].pressed;
+      }
+
+      this.PostToRuntime('gamepads-update', this.data);
+    }
+  };
+
+  class YandexGamesSDKHandler {
+    constructor(domHandler) {
+      this.domHandler = domHandler;
+
+      /** @type {types.YSDK | undefined} */
+      this.ysdk = undefined;
+
+      // Prevent 'ysdk is not defined' error
+      window['ysdk'] = undefined;
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-initialize', this.InitializeYSDK.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-loading-api-ready', this.YSDKLoadingAPIReady.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler(
+        'ysdk-gameplay-api-start',
+        this.YSDKGameplayAPIStart.bind(this),
+      );
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-gameplay-api-stop', this.YSDKGameplayAPIStop.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler(
+        'ysdk-show-fullscreen-ad',
+        this.YSDKShowFullscreenAD.bind(this),
+      );
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-show-rewarded-ad', this.YSDKShowRewardedAD.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler(
+        'ysdk-show-sticky-banner',
+        this.YSDKShowStickyBanner.bind(this),
+      );
+
+      this.domHandler.AddRuntimeMessageHandler(
+        'ysdk-hide-sticky-banner',
+        this.YSDKHideStickyBanner.bind(this),
+      );
+
+      this.domHandler.AddRuntimeMessageHandler(
+        'ysdk-get-leaderboard-entries',
+        this.YSDKGetLeaderboardEntries.bind(this),
+      );
+
+      this.domHandler.AddRuntimeMessageHandler(
+        'ysdk-set-leaderboard-score',
+        this.YSDKSetLeaderboardScore.bind(this),
+      );
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-purchase', this.YSDKPurchase.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-consume-purchase', this.YSDKConsumePurchase.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-get-purchases', this.YSDKGetPurchases.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-get-catalog', this.YSDKGetCatalog.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-get-player', this.YSDKGetPlayer.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-get-player-data', this.YSDKGetPlayerData.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-get-player-stats', this.YSDKGetPlayerStats.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-set-player-data', this.YSDKSetPlayerData.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-set-player-stats', this.YSDKSetPlayerStats.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler(
+        'ysdk-increment-player-stats',
+        this.YSDKIncrementPlayerStats.bind(this),
+      );
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-dispatch-event', this.YSDKDispatchEvent.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler(
+        'ysdk-shortcuts-show-prompt',
+        this.YSDKShortcutsShowPrompt.bind(this),
+      );
+
+      this.domHandler.AddRuntimeMessageHandler(
+        'ysdk-remote-config-fetch',
+        this.YSDKRemoteConfigFetch.bind(this),
+      );
+
+      this.domHandler.AddRuntimeMessageHandler('ysdk-request-review', this.YSDKRequestReview.bind(this));
+
+      this.domHandler.AddRuntimeMessageHandler(
+        'ysdk-update-can-show-shortcut-prompt',
+        this.YSDKUpdateCanShowShortcutPrompt.bind(this),
+      );
+    }
+
+    async LoadYSDKScript() {
+      return new Promise((resolve) => {
+        const head = document.getElementsByTagName('head')[0];
+        const script = document.createElement('script');
+        script.src = '/sdk.js';
+        script.async = true;
+        script.onload = async () => resolve();
+        head.appendChild(script);
+      });
+    }
+
+    async InitializeYSDK() {
+      await this.LoadYSDKScript();
+
+      if (!window['YaGames']) {
+        return;
+      }
+
+      this.ysdk = await window['YaGames']['init']();
+      window['ysdk'] = this.ysdk;
+      window.ysdk = this.ysdk;
+
+      await this.OnYSDKLoaded(this.ysdk);
+
+      this.ysdk['features']['PluginEngineDataReporterAPI']?.['report']({
+        ['engineName']: 'Construct',
+        ['engineVersion']: '3', // TODO: find a way to get version from runtime in "rXXX" format
+        ['pluginName']: 'yagames_sdk by LisGames',
+        ['pluginVersion']: '2.11.0',
+      });
+
+      console.log('%c YandexGamesSDK for Construct 3 v2.11.0 ', 'background: #14151f; color: #fb923c');
+
+      return {
+        ['environment']: {
+          ['app']: {
+            ['id']: this.ysdk['environment']['app']['id'],
+          },
+          ['browser']: {
+            ['lang']: this.ysdk['environment']['browser']['lang'],
+          },
+          ['i18n']: {
+            ['lang']: this.ysdk['environment']['i18n']['lang'],
+            ['tld']: this.ysdk['environment']['i18n']['tld'],
+          },
+          ['payload']: this.ysdk['environment']['payload'],
+        },
+        ['deviceType']: this.ysdk['deviceInfo']['type'],
+      };
+    }
+
+    async OnYSDKLoaded() {
+      if (!this.ysdk) return;
+
+      this.ysdk['onEvent'](this.ysdk['EVENTS']['HISTORY_BACK'], () => {
+        this.domHandler.PostToRuntime('ysdk-handle-event', { ['type']: 'HISTORY_BACK' });
+      });
+
+      await this.YSDKUpdateCanShowShortcutPrompt();
+      await this.YSDKUpdateCanReview();
+    }
+
+    YSDKLoadingAPIReady() {
+      if (!this.ysdk) return;
+
+      this.ysdk['features']['LoadingAPI']?.['ready']();
+    }
+
+    YSDKGameplayAPIStart() {
+      if (!this.ysdk) return;
+
+      this.ysdk['features']['GameplayAPI']?.['start']();
+    }
+
+    YSDKGameplayAPIStop() {
+      if (!this.ysdk) return;
+
+      this.ysdk['features']['GameplayAPI']?.['stop']();
+    }
+
+    YSDKShowFullscreenAD() {
+      if (!this.ysdk) return;
+
+      this.ysdk['adv']['showFullscreenAdv']({
+        ['callbacks']: {
+          ['onClose']: (wasShown) => {
+            this.YSDKGameplayAPIStop();
+
+            this.domHandler.PostToRuntime('ysdk-fullscreen-ad-callback', {
+              ['type']: 'onClose',
+              ['wasShown']: wasShown,
+            });
+          },
+          ['onOpen']: () => {
+            this.YSDKGameplayAPIStart();
+
+            this.domHandler.PostToRuntime('ysdk-fullscreen-ad-callback', {
+              ['type']: 'onOpen',
+            });
+          },
+          ['onError']: (error) => {
+            this.YSDKGameplayAPIStart();
+
+            this.domHandler.PostToRuntime('ysdk-fullscreen-ad-callback', {
+              ['type']: 'onError',
+              ['error']: JSON.stringify(error),
+            });
+          },
+          ['onOffline']: () => {
+            this.YSDKGameplayAPIStart();
+
+            this.domHandler.PostToRuntime('ysdk-fullscreen-ad-callback', {
+              ['type']: 'onOffline',
+            });
+          },
+        },
+      });
+    }
+
+    YSDKShowRewardedAD(params) {
+      if (!this.ysdk) return;
+
+      this.ysdk['adv']['showRewardedVideo']({
+        ['callbacks']: {
+          ['onOpen']: () => {
+            this.YSDKGameplayAPIStop();
+
+            this.domHandler.PostToRuntime('ysdk-rewarded-ad-callback', {
+              ['id']: params['id'],
+              ['type']: 'onOpen',
+            });
+          },
+          ['onRewarded']: () => {
+            this.YSDKGameplayAPIStart();
+
+            this.domHandler.PostToRuntime('ysdk-rewarded-ad-callback', {
+              ['id']: params['id'],
+              ['type']: 'onRewarded',
+            });
+          },
+          ['onClose']: () => {
+            this.YSDKGameplayAPIStart();
+
+            this.domHandler.PostToRuntime('ysdk-rewarded-ad-callback', {
+              ['id']: params['id'],
+              ['type']: 'onClose',
+            });
+          },
+          ['onError']: (error) => {
+            this.YSDKGameplayAPIStart();
+
+            this.domHandler.PostToRuntime('ysdk-rewarded-ad-callback', {
+              ['id']: params['id'],
+              ['type']: 'onError',
+              ['error']: JSON.stringify(error),
+            });
+          },
+        },
+      });
+    }
+
+    YSDKShowStickyBanner() {
+      if (!this.ysdk) return;
+
+      this.ysdk['adv']['showBannerAdv']();
+    }
+
+    YSDKHideStickyBanner() {
+      if (!this.ysdk) return;
+
+      this.ysdk['adv']['hideBannerAdv']();
+    }
+
+    async YSDKGetLeaderboardEntries(params) {
+      if (!this.ysdk) return;
+
+      const lb = await this.ysdk['getLeaderboards']();
+
+      const entries = await lb['getLeaderboardEntries'](params['leaderboardName'], params['options']);
+
+      return {
+        ['leaderboard']: entries['leaderboard'],
+        ['ranges']: entries['ranges'],
+        ['userRank']: entries['userRank'],
+        ['entries']: entries['entries'].map((entry) => {
+          return {
+            ['score']: entry['score'],
+            ['extraData']: entry['extraData'],
+            ['rank']: entry['rank'],
+            ['player']: {
+              ['avatarSrc']: {
+                ['small']: entry['player']['getAvatarSrc']('small'),
+                ['medium']: entry['player']['getAvatarSrc']('medium'),
+                ['large']: entry['player']['getAvatarSrc']('large'),
+              },
+              ['avatarSrcSet']: {
+                ['small']: entry['player']['getAvatarSrcSet']('small'),
+                ['medium']: entry['player']['getAvatarSrcSet']('medium'),
+                ['large']: entry['player']['getAvatarSrcSet']('large'),
+              },
+              ['lang']: entry['player']['lang'],
+              ['publicName']: entry['player']['publicName'],
+              ['scopePermissions']: entry['player']['scopePermissions'],
+              ['uniqueID']: entry['player']['uniqueID'],
+            },
+            ['formattedScore']: entry['formattedScore'],
+          };
+        }),
+      };
+    }
+
+    async YSDKSetLeaderboardScore(params) {
+      if (!this.ysdk) return;
+
+      const lb = await this.ysdk['getLeaderboards']();
+
+      await lb['setLeaderboardScore'](
+        params['leaderboardName'],
+        params['score'],
+        params['extraData'] || undefined,
+      );
+    }
+
+    async YSDKPurchase(params) {
+      if (!this.ysdk) return;
+
+      try {
+        const payments = await this.ysdk['getPayments']({ ['signed']: true });
+
+        const purchase = await payments['purchase']({
+          ['id']: params['productID'],
+          ['developerPayload']: params['developerPayload'],
+        });
+
+        this.domHandler.PostToRuntime('ysdk-purchase-callback', {
+          ['success']: true,
+          ['productID']: purchase['productID'],
+          ['purchaseToken']: purchase['purchaseToken'],
+          ['developerPayload']: purchase['developerPayload'],
+          ['signature']: purchase['signature'],
+        });
+      } catch (error) {
+        console.error(error);
+
+        this.domHandler.PostToRuntime('ysdk-purchase-callback', {
+          ['error']: JSON.stringify(error),
+        });
+      }
+    }
+
+    async YSDKConsumePurchase(params) {
+      if (!this.ysdk) return;
+
+      const payments = await this.ysdk['getPayments']({ ['signed']: true });
+
+      await payments['consumePurchase'](params['purchaseToken']);
+    }
+
+    async YSDKGetPurchases() {
+      if (!this.ysdk) return;
+
+      const payments = await this.ysdk['getPayments']({ ['signed']: true });
+
+      const purchases = await payments['getPurchases']();
+
+      const _purchases = [];
+
+      for (let i = 0; i < purchases.length; i++) {
+        const purchase = purchases[i];
+        _purchases[i] = {
+          ['productID']: purchase['productID'],
+          ['purchaseToken']: purchase['purchaseToken'],
+          ['developerPayload']: purchase['developerPayload'],
+        };
+      }
+
+      _purchases['signature'] = purchases['signature'];
+
+      return _purchases;
+    }
+
+    async YSDKGetCatalog() {
+      if (!this.ysdk) return;
+
+      const payments = await this.ysdk['getPayments']({ ['signed']: true });
+
+      const catalog = await payments['getCatalog']();
+
+      const _catalog = [];
+
+      for (let i = 0; i < catalog.length; i++) {
+        const product = catalog[i];
+        _catalog[i] = {
+          ['id']: product['id'],
+          ['title']: product['title'],
+          ['description']: product['description'],
+          ['imageURI']: product['imageURI'],
+          ['price']: product['price'],
+          ['priceValue']: product['priceValue'],
+          ['priceCurrencyCode']: product['priceCurrencyCode'],
+          ['priceCurrencyImage']: {
+            ['small']: product['getPriceCurrencyImage']('small'),
+            ['medium']: product['getPriceCurrencyImage']('medium'),
+            ['svg']: product['getPriceCurrencyImage']('svg'),
+          },
+        };
+      }
+
+      return _catalog;
+    }
+
+    async YSDKGetPlayerData(keys) {
+      if (!this.ysdk) return;
+
+      const player = await this.ysdk['getPlayer']();
+
+      const data = await player['getData'](keys);
+
+      return data;
+    }
+
+    async YSDKGetPlayerStats(keys) {
+      if (!this.ysdk) return;
+
+      const player = await this.ysdk['getPlayer']();
+
+      const stats = await player['getStats'](keys);
+
+      return stats;
+    }
+
+    async YSDKSetPlayerData(params) {
+      if (!this.ysdk) return;
+
+      const player = await this.ysdk['getPlayer']();
+
+      await player['setData'](params['data'], params['flush']);
+    }
+
+    async YSDKSetPlayerStats(data) {
+      if (!this.ysdk) return;
+
+      const player = await this.ysdk['getPlayer']();
+
+      await player['setStats'](data);
+    }
+
+    async YSDKIncrementPlayerStats(data) {
+      if (!this.ysdk) return;
+
+      const player = await this.ysdk['getPlayer']();
+
+      await player['incrementStats'](data);
+    }
+
+    async YSDKGetPlayer(params) {
+      if (!this.ysdk) return;
+
+      /** @type {import("../../../global").Player} */
+      let player;
+
+      if (params['requestPersonalInfo'] && this.ysdk['openAuthDialog']) {
+        player = await this.ysdk['getPlayer']({ ['signed']: true, ['scopes']: true });
+
+        if (player['getMode']() === 'lite') {
+          await this.ysdk['openAuthDialog']();
+          player = await this.ysdk['getPlayer']({ ['signed']: true, ['scopes']: true });
+        }
+
+        // Double request. The first one can return empty name even if the user provided personal info.
+        player = await this.ysdk['getPlayer']({ ['signed']: true, ['scopes']: true });
+      } else {
+        player = await this.ysdk['getPlayer']({ ['scopes']: false });
+      }
+
+      await this.YSDKUpdateCanReview();
+
+      return {
+        ['isAuthorized']: player['getMode']() !== 'lite',
+        ['isAccessGranted']: player['getName']() !== '',
+        ['uniqueID']: player['getUniqueID'](),
+        ['publicName']: player['getName'](),
+        ['avatars']: {
+          ['small']: player['getPhoto']('small'),
+          ['medium']: player['getPhoto']('medium'),
+          ['large']: player['getPhoto']('large'),
+        },
+        ['signature']: player['signature'],
+        ['payingStatus']: player['getPayingStatus'](),
+      };
+    }
+
+    YSDKDispatchEvent(params) {
+      if (!this.ysdk) return;
+
+      this.ysdk['dispatchEvent'](this.ysdk['EVENTS'][params['name']]);
+    }
+
+    async YSDKUpdateCanShowShortcutPrompt() {
+      if (!this.ysdk) return;
+
+      const prompt = await this.ysdk['shortcut']['canShowPrompt']();
+
+      await this.domHandler.PostToRuntimeAsync('ysdk-update-can-show-shortcut-prompt', {
+        ['canShow']: prompt['canShow'],
+      });
+    }
+
+    async YSDKShortcutsShowPrompt() {
+      if (!this.ysdk) return;
+
+      const result = await this.ysdk['shortcut']['showPrompt']();
+
+      await this.YSDKUpdateCanShowShortcutPrompt();
+
+      this.domHandler.PostToRuntime('ysdk-shortcut-show-prompt-result', {
+        ['accepted']: result['outcome'] === 'accepted',
+      });
+    }
+
+    /**
+     * @param {{
+     *  defaultFlags: Record<string, boolean>,
+     *  clientFeatures: string[],
+     * }} params
+     */
+    async YSDKRemoteConfigFetch(params) {
+      if (!this.ysdk) {
+        return params.defaultFlags;
+      }
+
+      const config = await this.ysdk['getFlags'](params);
+
+      return config;
+    }
+
+    async YSDKRequestReview() {
+      if (!this.ysdk) return;
+
+      const canReview = await this.ysdk['feedback']['canReview']();
+
+      if (canReview.value) {
+        const result = await this.ysdk['feedback']['requestReview']();
+
+        await this.YSDKUpdateCanReview();
+
+        return {
+          ['feedbackSent']: result['feedbackSent'],
+        };
+      } else {
+        return {
+          ['feedbackSent']: false,
+        };
+      }
+    }
+
+    async YSDKUpdateCanReview() {
+      if (!this.ysdk) return;
+
+      const canReview = await this.ysdk['feedback']['canReview']();
+
+      await this.domHandler.PostToRuntimeAsync('ysdk-update-can-review', {
+        ['value']: canReview['value'],
+      });
+    }
+
+    YSDKServerTimeUpdate() {
+      if (!this.ysdk) return;
+
+      this.domHandler.PostToRuntime('ysdk-server-time-update', this.ysdk.serverTime());
+    }
+  }
+
+  class TVRemoteEmulator {
+    constructor(domHandler) {
+      this.domHandler = domHandler;
+      this.enabled = false;
+      this.ArrowMap = {
+        ArrowUp: 12,
+        ArrowDown: 13,
+        ArrowLeft: 14,
+        ArrowRight: 15,
+      };
+    }
+
+    Start() {
+      this.iframe = document.createElement('iframe');
+      this.iframe.id = 'tv-emulator';
+      this.iframe.src = '';
+      this.iframe.style.position = 'absolute';
+      this.iframe.style.display = 'none';
+      this.iframe.style.width = '288px';
+      this.iframe.style.height = '640px';
+      this.iframe.style.border = 'none';
+      this.iframe.style.zIndex = '999';
+      this.iframe.style.transformOrigin = 'right bottom';
+      document.body.appendChild(this.iframe);
+
+      this.UpdatePosition(this.iframe);
+
+      fetch('tv_emulator.html')
+        .then((res) => res.text())
+        .then((html) => {
+          this.iframe.contentWindow.document.write(html);
+          window.addEventListener('resize', this.UpdatePosition.bind(this));
+          window.addEventListener('message', this.OnMessage.bind(this));
+          window.addEventListener('keydown', this.OnKeyDown.bind(this));
+        });
+
+      this.fakeController = {
+        id: 'TV Remote Emulator',
+        index: 0,
+        axes: [0, 0, 0, 0],
+        connected: false,
+        buttons: new Array(16).fill(0).map(() => ({
+          pressed: false,
+          touched: false,
+          value: 0,
+        })),
+        timestamp: Math.floor(Date.now() / 1000),
+      };
+    }
+
+    /** @param {KeyboardEvent} event */
+    OnKeyDown(event) {
+      if (event['key'] !== 'F6') return;
+      if (this.iframe.style.display === 'none') {
+        this.EnableGamepad();
+      } else {
+        this.DisableGamepad();
+      }
+    }
+
+    EnableGamepad() {
+      this.enabled = true;
+      this.iframe.style.display = 'block';
+
+      const event = new Event('gamepadconnected');
+      this.fakeController.connected = true;
+      event['gamepad'] = this.fakeController;
+      this.fakeController.timestamp = Math.floor(Date.now() / 1000);
+      window.dispatchEvent(event);
+
+      this._originalGetGamepads = navigator.getGamepads;
+      navigator.getGamepads = () => [this.fakeController];
+    }
+
+    DisableGamepad() {
+      this.enabled = false;
+      this.iframe.style.display = 'none';
+
+      const event = new Event('gamepaddisconnected');
+      this.fakeController.connected = false;
+      event['gamepad'] = this.fakeController;
+      this.fakeController.timestamp = Math.floor(Date.now() / 1000);
+      window.dispatchEvent(event);
+
+      navigator.getGamepads = this._originalGetGamepads;
+    }
+
+    /** @param {MessageEvent} event */
+    OnMessage(event) {
+      if (event['data']['event'] !== 'tv-emulator-event') return;
+
+      switch (event['data']['name']) {
+        case 'Enter':
+          window.dispatchEvent(
+            new KeyboardEvent(event['data']['pressed'] ? 'keydown' : 'keyup', {
+              ['key']: 'Enter',
+              ['code']: 'Enter',
+              ['keyCode']: 13,
+            }),
+          );
+          break;
+        case 'Back':
+          if (!event['data']['pressed']) {
+            this.domHandler.PostToRuntime('ysdk-handle-event', { ['type']: 'HISTORY_BACK' });
+          }
+          break;
+        default:
+          const button = this.fakeController.buttons[this.ArrowMap[event['data']['name']]];
+          button.pressed = event['data']['pressed'];
+          button.value = event['data']['pressed'] ? 1 : 0;
+          button.touched = event['data']['pressed'];
+          this.fakeController.timestamp = Math.floor(Date.now() / 1000);
+          break;
+      }
+    }
+
+    UpdatePosition() {
+      const scale = Math.min(window.innerWidth / 288, window.innerHeight / 640);
+      this.iframe.style.transform = `scale(${scale})`;
+      this.iframe.style.left = `${window.innerWidth - 288}px`;
+      this.iframe.style.top = `${window.innerHeight - 640}px`;
+    }
+  }
+
+  self.RuntimeInterface.AddDOMHandlerClass(HANDLER_CLASS);
+}
+
+
+// scripts/plugins/Button/dom/domSide.js
+'use strict';{const DOM_COMPONENT_ID="button";function StopPropagation(e){e.stopPropagation()}const HANDLER_CLASS=class ButtonDOMHandler extends self.DOMElementHandler{constructor(iRuntime){super(iRuntime,DOM_COMPONENT_ID)}CreateElement(elementId,e){const inputElem=document.createElement("input");const isCheckbox=e["isCheckbox"];let mainElem=inputElem;if(isCheckbox){inputElem.type="checkbox";const labelElem=document.createElement("label");labelElem.appendChild(inputElem);labelElem.appendChild(document.createTextNode(""));
+labelElem.style.fontFamily="sans-serif";labelElem.style.userSelect="none";labelElem.style.webkitUserSelect="none";labelElem.style.display="inline-block";labelElem.style.color="black";mainElem=labelElem}else inputElem.type="button";mainElem.style.position="absolute";mainElem.addEventListener("pointerdown",StopPropagation);mainElem.addEventListener("pointermove",StopPropagation);mainElem.addEventListener("pointerrawupdate",StopPropagation);mainElem.addEventListener("pointerup",StopPropagation);mainElem.addEventListener("mousedown",
+StopPropagation);mainElem.addEventListener("mouseup",StopPropagation);mainElem.addEventListener("keydown",StopPropagation);mainElem.addEventListener("keyup",StopPropagation);mainElem.addEventListener("contextmenu",e=>e.preventDefault());inputElem.addEventListener("click",()=>this._PostToRuntimeElementMaybeSync("click",elementId,{"isChecked":inputElem.checked}));if(e["id"])inputElem.id=e["id"];if(e["className"])inputElem.className=e["className"];this.UpdateState(mainElem,e);return mainElem}_GetInputElem(mainElem){if(mainElem.tagName.toLowerCase()===
+"input")return mainElem;else return mainElem.firstChild}_GetFocusElement(mainElem){return this._GetInputElem(mainElem)}UpdateState(mainElem,e){const inputElem=this._GetInputElem(mainElem);inputElem.checked=e["isChecked"];inputElem.disabled=!e["isEnabled"];mainElem.title=e["title"];if(mainElem===inputElem)inputElem.value=e["text"];else mainElem.lastChild.textContent=e["text"]}};self.RuntimeInterface.AddDOMHandlerClass(HANDLER_CLASS)};
+
+
+// scripts/plugins/CORDOVAIAP/dom/domSide.js
+'use strict';{const DOM_COMPONENT_ID="mobileiap";const HANDLER_CLASS=class IAPDOMHandler extends self.DOMHandler{constructor(iRuntime){super(iRuntime,DOM_COMPONENT_ID);this._store=null;this._usesValidator=false;this._products=[];this._pendingProducts=new Set;this._lastError=null;this.AddRuntimeMessageHandler("init",e=>this._Initialise(e));this.AddRuntimeMessageHandler("register",o=>this._OnRegister(o));this.AddRuntimeMessageHandler("complete_registration",_=>this._OnCompleteRegistration());this.AddRuntimeMessageHandler("purchase",
+id=>this._OnPurchase(id));this.AddRuntimeMessageHandler("restore",_=>this._OnRestore())}_Initialise(e){console.log("[C3 IAP] Initialising");if(window["CdvPurchase"])this._store=window["CdvPurchase"]["store"];if(!this._store)return;const validatorUrl=e["validator-url"];if(validatorUrl){this._store["validator"]=validatorUrl;this._usesValidator=true}this._store["ready"](_=>this._OnReady());this._store["error"](err=>this._OnGenericError(err));this._store["when"]()["productUpdated"](product=>this._OnProductUpdated(product))["approved"](transaction=>
+this._OnTransactionApproved(transaction))["verified"](verifiedReceipt=>this._OnTransactionVerified(verifiedReceipt))["unverified"](param=>this._OnUnverified(param))["finished"](transaction=>this._OnTransactionFinished(transaction))}_ToProductInfo(product){return{"id":product["id"],"owned":!!product["owned"],"canPurchase":!!product["canPurchase"],"title":product["title"]||"(no title)","description":product["description"]||"(no description)","price":product["pricing"]?product["pricing"]["price"]:"(unknown)",
+"transaction":null}}_OnReady(){console.log("[C3 IAP] Store ready");this.PostToRuntime("registration",this._store["products"].map(p=>this._ToProductInfo(p)))}_OnTransactionApproved(transaction){if(this._usesValidator){console.log(`[C3 IAP] Product "${transaction["products"].map(p=>p["id"]).join(",")}" approved, verifying with validator`);transaction["verify"]()}else{console.log(`[C3 IAP] Product "${transaction["products"].map(p=>p["id"]).join(",")}" approved, finishing`);transaction["finish"]()}}_OnTransactionVerified(verifiedReceipt){console.log("[C3 IAP] Transaction verified, finishing");
+verifiedReceipt["finish"]()}_OnUnverified(param){console.log("[C3 IAP] Transaction unverified: ",param)}_OnProductUpdated(product){if(product["owned"])this._OnProductOwned(product);else this._OnProductAvailable(product)}_OnProductAvailable(product){this.PostToRuntime("product-available",this._ToProductInfo(product))}_OnProductOwned(product){this.PostToRuntime("product-owned",this._ToProductInfo(product))}_OnTransactionFinished(transaction){console.log("[C3 IAP] Transaction finished");this.PostToRuntime("transaction-finished",
+{"transactionId":transaction["transactionId"]});for(const prodInfo of transaction["products"]){this._pendingProducts.delete(prodInfo["id"]);const product=this._store["get"](prodInfo["id"]);this._OnProductOwned(product)}}_OnPurchaseSuccess(product){this._pendingProducts.delete(product["id"]);this.PostToRuntime("purchase-success",this._ToProductInfo(product))}_OnPurchaseFail(product,err){this.PostToRuntime("purchase-failure",[this._ToProductInfo(product),err])}_OnGenericError(err){this._lastError=err;
+console.error("[C3 IAP] Store error: ",err)}_OnRegister(o){const id=o["id"];const type=o["type"];if(!this._store)return null;this._products.push({"id":id,"alias":id,"type":type,"platform":this._store["defaultPlatform"]()})}_OnCompleteRegistration(){if(!this._store)return;console.log(`[C3 IAP] Registering ${this._products.length} products`);this._store["register"](this._products);this._store["initialize"]()}_OnPurchase(id){if(!this._store)return;const product=this._store["get"](id);if(!product){const err=
+{"code":-1,"message":"Unable to purchase invalid product"};this.PostToRuntime("purchase-failure",[this._ToProductInfo({"id":id}),err]);return}this._pendingProducts.add(id);console.log(`[C3 IAP] Purchasing product "${id}"`);this._store["order"](product["getOffer"]()).then(result=>{if(result&&result["isError"])this._OnPurchaseFail(product,result);else this._OnPurchaseSuccess(product)})}_OnRestore(){if(!this._store)return;this._store["restorePurchases"]()}};self.RuntimeInterface.AddDOMHandlerClass(HANDLER_CLASS)};
+
+
+// start-export.js
+'use strict';{if(window["C3_Is_Supported"]){const enableWorker=false;window["c3_runtimeInterface"]=new self.RuntimeInterface({useWorker:enableWorker,workerMainUrl:"workermain.js",runtimeScriptList:["scripts/c3main.js"],scriptFolder:"scripts/",exportType:"html5"})}};
+
