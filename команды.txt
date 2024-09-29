@@ -1,0 +1,7 @@
+git add .
+git commit -m '1'
+
+eval `ssh-agent -s`
+ssh-add path C:/id_rsa
+
+git push origin main
